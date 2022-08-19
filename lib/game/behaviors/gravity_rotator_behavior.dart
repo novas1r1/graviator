@@ -6,8 +6,7 @@ import 'package:flutter/services.dart';
 ///
 /// Whenever, the gravity is rotated, all the [World.bodies] lose their
 /// velocity.
-class GravityRotatorBehavior extends Component
-    with ParentIsA<Forge2DGame>, KeyboardHandler {
+class GravityRotatorBehavior extends Component with ParentIsA<Forge2DGame>, KeyboardHandler {
   late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
 
   @override
@@ -32,19 +31,21 @@ class GravityRotatorBehavior extends Component
 
 extension on Vector2 {
   void rotateClockwise() {
-    // TODO(md-weber): use a better rotation algorithm
+    final x = this.x;
+    final y = this.y;
+
     if (x == 0 && y == 10) {
-      x = -10;
-      y = 0;
+      this.x = -y;
+      this.y = x;
     } else if (x == -10 && y == 0) {
-      x = 0;
-      y = -10;
+      this.x = y;
+      this.y = x;
     } else if (x == 0 && y == -10) {
-      x = 10;
-      y = 0;
+      this.x = -y;
+      this.y = x;
     } else if (x == 10 && y == 0) {
-      x = 0;
-      y = 10;
+      this.x = y;
+      this.y = x;
     }
   }
 }
