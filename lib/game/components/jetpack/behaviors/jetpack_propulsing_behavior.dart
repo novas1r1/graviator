@@ -41,7 +41,10 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack> with KeyboardHandler {
 }
 
 class _SmokeParticleSystem extends ParticleSystemComponent {
-  _SmokeParticleSystem({required int count, required Vector2 acceleration, required Vector2 size})
+  _SmokeParticleSystem(
+      {required int count,
+      required Vector2 acceleration,
+      required Vector2 size})
       : super(
           // TODO(alestiago): Remove this absolute positioning.
           position: Vector2(size.x - 12, size.y - 11),

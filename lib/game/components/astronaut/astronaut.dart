@@ -13,7 +13,8 @@ class Astronaut extends BodyEntity<AstronautBodyComponent> {
     super.behaviors,
     super.children,
   }) : super(
-          bodyComponent: AstronautBodyComponent()..initialPosition = initialPosition,
+          bodyComponent: AstronautBodyComponent()
+            ..initialPosition = initialPosition,
         );
 }
 
