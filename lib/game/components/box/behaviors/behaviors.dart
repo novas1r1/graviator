@@ -1,1 +1,1 @@
-export 'box_body_behavior.dart';
+export 'box_bouncing_behavior.dart';
