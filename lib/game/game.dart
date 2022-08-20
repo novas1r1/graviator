@@ -38,14 +38,6 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
       ),
     );
   }
-
-  // TODO(dev): later on, typing the map elements would be a better approach
-  /// small method to avoid typos when accessing sprite entry in map elements
-  static String? getSpriteNameFromMapElement(
-    MapEntry<MapPosition, Map<String, dynamic>> element,
-  ) {
-    return element.value['sprite'] as String?;
-  }
 }
 
 class GameEntity extends Entity {
@@ -64,8 +56,7 @@ class GameEntity extends Entity {
     await super.onLoad();
 
     final map = MiniMap.fromDataString(mapData);
-    for (final element in map.objects.entries) {
-      await addAll(BuildingBlockFactory.resolveMapEntry(element));
-    }
+
+    await addAll(Box.createAllFromMap(map.objects));
   }
 }
