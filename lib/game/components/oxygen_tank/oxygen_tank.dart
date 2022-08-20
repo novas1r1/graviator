@@ -1,11 +1,14 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flame/components.dart';
+import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flamejam/app/cubits/game_cubit.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
-/// Oxygen
 class OxygenTank extends BodyEntity {
   OxygenTank({
     required Vector2 initialPosition,
@@ -14,6 +17,7 @@ class OxygenTank extends BodyEntity {
           bodyComponent: _OxygenTankComponent()
             ..initialPosition = initialPosition,
         );
+
   factory OxygenTank.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
     required double mapWidth,
@@ -71,7 +75,8 @@ class _OxygenTankComponent extends BodyComponent
   @override
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
-
+    // TODO(max): Move this to portal.
+    readBloc<GameCubit, GameState>().endGame();
     parent!.removeFromParent();
   }
 
@@ -101,7 +106,6 @@ class _OxygenTankSpriteComponent extends SpriteComponent {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
     position = size.clone() / -2;
   }
 }

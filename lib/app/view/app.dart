@@ -19,8 +19,10 @@ class App extends StatelessWidget {
           case GameStatus.startScreenDisplayed:
             return const StartScreen();
           case GameStatus.gameScreenDisplayed:
-            return const GameWidget.controlled(
-              gameFactory: FlameJam.new,
+            return GameWidget.controlled(
+              gameFactory: () => FlameJam(
+                gameCubit: context.read<GameCubit>(),
+              ),
             );
           case GameStatus.gameOverScreenDisplayed:
             return const GameOverScreen();

@@ -1,3 +1,3 @@
 export 'astronaut/astronaut.dart';
 export 'box/box.dart';
-export 'walls/wall_static/wall_static.dart';
+export 'oxygen_tank/oxygen_tank.dart';
