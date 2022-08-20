@@ -88,7 +88,7 @@ class GameEntity extends Entity {
     final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
     children
-      ..addAll(Box.createAllFromMap(map))
+      ..addAll(map.create())
       ..addAll(OxygenTank.createAllFromMap(map));
 
     final astronaut = Astronaut(
@@ -103,6 +103,6 @@ class GameEntity extends Entity {
       ],
     );
     await addAll(children..add(astronaut));
-    // game.camera.followBodyComponent(astronaut.bodyComponent);
+    game.camera.followBodyComponent(astronaut.bodyComponent);
   }
 }

@@ -3,7 +3,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
-import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
@@ -74,8 +73,6 @@ class _OxygenTankComponent extends BodyComponent
   @override
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
-    // TODO(max): Move this to portal.
-    readBloc<GameCubit, GameState>().endGame();
     parent!.removeFromParent();
   }
 
