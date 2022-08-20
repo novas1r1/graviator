@@ -1,12 +1,9 @@
-import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flame_mini_sprite/flame_mini_sprite.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 /// the main game class
@@ -15,11 +12,13 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   FlameJam() : super(gravity: Vector2(0, 10));
 
   @override
-  Color backgroundColor() => Color.fromARGB(255, 0, 88, 255);
+  Color backgroundColor() => const Color.fromARGB(255, 0, 88, 255);
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    await MiniSpriteLibrary.loadSprites(pixelSize: 1, color: Colors.amber);
 
     await addAll([
       GravityRotatorBehavior(),
@@ -30,52 +29,17 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
       // WallStatic(position: WallPosition.bottom),
     ]);
 
-    final componentLoadingFutures = <Future>[];
+    final componentLoadingFutures = <Future<dynamic>>[];
 
     final map = MiniMap.fromDataString(MiniSpriteMaps.demoLevel);
 
-    final sprites = await MiniSpriteLibrary.library.toSprites(
-      pixelSize: 1,
-      color: Colors.white,
-    );
-
     for (final element in map.objects.entries) {
-      final sprite = sprites[getSpriteNameFromMapElement(element)];
-
-      if (sprite == null) {
-        continue;
-      }
-
-      final future = add(
-        BuildingBlock(
-          positionX: element.key.x.toDouble(),
-          positionY: element.key.y.toDouble(),
-        ),
-      );
-
-      // final future = add(
-      //   SpriteComponent(
-      //     sprite: sprite,
-      //     position: Vector2(
-      //       element.key.x * MiniSpriteLibrary.defaultSpriteSize,
-      //       element.key.y * MiniSpriteLibrary.defaultSpriteSize,
-      //     ),
-      //     size: Vector2(
-      //       sprite!.image.width.toDouble(),
-      //       sprite.image.height.toDouble(),
-      //     ),
-      //   ),
-      // );
-
-      if (future != null) {
-        componentLoadingFutures.add(future);
-      }
+      componentLoadingFutures.add(addAll(BuildingBlockFactory.resolveMapEntry(element)));
     }
 
     await Future.wait(componentLoadingFutures);
 
-    camera.zoom = 1;
-    camera.snapTo(Vector2(-20, -20));
+    camera.zoom = 4;
   }
 
   // TODO(dev): later on, typing the map elements would be a better approach
