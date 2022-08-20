@@ -20,6 +20,9 @@ class ControlledMovementBehavior extends Behavior<Astronaut>
   /// The velocity of the player
   final Vector2 velocity = Vector2(0, 0);
 
+  /// The jump force that is applied to the player if he jumps
+  final double _jumpForce = 18.5;
+
   @override
   void update(double dt) {
     super.update(dt);
@@ -46,6 +49,11 @@ class ControlledMovementBehavior extends Behavior<Astronaut>
     final isGravityUp = gameRef.world.gravity.y == -10;
     final isGravityRight = gameRef.world.gravity.x == 10;
 
+    void jump(Vector2 jumpForce) {
+      final body = parent.bodyComponent.body;
+      body.applyLinearImpulse(jumpForce.scaled(body.mass));
+    }
+
     if (event.logicalKey == LogicalKeyboardKey.keyA) {
       if (isGravityDown) velocity.x = isKeyDown ? -1 : 0;
       if (isGravityLeft) velocity.y = isKeyDown ? -1 : 0;
@@ -57,10 +65,14 @@ class ControlledMovementBehavior extends Behavior<Astronaut>
       if (isGravityUp) velocity.x = isKeyDown ? -1 : 0;
       if (isGravityRight) velocity.y = isKeyDown ? -1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyW) {
-      if (isGravityDown) velocity.y = isKeyDown ? -1 : 0;
-      if (isGravityLeft) velocity.x = isKeyDown ? 1 : 0;
-      if (isGravityUp) velocity.y = isKeyDown ? 1 : 0;
-      if (isGravityRight) velocity.x = isKeyDown ? -1 : 0;
+      final linearVelocity = parent.bodyComponent.body.linearVelocity;
+
+      final isJumpAllowedHorizontal = (isGravityUp || isGravityDown) && linearVelocity.y == 0;
+      final isJumpAllowedVertical = (isGravityLeft || isGravityRight) && linearVelocity.x == 0;
+      if (isJumpAllowedHorizontal && isGravityDown) jump(Vector2(0, -_jumpForce));
+      if (isJumpAllowedVertical && isGravityLeft) jump(Vector2(_jumpForce, 0));
+      if (isJumpAllowedHorizontal && isGravityUp) jump(Vector2(0, _jumpForce));
+      if (isJumpAllowedVertical && isGravityRight) jump(Vector2(-_jumpForce, 0));
     } else if (event.logicalKey == LogicalKeyboardKey.keyS) {
       if (isGravityDown) velocity.y = isKeyDown ? 1 : 0;
       if (isGravityLeft) velocity.x = isKeyDown ? -1 : 0;
