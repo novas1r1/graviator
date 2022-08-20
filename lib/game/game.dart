@@ -66,9 +66,8 @@ class GameEntity extends Entity {
 
     final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
-    for (final element in map.objects.entries) {
-      children.addAll(BuildingBlockFactory.resolveMapEntry(element));
-    }
+
+    children.addAll(Box.createAllFromMap(map));
 
     final player = Player(
       initialPosition: Vector2(16, 16),
