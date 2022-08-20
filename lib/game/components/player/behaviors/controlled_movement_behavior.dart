@@ -25,10 +25,11 @@ class ControlledMovementBehavior extends Behavior<Player>
     super.update(dt);
 
     // rotate the player to have his feet on the ground where gravity points
-    parent.body
-      ..applyLinearImpulse(velocity.scaled(parent.body.mass))
+    final body = parent.bodyComponent.body;
+    body
+      ..applyLinearImpulse(velocity.scaled(body.mass))
       ..setTransform(
-        parent.body.position,
+        body.position,
         math.pi - gameRef.world.gravity.screenAngle() * -1,
       );
   }
@@ -40,14 +41,31 @@ class ControlledMovementBehavior extends Behavior<Player>
   ) {
     final isKeyDown = event is RawKeyDownEvent;
 
+    final isGravityDown = gameRef.world.gravity.y == 10;
+    final isGravityLeft = gameRef.world.gravity.x == -10;
+    final isGravityUp = gameRef.world.gravity.y == -10;
+    final isGravityRight = gameRef.world.gravity.x == 10;
+
     if (event.logicalKey == LogicalKeyboardKey.keyA) {
-      velocity.x = isKeyDown ? -1 : 0;
+      if (isGravityDown) velocity.x = isKeyDown ? -1 : 0;
+      if (isGravityLeft) velocity.y = isKeyDown ? -1 : 0;
+      if (isGravityUp) velocity.x = isKeyDown ? 1 : 0;
+      if (isGravityRight) velocity.y = isKeyDown ? 1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
-      velocity.x = isKeyDown ? 1 : 0;
+      if (isGravityDown) velocity.x = isKeyDown ? 1 : 0;
+      if (isGravityLeft) velocity.y = isKeyDown ? 1 : 0;
+      if (isGravityUp) velocity.x = isKeyDown ? -1 : 0;
+      if (isGravityRight) velocity.y = isKeyDown ? -1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyW) {
-      velocity.y = isKeyDown ? -1 : 0;
+      if (isGravityDown) velocity.y = isKeyDown ? -1 : 0;
+      if (isGravityLeft) velocity.x = isKeyDown ? 1 : 0;
+      if (isGravityUp) velocity.y = isKeyDown ? 1 : 0;
+      if (isGravityRight) velocity.x = isKeyDown ? -1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyS) {
-      velocity.y = isKeyDown ? 1 : 0;
+      if (isGravityDown) velocity.y = isKeyDown ? 1 : 0;
+      if (isGravityLeft) velocity.x = isKeyDown ? -1 : 0;
+      if (isGravityUp) velocity.y = isKeyDown ? -1 : 0;
+      if (isGravityRight) velocity.x = isKeyDown ? 1 : 0;
     }
 
     return super.onKeyEvent(event, keysPressed);

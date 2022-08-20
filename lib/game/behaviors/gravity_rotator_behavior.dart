@@ -14,19 +14,16 @@ class GravityRotatorBehavior extends Behavior<GameEntity> with KeyboardHandler {
   @override
   // ignore: avoid_renaming_method_parameters
   bool onKeyEvent(RawKeyEvent event, _) {
-    if (!_keys.contains(event.logicalKey)) {
-      return true;
-    }
+    if (event is! RawKeyUpEvent) return true;
+    if (!_keys.contains(event.logicalKey)) return true;
 
-    if (event is RawKeyUpEvent) {
-      for (final body in parent.game.world.bodies) {
-        body.linearVelocity.setZero();
-        body.setAwake(true);
-      }
-      parent.game.world.gravity.rotateAntiClockwise();
+    for (final body in parent.game.world.bodies) {
+      body.linearVelocity.setZero();
+      body.setAwake(true);
     }
+    parent.game.world.gravity.rotateAntiClockwise();
 
-    return false;
+    return true;
   }
 }
 

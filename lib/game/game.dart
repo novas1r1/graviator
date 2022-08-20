@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/components/player/behaviors/behaviors.dart';
@@ -19,13 +21,18 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
           zoom: 4,
         );
 
+  void Function(Canvas canvas) renderTreeCallback = (_) {};
+
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 0, 88, 255);
+  void renderTree(Canvas canvas) {
+    renderTreeCallback(canvas);
+    super.renderTree(canvas);
+  }
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    await MiniSpriteLibrary.loadSprites(pixelSize: 1, color: Colors.amber);
+    await MiniSpriteLibrary.loadSprites(pixelSize: 1, color: Colors.white);
 
     await add(
       GameEntity(
@@ -33,15 +40,9 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
         mapData: MiniSpriteMap.demoLevelTwo,
         behaviors: [
           GravityRotatorBehavior(),
+          CameraRotatorBehavior(),
         ],
-        children: [
-          Player(
-            initialPosition: Vector2(32, 16),
-            behaviors: [
-              ControlledMovementBehavior(),
-            ],
-          ),
-        ],
+        children: [],
       ),
     );
   }
@@ -63,8 +64,19 @@ class GameEntity extends Entity {
   Future<void> onLoad() async {
     await super.onLoad();
 
+    final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
+    for (final element in map.objects.entries) {
+      children.addAll(BuildingBlockFactory.resolveMapEntry(element));
+    }
 
-    await addAll(Box.createAllFromMap(map));
+    final player = Player(
+      initialPosition: Vector2(16, 16),
+      behaviors: [
+        ControlledMovementBehavior(),
+      ],
+    );
+    await addAll(children..add(player));
+    game.camera.followBodyComponent(player.bodyComponent);
   }
 }
