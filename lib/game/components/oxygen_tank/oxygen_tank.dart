@@ -13,11 +13,13 @@ class OxygenTank extends BodyEntity {
     required Vector2 initialPosition,
     super.behaviors,
   }) : super(
-          bodyComponent: _OxygenTankComponent()..initialPosition = initialPosition,
+          bodyComponent: _OxygenTankComponent()
+            ..initialPosition = initialPosition,
         );
 
   /// Create a [OxygenTank] Entity from the [MiniMap] Entry
-  OxygenTank.fromMapEntry({required MapEntry<MapPosition, Map<String, dynamic>> entry})
+  OxygenTank.fromMapEntry(
+      {required MapEntry<MapPosition, Map<String, dynamic>> entry})
       : this(
           initialPosition: Vector2(
             entry.key.x.toDouble() * 16,
@@ -26,16 +28,25 @@ class OxygenTank extends BodyEntity {
         );
 }
 
-class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCallbacks {
+class _OxygenTankComponent extends BodyComponent
+    with InitialPosition, ContactCallbacks {
   _OxygenTankComponent()
       : super(
           renderBody: false,
           children: [
             SpriteComponent(
+              sprite: MiniSpriteLibrary.sprites['O2'],
+              size: Vector2.all(4),
+              anchor: Anchor.center,
+              position: Vector2(0, _spriteSize.y * 0.1),
+              priority: 1,
+            ),
+            SpriteComponent(
               size: _spriteSize,
               sprite: MiniSpriteLibrary.sprites['oxygen_tank'],
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.005, 0),
+              priority: 0,
             )
           ],
         );
