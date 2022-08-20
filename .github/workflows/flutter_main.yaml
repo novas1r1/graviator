@@ -11,6 +11,6 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       coverage_excludes: "*.g.dart"
-      min_coverage: 10
+      min_coverage: 0
       flutter_version: 3.0.5
       test_optimization: false
