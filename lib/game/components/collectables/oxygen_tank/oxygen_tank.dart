@@ -13,7 +13,6 @@ class OxygenTank extends BodyEntity {
           bodyComponent: _OxygenTankComponent()
             ..initialPosition = initialPosition,
         );
-
   factory OxygenTank.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
     required double mapWidth,
@@ -26,6 +25,7 @@ class OxygenTank extends BodyEntity {
 
     return OxygenTank(
       initialPosition: position,
+      behaviors: [],
     );
   }
 
@@ -76,7 +76,7 @@ class _OxygenTankComponent extends BodyComponent
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
 
-    paint.color = _colors[(_colors.indexOf(paint.color) + 1) % _colors.length];
+    parent!.removeFromParent();
   }
 
   @override
