@@ -12,3 +12,5 @@ jobs:
     with:
       coverage_excludes: "*.g.dart"
       min_coverage: 10
+      flutter_version: 3.0.5
+      test_optimization: false
