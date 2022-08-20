@@ -59,6 +59,7 @@ class Box extends BodyEntity {
         case 'building_block_dynamic':
           bodyType = BodyType.dynamic;
           break;
+
         default:
           continue;
       }
@@ -112,6 +113,11 @@ class _BoxBodySpriteComponent extends SpriteComponent {
   _BoxBodySpriteComponent.static()
       : super(
           sprite: MiniSpriteLibrary.sprites['building_block_static'],
+        );
+
+  _BoxBodySpriteComponent.oxygen()
+      : super(
+          sprite: MiniSpriteLibrary.sprites['oxygen'],
         );
 
   @override
