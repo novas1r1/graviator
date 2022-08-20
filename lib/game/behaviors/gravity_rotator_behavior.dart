@@ -6,7 +6,8 @@ import 'package:flutter/services.dart';
 ///
 /// Whenever, the gravity is rotated, all the [World.bodies] lose their
 /// velocity.
-class GravityRotatorBehavior extends Component with ParentIsA<Forge2DGame>, KeyboardHandler {
+class GravityRotatorBehavior extends Component
+    with ParentIsA<Forge2DGame>, KeyboardHandler {
   late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
 
   @override
