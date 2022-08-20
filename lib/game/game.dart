@@ -34,7 +34,8 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     final map = MiniMap.fromDataString(MiniSpriteMaps.demoLevel);
 
     for (final element in map.objects.entries) {
-      componentLoadingFutures.add(addAll(BuildingBlockFactory.resolveMapEntry(element)));
+      componentLoadingFutures
+          .add(addAll(BuildingBlockFactory.resolveMapEntry(element)));
     }
 
     await Future.wait(componentLoadingFutures);
@@ -45,7 +46,9 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   // TODO(dev): later on, typing the map elements would be a better approach
 
   /// small method to avoid typos when accessing sprite entry in map elements
-  String? getSpriteNameFromMapElement(MapEntry<MapPosition, Map<String, dynamic>> element) {
+  String? getSpriteNameFromMapElement(
+    MapEntry<MapPosition, Map<String, dynamic>> element,
+  ) {
     return element.value['sprite'] as String?;
   }
 }
