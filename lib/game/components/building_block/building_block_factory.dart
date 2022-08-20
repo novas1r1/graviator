@@ -6,8 +6,11 @@ import 'package:mini_sprite/mini_sprite.dart';
 class BuildingBlockFactory {
   BuildingBlockFactory._();
 
-  /// takes a map entry and returns a list of all components that could be generated
-  static List<Component> resolveMapEntry(MapEntry<MapPosition, Map<String, dynamic>> entry) {
+  /// takes a map entry and returns a list of all components that could be
+  /// generated
+  static List<Component> resolveMapEntry(
+    MapEntry<MapPosition, Map<String, dynamic>> entry,
+  ) {
     final spriteName = getSpriteNameFromMapElement(entry);
 
     switch (spriteName) {
@@ -31,7 +34,9 @@ class BuildingBlockFactory {
   }
 
   /// small method to avoid typos when accessing sprite entry in map elements
-  static String? getSpriteNameFromMapElement(MapEntry<MapPosition, Map<String, dynamic>> element) {
+  static String? getSpriteNameFromMapElement(
+    MapEntry<MapPosition, Map<String, dynamic>> element,
+  ) {
     return element.value['sprite'] as String?;
   }
 }
