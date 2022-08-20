@@ -5,6 +5,7 @@ import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
+/// Oxygen
 class OxygenTank extends BodyEntity {
   OxygenTank({
     required Vector2 initialPosition,
@@ -23,10 +24,7 @@ class OxygenTank extends BodyEntity {
       entry.key.y.toDouble() * mapHeight,
     );
 
-    return OxygenTank(
-      initialPosition: position,
-      behaviors: [],
-    );
+    return OxygenTank(initialPosition: position);
   }
 
   /// default height

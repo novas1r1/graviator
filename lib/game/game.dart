@@ -71,8 +71,9 @@ class GameEntity extends Entity {
     final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
 
-    children.addAll(Box.createAllFromMap(map));
-    children.addAll(OxygenTank.createAllFromMap(map));
+    children
+      ..addAll(Box.createAllFromMap(map))
+      ..addAll(OxygenTank.createAllFromMap(map));
 
     final player = Player(
       initialPosition: Vector2(16, 16),
