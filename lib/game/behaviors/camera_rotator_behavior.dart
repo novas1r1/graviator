@@ -4,13 +4,15 @@ import 'dart:ui' as ui;
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/services.dart';
 
 /// {@template game.behaviors.CameraRotatorBehavior}
 /// Rotates the camera clockwise when [_keys] are pressed.
 /// {@endtemplate}
-class CameraRotatorBehavior extends Behavior<GameEntity> with KeyboardHandler {
+class CameraRotatorBehavior extends Behavior<GameEntity>
+    with KeyboardHandler, HasGameRef<Forge2DGame> {
   /// {@macro game.behaviors.CameraRotatorBehavior}
   CameraRotatorBehavior();
 
@@ -30,9 +32,9 @@ class CameraRotatorBehavior extends Behavior<GameEntity> with KeyboardHandler {
   }
 
   void _onGameRenderTree(ui.Canvas canvas) {
-    final mapSize = Vector2.all(16) * 16;
     final camera = parent.game.camera;
-    final center = (mapSize / 2) * camera.zoom;
+    final center = (gameRef.size / 2) * camera.zoom;
+
     canvas
       ..translate(center.x, center.y)
       ..rotate(_rotation)

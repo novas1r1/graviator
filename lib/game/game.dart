@@ -26,6 +26,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
   void renderTree(Canvas canvas) {
     renderTreeCallback(canvas);
+
     super.renderTree(canvas);
   }
 
@@ -37,7 +38,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     await add(
       GameEntity(
         game: this,
-        mapData: MiniSpriteMap.demoLevelTwo,
+        mapData: MiniSpriteMap.demoLevel,
         behaviors: [
           GravityRotatorBehavior(),
           CameraRotatorBehavior(),
