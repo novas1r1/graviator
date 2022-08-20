@@ -82,9 +82,6 @@ class BuildingBlockBody extends BodyComponent {
           BuildingBlock.width / 2 - 0.01,
           BuildingBlock.height / 2 - 0.01,
         ),
-      friction: 0,
-      restitution: 0,
-      density: 0,
     );
 
     final body = BodyDef(
