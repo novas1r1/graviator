@@ -6,9 +6,9 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flutter/services.dart';
 
-/// Can be attached to a [Player] to make it move on keyboard inputs.
-class ControlledMovementBehavior extends Behavior<Player>
-    with ParentIsA<Player>, KeyboardHandler, HasGameRef<Forge2DGame> {
+/// Can be attached to a [Astronaut] to make it move on keyboard inputs.
+class ControlledMovementBehavior extends Behavior<Astronaut>
+    with ParentIsA<Astronaut>, KeyboardHandler, HasGameRef<Forge2DGame> {
   /// constructor
   ControlledMovementBehavior({
     this.speed = 10,

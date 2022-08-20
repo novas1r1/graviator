@@ -8,7 +8,8 @@ import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/components.dart';
-import 'package:flamejam/game/components/player/behaviors/behaviors.dart';
+import 'package:flamejam/game/components/jetpack/behaviors/behaviors.dart';
+import 'package:flamejam/game/components/jetpack/jetpack.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
@@ -78,8 +79,13 @@ class GameEntity extends Entity {
       children.addAll(BuildingBlockFactory.resolveMapEntry(element));
     }
 
-    final player = Player(
+    final player = Astronaut(
       initialPosition: Vector2(16, 16),
+      children: [
+        Jetpack(
+          behaviors: [JetpackPropulsingBehavior()],
+        ),
+      ],
       behaviors: [
         ControlledMovementBehavior(),
       ],
