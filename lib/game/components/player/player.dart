@@ -3,8 +3,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Player extends BodyComponent
-    with ParentIsA<Forge2DGame>, KeyboardHandler {
+class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler {
   /// Player Component which can move
   Player({
     required this.initialPosition,
@@ -13,7 +12,7 @@ class Player extends BodyComponent
   }
 
   final Vector2 initialPosition;
-  final Vector2 velocity = Vector2(50, 50);
+  final Vector2 velocity = Vector2(0, 0);
   final int speed = 10;
 
   @override
@@ -30,6 +29,7 @@ class Player extends BodyComponent
       type: BodyType.dynamic,
       position: initialPosition,
       userData: this,
+      allowSleep: false,
     );
 
     return world.createBody(bodyDef)..createFixture(fixture);
@@ -38,10 +38,8 @@ class Player extends BodyComponent
   @override
   void update(double dt) {
     super.update(dt);
-    final displacement = velocity * (speed * dt);
-    // change position of the player
-    // print(displacement);
-    // body.position += displacement;
+
+    body.applyLinearImpulse(velocity.scaled(body.mass));
   }
 
   @override
@@ -50,8 +48,6 @@ class Player extends BodyComponent
     Set<LogicalKeyboardKey> keysPressed,
   ) {
     final isKeyDown = event is RawKeyDownEvent;
-
-    print('MOVIN');
 
     if (event.logicalKey == LogicalKeyboardKey.keyA) {
       velocity.x = isKeyDown ? -1 : 0;
