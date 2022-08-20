@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  flame_behaviors:
+    dependency: "direct main"
+    description:
+      name: flame_behaviors
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   flame_bloc:
     dependency: "direct main"
     description:
