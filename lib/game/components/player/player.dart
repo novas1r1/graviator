@@ -85,11 +85,6 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
       velocity.y = isKeyDown ? 1 : 0;
     }
 
-    if (event.logicalKey == LogicalKeyboardKey.numpadAdd) {
-      print(world.gravity.screenAngle());
-      body.setTransform(body.position, pi - world.gravity.screenAngle() * -1);
-    }
-
     return super.onKeyEvent(event, keysPressed);
   }
 }
