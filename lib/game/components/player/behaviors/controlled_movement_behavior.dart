@@ -25,10 +25,11 @@ class ControlledMovementBehavior extends Behavior<Player>
     super.update(dt);
 
     // rotate the player to have his feet on the ground where gravity points
-    parent.body
-      ..applyLinearImpulse(velocity.scaled(parent.body.mass))
+    final body = parent.bodyComponent.body;
+    body
+      ..applyLinearImpulse(velocity.scaled(body.mass))
       ..setTransform(
-        parent.body.position,
+        body.position,
         math.pi - gameRef.world.gravity.screenAngle() * -1,
       );
   }
