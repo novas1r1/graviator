@@ -15,7 +15,7 @@ class _BoxBody extends BodyComponent {
   Body createBody() {
     final bodyDef = BodyDef(
       type: BodyType.dynamic,
-      position: gameRef.size / 2,
+      position: gameRef.size / 4,
     );
 
     return world.createBody(bodyDef)
