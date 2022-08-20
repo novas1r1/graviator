@@ -65,6 +65,6 @@ class GameEntity extends Entity {
 
     final map = MiniMap.fromDataString(mapData);
 
-    await addAll(Box.createAllFromMap(map.objects));
+    await addAll(Box.createAllFromMap(map));
   }
 }
