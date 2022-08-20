@@ -24,10 +24,10 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     await addAll([
       GravityRotatorBehavior(),
       Box(),
-      WallStatic(position: WallPosition.top),
-      WallStatic(position: WallPosition.left),
-      WallStatic(position: WallPosition.right),
-      WallStatic(position: WallPosition.bottom),
+      // WallStatic(position: WallPosition.top),
+      // WallStatic(position: WallPosition.left),
+      // WallStatic(position: WallPosition.right),
+      // WallStatic(position: WallPosition.bottom),
     ]);
 
     final componentLoadingFutures = <Future>[];
@@ -42,25 +42,30 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     for (final element in map.objects.entries) {
       final sprite = sprites[getSpriteNameFromMapElement(element)];
 
-      print(sprite);
-
-      if (sprite != null) {
+      if (sprite == null) {
         continue;
       }
 
       final future = add(
-        SpriteComponent(
-          sprite: sprite,
-          position: Vector2(
-            element.key.x * MiniSpriteLibrary.defaultSpriteSize,
-            element.key.y * MiniSpriteLibrary.defaultSpriteSize,
-          ),
-          size: Vector2(
-            sprite!.image.width.toDouble(),
-            sprite.image.height.toDouble(),
-          ),
+        BuildingBlock(
+          positionX: element.key.x.toDouble(),
+          positionY: element.key.y.toDouble(),
         ),
       );
+
+      // final future = add(
+      //   SpriteComponent(
+      //     sprite: sprite,
+      //     position: Vector2(
+      //       element.key.x * MiniSpriteLibrary.defaultSpriteSize,
+      //       element.key.y * MiniSpriteLibrary.defaultSpriteSize,
+      //     ),
+      //     size: Vector2(
+      //       sprite!.image.width.toDouble(),
+      //       sprite.image.height.toDouble(),
+      //     ),
+      //   ),
+      // );
 
       if (future != null) {
         componentLoadingFutures.add(future);
@@ -69,7 +74,8 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
 
     await Future.wait(componentLoadingFutures);
 
-    camera.zoom = 4;
+    camera.zoom = 1;
+    camera.snapTo(Vector2(-20, -20));
   }
 
   // TODO(dev): later on, typing the map elements would be a better approach
