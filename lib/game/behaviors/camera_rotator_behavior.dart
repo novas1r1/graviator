@@ -16,8 +16,6 @@ class CameraRotatorBehavior extends Behavior<GameEntity> with KeyboardHandler {
 
   late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
 
-  late ui.Canvas _canvas;
-
   double _rotation = 0;
 
   @override

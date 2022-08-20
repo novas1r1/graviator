@@ -17,8 +17,8 @@ class Player extends BodyEntity {
 }
 
 class _PlayerBodyComponent extends BodyComponent with InitialPosition {
-  static const double playerHeight = 8;
-  static const double playerWidth = 6;
+  static const double playerHeight = 32;
+  static const double playerWidth = 32;
 
   @override
   Body createBody() {

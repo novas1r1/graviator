@@ -7,17 +7,22 @@ class BodyEntity extends Entity {
   BodyEntity({
     super.children,
     super.behaviors,
-    required BodyComponent bodyComponent,
-  }) : _bodyComponent = bodyComponent;
+    required this.bodyComponent,
+  }) : assert(
+          () {
+            if (children != null) {
+              return children.whereType<BodyComponent>().isEmpty;
+            }
+            return true;
+          }(),
+          'Children must not contain a BodyComponent.',
+        );
 
-  late final Body body;
-
-  final BodyComponent _bodyComponent;
+  final BodyComponent bodyComponent;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    await add(_bodyComponent);
-    body = _bodyComponent.body;
+    await add(bodyComponent);
   }
 }

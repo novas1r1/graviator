@@ -33,7 +33,6 @@ class _BoxBodyComponent extends BodyComponent with InitialPosition {
 
   @override
   Body createBody() {
-    print(initialPosition);
     return world.createBody(
       BodyDef(
         type: _type,

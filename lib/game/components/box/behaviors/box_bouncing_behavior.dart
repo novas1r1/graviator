@@ -10,14 +10,14 @@ class BoxBouncingBehavior extends Behavior<Box> {
     super.update(dt);
 
     assert(
-      parent.body.bodyType == BodyType.dynamic,
+      parent.bodyComponent.body.bodyType == BodyType.dynamic,
       'BoxBouncingBehavior only works with dynamic bodies',
     );
 
     final bouncingComponent = children.whereType<_BouncingComponent>();
     final hasBouncingComponent = bouncingComponent.isNotEmpty;
     if (!hasBouncingComponent) {
-      await add(_BouncingComponent(body: parent.body));
+      await add(_BouncingComponent(body: parent.bodyComponent.body));
     }
   }
 }
