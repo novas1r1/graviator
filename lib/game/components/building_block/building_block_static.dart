@@ -9,6 +9,6 @@ class BuildingBlockStatic extends BuildingBlock {
     required super.positionY,
   }) : super(
           bodyType: BodyType.static,
-          spriteName: 'building_block',
+          spriteName: 'building_block_static',
         );
 }

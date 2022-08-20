@@ -11,8 +11,7 @@ class BuildingBlockFactory {
     final spriteName = getSpriteNameFromMapElement(entry);
 
     switch (spriteName) {
-      // TODO(dev): rename
-      case 'building_block':
+      case 'building_block_static':
         final block = BuildingBlockStatic(
           positionX: entry.key.x.toDouble(),
           positionY: entry.key.y.toDouble(),
