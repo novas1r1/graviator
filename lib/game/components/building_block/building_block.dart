@@ -79,8 +79,8 @@ class BuildingBlockBody extends BodyComponent {
     final fixture = FixtureDef(
       PolygonShape()
         ..setAsBoxXY(
-          BuildingBlock.width / 2,
-          BuildingBlock.height / 2,
+          BuildingBlock.width / 2 - 0.01,
+          BuildingBlock.height / 2 - 0.01,
         ),
     );
 
