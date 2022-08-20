@@ -9,7 +9,11 @@ import 'package:mini_sprite/mini_sprite.dart';
 /// the main game class
 class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   /// default constructor
-  FlameJam() : super(gravity: Vector2(0, 10));
+  FlameJam()
+      : super(
+          gravity: Vector2(0, 10),
+          zoom: 4,
+        );
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 0, 88, 255);
@@ -25,6 +29,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
       Player(initialPosition: Vector2(50, 50)),
       Box(
         type: BodyType.dynamic,
+        initialPosition: Vector2(16, 16),
         behaviors: [
           BoxBouncingBehavior(),
         ],
@@ -45,8 +50,6 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     }
 
     await Future.wait(componentLoadingFutures);
-
-    camera.zoom = 4;
   }
 
   // TODO(dev): later on, typing the map elements would be a better approach
