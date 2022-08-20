@@ -17,6 +17,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     await addAll([
       GravityRotatorBehavior(),
       Box(),
+      Player(initialPosition: Vector2(50, 50)),
       WallStatic(position: WallPosition.top),
       WallStatic(position: WallPosition.left),
       WallStatic(position: WallPosition.right),
