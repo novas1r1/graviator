@@ -22,12 +22,10 @@ class Box extends BodyEntity {
   factory Box.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
     required BodyType bodyType,
-    required double mapWidth,
-    required double mapHeight,
   }) {
     final position = Vector2(
-      entry.key.x.toDouble() * mapWidth,
-      entry.key.y.toDouble() * mapHeight,
+      entry.key.x.toDouble() * defaultWidth,
+      entry.key.y.toDouble() * defaultHeight,
     );
 
     return Box(
@@ -68,8 +66,6 @@ class Box extends BodyEntity {
         Box.fromMapEntry(
           entry: entry,
           bodyType: bodyType,
-          mapHeight: 16,
-          mapWidth: 16,
         ),
       );
     }
