@@ -10,11 +10,15 @@ export 'behaviors/behaviors.dart';
 class Box extends BodyEntity {
   Box({
     required BodyType type,
+    required Vector2 initialPosition,
     super.behaviors,
-  }) : super(bodyComponent: _BoxBodyComponent(type: type));
+  }) : super(
+          bodyComponent: _BoxBodyComponent(type: type)
+            ..initialPosition = initialPosition,
+        );
 }
 
-class _BoxBodyComponent extends BodyComponent {
+class _BoxBodyComponent extends BodyComponent with InitialPosition {
   _BoxBodyComponent({
     required BodyType type,
   })  : _type = type,
@@ -29,10 +33,11 @@ class _BoxBodyComponent extends BodyComponent {
 
   @override
   Body createBody() {
+    print(initialPosition);
     return world.createBody(
       BodyDef(
         type: _type,
-        position: gameRef.size / 4,
+        position: initialPosition,
       ),
     )..createFixtureFromShape(
         PolygonShape()..setAsBoxXY(10, 10),
