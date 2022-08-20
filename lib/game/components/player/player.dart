@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flamejam/assets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,9 +8,13 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
   /// Player Component which can move
   Player({
     required this.initialPosition,
-  }) : super() {
-    paint.color = Colors.blue;
-  }
+  });
+
+  static const double spriteWidth = 12;
+  static const double spriteHeight = 16;
+
+  static const double playerHeight = 8;
+  static const double playerWidth = 6;
 
   final Vector2 initialPosition;
   final Vector2 velocity = Vector2(0, 0);
@@ -18,21 +23,36 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
   @override
   Body createBody() {
     final fixture = FixtureDef(
-      CircleShape()..radius = 2,
-      friction: 0.3,
-      restitution: 0.6,
-      density: 1,
+      PolygonShape()
+        ..setAsBoxXY(
+          playerWidth / 2,
+          playerHeight / 2,
+        ),
+      friction: 1,
+      // density: 1.02,
       userData: this,
     );
 
     final bodyDef = BodyDef(
       type: BodyType.dynamic,
       position: initialPosition,
-      userData: this,
       allowSleep: false,
+      userData: this,
     );
 
-    return world.createBody(bodyDef)..createFixture(fixture);
+    final body = world.createBody(bodyDef)..createFixture(fixture);
+
+    add(
+      SpriteComponent(
+        sprite: MiniSpriteLibrary.sprites['player'],
+        size: Vector2(playerWidth, playerHeight),
+        position: Vector2(playerWidth / 2, playerHeight / 2)..negate(),
+      ),
+    );
+
+    paint.color = Colors.transparent;
+
+    return body;
   }
 
   @override
