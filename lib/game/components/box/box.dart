@@ -14,8 +14,7 @@ class Box extends BodyEntity {
     required Vector2 initialPosition,
     super.behaviors,
   }) : super(
-          bodyComponent: _BoxBodyComponent(type: type)
-            ..initialPosition = initialPosition,
+          bodyComponent: _BoxBodyComponent(type: type)..initialPosition = initialPosition,
         );
 
   /// creates a box from an entry of a map
