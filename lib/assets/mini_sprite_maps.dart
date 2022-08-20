@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/components/components.dart';
+import 'package:flamejam/game/components/portal/portal.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 /// Holds all the maps
@@ -34,6 +35,9 @@ extension MiniMapCreate on MiniMap {
             entry: entry,
             bodyType: BodyType.dynamic,
           );
+          break;
+        case 'portal':
+          component = Portal.fromMapEntry(entry: entry);
           break;
         default:
           continue;
