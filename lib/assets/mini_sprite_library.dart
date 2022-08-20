@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_mini_sprite/flame_mini_sprite.dart';
 import 'package:flutter/widgets.dart';
