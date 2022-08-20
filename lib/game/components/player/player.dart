@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
@@ -29,7 +31,7 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
           playerHeight / 2,
         ),
       friction: 1,
-      // density: 1.02,
+      density: 0.1,
       userData: this,
     );
 
@@ -37,6 +39,7 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
       type: BodyType.dynamic,
       position: initialPosition,
       allowSleep: false,
+      fixedRotation: true,
       userData: this,
     );
 
@@ -59,6 +62,9 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
   void update(double dt) {
     super.update(dt);
 
+    // rotate the player to have his feet on the ground where gravity points
+    body.setTransform(body.position, pi - world.gravity.screenAngle() * -1);
+
     body.applyLinearImpulse(velocity.scaled(body.mass));
   }
 
@@ -77,6 +83,11 @@ class Player extends BodyComponent with ParentIsA<Forge2DGame>, KeyboardHandler 
       velocity.y = isKeyDown ? -1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyS) {
       velocity.y = isKeyDown ? 1 : 0;
+    }
+
+    if (event.logicalKey == LogicalKeyboardKey.numpadAdd) {
+      print(world.gravity.screenAngle());
+      body.setTransform(body.position, pi - world.gravity.screenAngle() * -1);
     }
 
     return super.onKeyEvent(event, keysPressed);
