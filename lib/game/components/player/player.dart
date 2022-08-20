@@ -17,20 +17,33 @@ class Player extends BodyEntity {
 }
 
 class _PlayerBodyComponent extends BodyComponent with InitialPosition {
-  static const double playerHeight = 8;
-  static const double playerWidth = 6;
+  _PlayerBodyComponent()
+      : super(
+          renderBody: false,
+          children: [
+            SpriteComponent(
+              sprite: MiniSpriteLibrary.sprites['player'],
+              size: _spriteSize,
+              position: Vector2(
+                _spriteSize.x / -2,
+                (_spriteSize.y / -2) - (_spriteSize.y * 0.03),
+              ),
+            ),
+          ],
+        );
+
+  static final _spriteSize = Vector2.all(32);
 
   @override
   Body createBody() {
+    final hitbox = Vector2(
+      _spriteSize.x * 0.37,
+      _spriteSize.y * 0.47,
+    );
     final fixture = FixtureDef(
-      PolygonShape()
-        ..setAsBoxXY(
-          playerWidth / 2,
-          playerHeight / 2,
-        ),
+      PolygonShape()..setAsBoxXY(hitbox.x, hitbox.y),
       friction: 1,
       density: 0.1,
-      userData: this,
     );
 
     final bodyDef = BodyDef(
@@ -41,18 +54,6 @@ class _PlayerBodyComponent extends BodyComponent with InitialPosition {
       userData: this,
     );
 
-    final body = world.createBody(bodyDef)..createFixture(fixture);
-
-    add(
-      SpriteComponent(
-        sprite: MiniSpriteLibrary.sprites['player'],
-        size: Vector2(playerWidth, playerHeight),
-        position: Vector2(playerWidth / 2, playerHeight / 2)..negate(),
-      ),
-    );
-
-    paint.color = Colors.transparent;
-
-    return body;
+    return world.createBody(bodyDef)..createFixture(fixture);
   }
 }
