@@ -30,13 +30,13 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
     await add(
       GameEntity(
         game: this,
-        mapData: MiniSpriteMap.demoLevel,
+        mapData: MiniSpriteMap.demoLevelTwo,
         behaviors: [
           GravityRotatorBehavior(),
         ],
         children: [
           Player(
-            initialPosition: Vector2(16, 16),
+            initialPosition: Vector2(32, 16),
             behaviors: [
               ControlledMovementBehavior(),
             ],
