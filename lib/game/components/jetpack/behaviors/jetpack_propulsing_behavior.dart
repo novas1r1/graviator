@@ -3,6 +3,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flamejam/game/components/jetpack/jetpack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack> with KeyboardHandler {
 
       add(
         _SmokeParticleSystem(
+          size: AstronautBodyComponent.spriteSize,
           count: astronaut.body.linearVelocity.length.ceil(),
           acceleration: Vector2(
             -astronaut.body.linearVelocity.x,
@@ -39,12 +41,13 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack> with KeyboardHandler {
 }
 
 class _SmokeParticleSystem extends ParticleSystemComponent {
-  _SmokeParticleSystem({
-    required int count,
-    required Vector2 acceleration,
-  }) : super(
+  _SmokeParticleSystem(
+      {required int count,
+      required Vector2 acceleration,
+      required Vector2 size})
+      : super(
           // TODO(alestiago): Remove this absolute positioning.
-          position: Vector2(8.6, 10),
+          position: Vector2(size.x - 12, size.y - 11),
           particle: Particle.generate(
             count: count,
             generator: (i) => AcceleratedParticle(
@@ -57,7 +60,7 @@ class _SmokeParticleSystem extends ParticleSystemComponent {
               ),
             ),
           ),
-        );
+        ) {}
 }
 
 class _SquareParticle extends Particle {

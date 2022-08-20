@@ -25,21 +25,21 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
           children: [
             SpriteComponent(
               sprite: MiniSpriteLibrary.sprites['player'],
-              size: _spriteSize,
+              size: spriteSize,
               position: Vector2(
-                _spriteSize.x / -2,
-                (_spriteSize.y / -2) - (_spriteSize.y * 0.03),
+                spriteSize.x / -2,
+                (spriteSize.y / -2) - (spriteSize.y * 0.03),
               ),
             ),
           ],
         );
 
-  static final _spriteSize = Vector2.all(16);
+  static final spriteSize = Vector2.all(16);
 
   @override
   Body createBody() {
     final fixture = FixtureDef(
-      PolygonShape()..setAsBoxXY(_spriteSize.x * 0.37, _spriteSize.y * 0.47),
+      PolygonShape()..setAsBoxXY(spriteSize.x * 0.37, spriteSize.y * 0.47),
       friction: 1,
       density: 0.1,
     );
