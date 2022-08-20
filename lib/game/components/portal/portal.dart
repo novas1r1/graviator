@@ -11,11 +11,13 @@ class Portal extends BodyEntity {
   /// Create a Portal Entity
   Portal({required Vector2 initialPosition})
       : super(
-          bodyComponent: _PortalBodyComponent()..initialPosition = initialPosition,
+          bodyComponent: _PortalBodyComponent()
+            ..initialPosition = initialPosition,
         );
 
   /// Create a [Portal] Entity from the [MiniMap] Entry
-  Portal.fromMapEntry({required MapEntry<MapPosition, Map<String, dynamic>> entry})
+  Portal.fromMapEntry(
+      {required MapEntry<MapPosition, Map<String, dynamic>> entry})
       : this(
           initialPosition: Vector2(
             entry.key.x.toDouble() * 16,
@@ -25,25 +27,32 @@ class Portal extends BodyEntity {
 }
 
 class _PortalBodyComponent extends BodyComponent with InitialPosition {
-  static final _spriteSize = Vector2.all(8);
-
   _PortalBodyComponent()
-      : super(children: [
-          SpriteComponent(
-            sprite: MiniSpriteLibrary.sprites['portal'],
-            size: _spriteSize,
-            // position: _spriteSize.clone() / 2,
-          )
-        ]);
+      : super(
+          renderBody: false,
+          children: [
+            SpriteComponent(
+              sprite: MiniSpriteLibrary.sprites['portal'],
+              size: _spriteSize,
+              anchor: Anchor.center,
+              position: Vector2(_spriteSize.x * 0.05, 0),
+            )
+          ],
+        );
+
+  static final _spriteSize = Vector2.all(16);
 
   @override
   Body createBody() {
     final fixtureDef = FixtureDef(
-      PolygonShape()..setAsBoxXY(_spriteSize.x, _spriteSize.y),
+      PolygonShape()
+        ..setAsBoxXY(
+          (_spriteSize.x / 2) * 0.6,
+          (_spriteSize.y / 2) * 0.88,
+        ),
       userData: this,
     );
     final bodyDef = BodyDef(position: initialPosition);
-    paint.color = Color(0xFFFF00000);
 
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }
