@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:flamejam/game/bloc/game_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameOverPage extends StatelessWidget {
   const GameOverPage({super.key});
@@ -24,6 +27,21 @@ class GameOverPage extends StatelessWidget {
                 ),
               ],
             ),
+            CallbackShortcuts(
+              bindings: {
+                const SingleActivator(LogicalKeyboardKey.space): () => context.read<GameCubit>().startGame(),
+              },
+              child: Focus(
+                autofocus: true,
+                child: ElevatedButton(
+                  onPressed: () => context.read<GameCubit>().startGame(),
+                  child: const Text(
+                    'Play again',
+                    style: TextStyle(fontSize: 40),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

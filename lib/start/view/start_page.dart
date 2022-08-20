@@ -2,6 +2,7 @@
 
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StartPage extends StatelessWidget {
@@ -19,11 +20,19 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: () => context.read<GameCubit>().startGame(),
-                    child: const Text(
-                      'START GAME',
-                      style: TextStyle(fontSize: 40),
+                  child: CallbackShortcuts(
+                    bindings: {
+                      const SingleActivator(LogicalKeyboardKey.space): () => context.read<GameCubit>().startGame(),
+                    },
+                    child: Focus(
+                      autofocus: true,
+                      child: ElevatedButton(
+                        onPressed: () => context.read<GameCubit>().startGame(),
+                        child: const Text(
+                          'START GAME',
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ),
                     ),
                   ),
                 ),
