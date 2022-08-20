@@ -22,7 +22,12 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
 
     await addAll([
       GravityRotatorBehavior(),
-      Box(),
+      Box(
+        type: BodyType.dynamic,
+        behaviors: [
+          BoxBouncingBehavior(),
+        ],
+      ),
       // WallStatic(position: WallPosition.top),
       // WallStatic(position: WallPosition.left),
       // WallStatic(position: WallPosition.right),
@@ -47,8 +52,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
 
   /// small method to avoid typos when accessing sprite entry in map elements
   String? getSpriteNameFromMapElement(
-    MapEntry<MapPosition, Map<String, dynamic>> element,
-  ) {
+      MapEntry<MapPosition, Map<String, dynamic>> element) {
     return element.value['sprite'] as String?;
   }
 }
