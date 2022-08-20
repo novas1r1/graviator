@@ -1,22 +1,25 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/mini_sprite_library.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 
-/// Player Entity which can move
-class Player extends BodyEntity {
-  /// Constructor
-  Player({
+export 'behaviors/behaviors.dart';
+
+class Astronaut extends BodyEntity<AstronautBodyComponent> {
+  Astronaut({
     required Vector2 initialPosition,
     super.behaviors,
+    super.children,
   }) : super(
-          bodyComponent: _PlayerBodyComponent()
+          bodyComponent: AstronautBodyComponent()
             ..initialPosition = initialPosition,
         );
 }
 
-class _PlayerBodyComponent extends BodyComponent with InitialPosition {
-  _PlayerBodyComponent()
+class AstronautBodyComponent extends BodyComponent with InitialPosition {
+  AstronautBodyComponent()
       : super(
           renderBody: false,
           children: [
