@@ -6,14 +6,13 @@ import 'package:flutter/services.dart';
 ///
 /// Whenever, the gravity is rotated, all the [World.bodies] lose their
 /// velocity.
-class GravityRotatorBehavior extends Component with ParentIsA<Forge2DGame>, KeyboardHandler {
+class GravityRotatorBehavior extends Component
+    with ParentIsA<Forge2DGame>, KeyboardHandler {
   late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
 
   @override
-  bool onKeyEvent(
-    RawKeyEvent event,
-    Set<LogicalKeyboardKey> keysPressed,
-  ) {
+  // ignore: avoid_renaming_method_parameters
+  bool onKeyEvent(RawKeyEvent event, _) {
     if (!_keys.contains(event.logicalKey)) {
       return true;
     }
@@ -23,7 +22,7 @@ class GravityRotatorBehavior extends Component with ParentIsA<Forge2DGame>, Keyb
         body.linearVelocity.setZero();
         body.setAwake(true);
       }
-      parent.world.gravity.rotateClockwise();
+      parent.world.gravity.rotateAntiClockwise();
     }
 
     return false;
@@ -31,7 +30,7 @@ class GravityRotatorBehavior extends Component with ParentIsA<Forge2DGame>, Keyb
 }
 
 extension on Vector2 {
-  void rotateClockwise() {
+  void rotateAntiClockwise() {
     final x = this.x;
     final y = this.y;
 
