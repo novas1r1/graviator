@@ -3,6 +3,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/components.dart';
+import 'package:flamejam/game/components/player/behaviors/behaviors.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
@@ -26,7 +27,12 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
 
     await addAll([
       GravityRotatorBehavior(),
-      Player(initialPosition: Vector2(50, 50)),
+      Player(
+        initialPosition: Vector2(16, 16),
+        behaviors: [
+          ControlledMovementBehavior(),
+        ],
+      ),
       Box(
         type: BodyType.dynamic,
         initialPosition: Vector2(16, 16),
@@ -34,10 +40,6 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
           BoxBouncingBehavior(),
         ],
       ),
-      // WallStatic(position: WallPosition.top),
-      // WallStatic(position: WallPosition.left),
-      // WallStatic(position: WallPosition.right),
-      // WallStatic(position: WallPosition.bottom),
     ]);
 
     final componentLoadingFutures = <Future<dynamic>>[];
