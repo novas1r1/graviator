@@ -5,7 +5,7 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
-import 'package:flamejam/game/components/collectables/oxygen/oxygen.dart';
+import 'package:flamejam/game/components/collectables/oxygen_tank/oxygen_tank.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/components/player/behaviors/behaviors.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +67,6 @@ class GameEntity extends Entity {
     final map = MiniMap.fromDataString(mapData);
 
     await addAll(Box.createAllFromMap(map));
-    await addAll(Oxygen.createAllFromMap(map));
+    await addAll(OxygenTank.createAllFromMap(map));
   }
 }

@@ -4,15 +4,16 @@ import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
-class Oxygen extends BodyEntity {
-  Oxygen({
+class OxygenTank extends BodyEntity {
+  OxygenTank({
     required Vector2 initialPosition,
     super.behaviors,
   }) : super(
-          bodyComponent: _OxygenComponent()..initialPosition = initialPosition,
+          bodyComponent: _OxygenTankComponent()
+            ..initialPosition = initialPosition,
         );
 
-  factory Oxygen.fromMapEntry({
+  factory OxygenTank.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
     required double mapWidth,
     required double mapHeight,
@@ -22,7 +23,7 @@ class Oxygen extends BodyEntity {
       entry.key.y.toDouble() * mapHeight,
     );
 
-    return Oxygen(
+    return OxygenTank(
       initialPosition: position,
     );
   }
@@ -33,10 +34,10 @@ class Oxygen extends BodyEntity {
   /// default width
   static const double defaultWidth = 12;
 
-  static List<Oxygen> createAllFromMap(
+  static List<OxygenTank> createAllFromMap(
     MiniMap map,
   ) {
-    final oxygenList = <Oxygen>[];
+    final oxygenList = <OxygenTank>[];
 
     for (final entry in map.objects.entries) {
       final spriteName = entry.value['sprite'];
@@ -44,7 +45,7 @@ class Oxygen extends BodyEntity {
       if (spriteName != 'oxygen') continue;
 
       oxygenList.add(
-        Oxygen.fromMapEntry(
+        OxygenTank.fromMapEntry(
           entry: entry,
           mapHeight: 16,
           mapWidth: 16,
@@ -56,11 +57,11 @@ class Oxygen extends BodyEntity {
   }
 }
 
-class _OxygenComponent extends BodyComponent with InitialPosition {
-  _OxygenComponent()
+class _OxygenTankComponent extends BodyComponent with InitialPosition {
+  _OxygenTankComponent()
       : super(
           children: [
-            _OxygenSpriteComponent(),
+            _OxygenTankSpriteComponent(),
           ],
         );
 
@@ -70,13 +71,16 @@ class _OxygenComponent extends BodyComponent with InitialPosition {
       BodyDef(position: initialPosition),
     )..createFixtureFromShape(
         PolygonShape()
-          ..setAsBoxXY(Oxygen.defaultWidth / 2, Oxygen.defaultHeight / 2),
+          ..setAsBoxXY(
+            OxygenTank.defaultWidth / 2,
+            OxygenTank.defaultHeight / 2,
+          ),
       );
   }
 }
 
-class _OxygenSpriteComponent extends SpriteComponent {
-  _OxygenSpriteComponent()
+class _OxygenTankSpriteComponent extends SpriteComponent {
+  _OxygenTankSpriteComponent()
       : super(
           sprite: MiniSpriteLibrary.sprites['oxygen'],
         );
