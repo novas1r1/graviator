@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs
+import 'dart:math' as math;
 
 import 'package:flame/events.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/components/player/behaviors/behaviors.dart';
@@ -22,6 +24,14 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
   Color backgroundColor() => const Color.fromARGB(255, 0, 88, 255);
 
+  void Function(Canvas canvas) renderTreeCallback = (_) {};
+
+  @override
+  void renderTree(Canvas canvas) {
+    renderTreeCallback(canvas);
+    super.renderTree(canvas);
+  }
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -33,6 +43,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
         mapData: MiniSpriteMap.demoLevel,
         behaviors: [
           GravityRotatorBehavior(),
+          CameraRotatorBehavior(),
         ],
         children: [
           Player(
