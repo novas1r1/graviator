@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/mini_sprite_library.dart';
@@ -56,4 +54,5 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition {
 
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }
+
 }
