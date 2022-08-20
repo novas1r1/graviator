@@ -19,11 +19,21 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: () => context.read<GameCubit>().startGame(),
-                    child: const Text(
-                      'START GAME',
-                      style: TextStyle(fontSize: 40),
+                  child: GestureDetector(
+                    onTap: () => context.read<GameCubit>().startGame(),
+                    child: Container(
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('button_bg.png'),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'START GAME',
+                          style: TextStyle(fontSize: 42),
+                        ),
+                      ),
                     ),
                   ),
                 ),
