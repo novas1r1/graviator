@@ -57,6 +57,7 @@ class Box extends BodyEntity {
         case 'building_block_dynamic':
           bodyType = BodyType.dynamic;
           break;
+
         default:
           continue;
       }
