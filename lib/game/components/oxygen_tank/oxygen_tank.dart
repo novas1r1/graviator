@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flame/components.dart';
-import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flamejam/app/cubits/game_cubit.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';

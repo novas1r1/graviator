@@ -1,9 +1,11 @@
-import 'package:flamejam/app/cubits/game_cubit.dart';
+// ignore_for_file: public_member_api_docs
+
+import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
