@@ -26,6 +26,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
   void renderTree(Canvas canvas) {
     renderTreeCallback(canvas);
+
     super.renderTree(canvas);
   }
 
@@ -45,14 +46,6 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
         children: [],
       ),
     );
-  }
-
-  // TODO(dev): later on, typing the map elements would be a better approach
-  /// small method to avoid typos when accessing sprite entry in map elements
-  static String? getSpriteNameFromMapElement(
-    MapEntry<MapPosition, Map<String, dynamic>> element,
-  ) {
-    return element.value['sprite'] as String?;
   }
 }
 
@@ -74,9 +67,8 @@ class GameEntity extends Entity {
 
     final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
-    for (final element in map.objects.entries) {
-      children.addAll(BuildingBlockFactory.resolveMapEntry(element));
-    }
+
+    children.addAll(Box.createAllFromMap(map));
 
     final player = Player(
       initialPosition: Vector2(16, 16),
