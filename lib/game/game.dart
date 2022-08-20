@@ -1,4 +1,9 @@
+// ignore_for_file: public_member_api_docs
+
+import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/game.dart';
+import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
@@ -21,41 +26,46 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
     await MiniSpriteLibrary.loadSprites(pixelSize: 1, color: Colors.amber);
 
-    await addAll([
-      GravityRotatorBehavior(),
-      Box(
-        type: BodyType.dynamic,
-        initialPosition: Vector2(16, 16),
+    await add(
+      GameEntity(
+        game: this,
+        mapData: MiniSpriteMap.demoLevel,
         behaviors: [
-          BoxBouncingBehavior(),
+          GravityRotatorBehavior(),
         ],
       ),
-      // WallStatic(position: WallPosition.top),
-      // WallStatic(position: WallPosition.left),
-      // WallStatic(position: WallPosition.right),
-      // WallStatic(position: WallPosition.bottom),
-    ]);
-
-    final componentLoadingFutures = <Future<dynamic>>[];
-
-    final map = MiniMap.fromDataString(MiniSpriteMaps.demoLevel);
-
-    for (final element in map.objects.entries) {
-      componentLoadingFutures
-          .add(addAll(BuildingBlockFactory.resolveMapEntry(element)));
-    }
-
-    await Future.wait(componentLoadingFutures);
+    );
   }
 
   // TODO(dev): later on, typing the map elements would be a better approach
-
   /// small method to avoid typos when accessing sprite entry in map elements
-  String? getSpriteNameFromMapElement(
-      MapEntry<MapPosition, Map<String, dynamic>> element) {
+  static String? getSpriteNameFromMapElement(
+    MapEntry<MapPosition, Map<String, dynamic>> element,
+  ) {
     return element.value['sprite'] as String?;
+  }
+}
+
+class GameEntity extends Entity {
+  GameEntity({
+    required this.mapData,
+    required this.game,
+    super.behaviors,
+  });
+
+  final String mapData;
+
+  final FlameJam game;
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+
+    final map = MiniMap.fromDataString(mapData);
+    for (final element in map.objects.entries) {
+      await addAll(BuildingBlockFactory.resolveMapEntry(element));
+    }
   }
 }
