@@ -18,21 +18,16 @@ class Box extends BodyEntity {
             ..initialPosition = initialPosition,
         );
 
-  /// creates a box from an entry of a map
-  factory Box.fromMapEntry({
+  Box.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
     required BodyType bodyType,
-  }) {
-    final position = Vector2(
-      entry.key.x.toDouble() * 16,
-      entry.key.y.toDouble() * 16,
-    );
-
-    return Box(
-      initialPosition: position,
-      type: bodyType,
-    );
-  }
+  }) : this(
+          type: bodyType,
+          initialPosition: Vector2(
+            entry.key.x.toDouble() * 16,
+            entry.key.y.toDouble() * 16,
+          ),
+        );
 
   /// default height
   static const double defaultHeight = 16;
