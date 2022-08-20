@@ -68,7 +68,6 @@ class GameEntity extends Entity {
 
     final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
-
     children.addAll(Box.createAllFromMap(map));
 
     final player = Astronaut(
