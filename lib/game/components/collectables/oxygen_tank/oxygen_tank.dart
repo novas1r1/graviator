@@ -57,8 +57,6 @@ class OxygenTank extends BodyEntity {
   }
 }
 
-const _colors = <Color>[Colors.red, Colors.teal, Colors.green];
-
 class _OxygenTankComponent extends BodyComponent
     with InitialPosition, ContactCallbacks {
   _OxygenTankComponent()
