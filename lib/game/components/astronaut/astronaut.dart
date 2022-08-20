@@ -13,8 +13,7 @@ class Astronaut extends BodyEntity<AstronautBodyComponent> {
     super.behaviors,
     super.children,
   }) : super(
-          bodyComponent: AstronautBodyComponent()
-            ..initialPosition = initialPosition,
+          bodyComponent: AstronautBodyComponent()..initialPosition = initialPosition,
         );
 }
 
@@ -34,16 +33,12 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
           ],
         );
 
-  static final _spriteSize = Vector2.all(32);
+  static final _spriteSize = Vector2.all(16);
 
   @override
   Body createBody() {
-    final hitbox = Vector2(
-      _spriteSize.x * 0.37,
-      _spriteSize.y * 0.47,
-    );
     final fixture = FixtureDef(
-      PolygonShape()..setAsBoxXY(hitbox.x, hitbox.y),
+      PolygonShape()..setAsBoxXY(_spriteSize.x * 0.37, _spriteSize.y * 0.47),
       friction: 1,
       density: 0.1,
     );
@@ -53,7 +48,7 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
       position: initialPosition,
       allowSleep: false,
       fixedRotation: true,
-      userData: this,
+      userData: parent,
     );
 
     return world.createBody(bodyDef)..createFixture(fixture);

@@ -18,60 +18,22 @@ class Box extends BodyEntity {
             ..initialPosition = initialPosition,
         );
 
-  /// creates a box from an entry of a map
-  factory Box.fromMapEntry({
+  Box.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
     required BodyType bodyType,
-  }) {
-    final position = Vector2(
-      entry.key.x.toDouble() * defaultWidth,
-      entry.key.y.toDouble() * defaultHeight,
-    );
-
-    return Box(
-      initialPosition: position,
-      type: bodyType,
-    );
-  }
+  }) : this(
+          type: bodyType,
+          initialPosition: Vector2(
+            entry.key.x.toDouble() * 16,
+            entry.key.y.toDouble() * 16,
+          ),
+        );
 
   /// default height
   static const double defaultHeight = 16;
 
   /// default width
   static const double defaultWidth = 16;
-
-  static List<Box> createAllFromMap(
-    MiniMap map,
-  ) {
-    final boxes = <Box>[];
-
-    for (final entry in map.objects.entries) {
-      final spriteName = entry.value['sprite'];
-
-      BodyType bodyType;
-
-      switch (spriteName) {
-        case 'building_block_static':
-          bodyType = BodyType.static;
-          break;
-        case 'building_block_dynamic':
-          bodyType = BodyType.dynamic;
-          break;
-
-        default:
-          continue;
-      }
-
-      boxes.add(
-        Box.fromMapEntry(
-          entry: entry,
-          bodyType: bodyType,
-        ),
-      );
-    }
-
-    return boxes;
-  }
 }
 
 class _BoxBodyComponent extends BodyComponent with InitialPosition {
