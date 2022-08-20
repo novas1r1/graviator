@@ -21,6 +21,7 @@ class GravityRotatorBehavior extends Component with ParentIsA<Forge2DGame>, Keyb
     if (event is RawKeyUpEvent) {
       for (final body in parent.world.bodies) {
         body.linearVelocity.setZero();
+        body.setAwake(true);
       }
       parent.world.gravity.rotateClockwise();
     }
