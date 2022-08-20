@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
+import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 class OxygenTank extends BodyEntity {
@@ -34,6 +35,7 @@ class OxygenTank extends BodyEntity {
   /// default width
   static const double defaultWidth = 12;
 
+  /// Goes through the whole map and creates oxygen tanks
   static List<OxygenTank> createAllFromMap(
     MiniMap map,
   ) {
@@ -42,7 +44,7 @@ class OxygenTank extends BodyEntity {
     for (final entry in map.objects.entries) {
       final spriteName = entry.value['sprite'];
 
-      if (spriteName != 'oxygen') continue;
+      if (spriteName != 'oxygen_tank') continue;
 
       oxygenList.add(
         OxygenTank.fromMapEntry(
@@ -57,18 +59,33 @@ class OxygenTank extends BodyEntity {
   }
 }
 
-class _OxygenTankComponent extends BodyComponent with InitialPosition {
+const _colors = <Color>[Colors.red, Colors.teal, Colors.green];
+
+class _OxygenTankComponent extends BodyComponent
+    with InitialPosition, ContactCallbacks {
   _OxygenTankComponent()
       : super(
           children: [
             _OxygenTankSpriteComponent(),
           ],
-        );
+        ) {
+    paint.color = Colors.blue;
+  }
+
+  @override
+  void beginContact(Object other, Contact contact) {
+    super.beginContact(other, contact);
+
+    paint.color = _colors[(_colors.indexOf(paint.color) + 1) % _colors.length];
+  }
 
   @override
   Body createBody() {
     return world.createBody(
-      BodyDef(position: initialPosition),
+      BodyDef(
+        position: initialPosition,
+        userData: this,
+      ),
     )..createFixtureFromShape(
         PolygonShape()
           ..setAsBoxXY(
@@ -82,7 +99,7 @@ class _OxygenTankComponent extends BodyComponent with InitialPosition {
 class _OxygenTankSpriteComponent extends SpriteComponent {
   _OxygenTankSpriteComponent()
       : super(
-          sprite: MiniSpriteLibrary.sprites['oxygen'],
+          sprite: MiniSpriteLibrary.sprites['oxygen_tank'],
         );
 
   @override

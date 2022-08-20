@@ -111,11 +111,6 @@ class _BoxBodySpriteComponent extends SpriteComponent {
           sprite: MiniSpriteLibrary.sprites['building_block_static'],
         );
 
-  _BoxBodySpriteComponent.oxygen()
-      : super(
-          sprite: MiniSpriteLibrary.sprites['oxygen'],
-        );
-
   @override
   Future<void> onLoad() async {
     await super.onLoad();

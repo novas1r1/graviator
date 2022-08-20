@@ -7,6 +7,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
+import 'package:flamejam/game/components/collectables/collectables.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/components/player/behaviors/behaviors.dart';
 import 'package:flutter/material.dart';
@@ -32,12 +33,15 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    await MiniSpriteLibrary.loadSprites(pixelSize: 1, color: Colors.white);
+    await MiniSpriteLibrary.loadSprites(
+      pixelSize: 1,
+      color: Colors.white,
+    );
 
     await add(
       GameEntity(
         game: this,
-        mapData: MiniSpriteMap.demoLevelTwo,
+        mapData: MiniSpriteMap.demoLevel,
         behaviors: [
           GravityRotatorBehavior(),
           CameraRotatorBehavior(),
@@ -68,6 +72,7 @@ class GameEntity extends Entity {
     final map = MiniMap.fromDataString(mapData);
 
     children.addAll(Box.createAllFromMap(map));
+    children.addAll(OxygenTank.createAllFromMap(map));
 
     final player = Player(
       initialPosition: Vector2(16, 16),
