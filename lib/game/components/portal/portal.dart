@@ -1,6 +1,8 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/mini_sprite_library.dart';
+import 'package:flamejam/game/bloc/game_cubit.dart';
+import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
@@ -9,13 +11,11 @@ class Portal extends BodyEntity {
   /// Create a Portal Entity
   Portal({required Vector2 initialPosition})
       : super(
-          bodyComponent: _PortalBodyComponent()
-            ..initialPosition = initialPosition,
+          bodyComponent: _PortalBodyComponent()..initialPosition = initialPosition,
         );
 
   /// Create a [Portal] Entity from the [MiniMap] Entry
-  Portal.fromMapEntry(
-      {required MapEntry<MapPosition, Map<String, dynamic>> entry})
+  Portal.fromMapEntry({required MapEntry<MapPosition, Map<String, dynamic>> entry})
       : this(
           initialPosition: Vector2(
             entry.key.x.toDouble() * 16,
@@ -24,7 +24,7 @@ class Portal extends BodyEntity {
         );
 }
 
-class _PortalBodyComponent extends BodyComponent with InitialPosition {
+class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCallbacks {
   _PortalBodyComponent()
       : super(
           renderBody: false,
@@ -41,6 +41,12 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition {
   static final _spriteSize = Vector2.all(16);
 
   @override
+  void beginContact(Object other, Contact contact) {
+    if (other is Astronaut) readBloc<GameCubit, GameState>().endGame();
+    super.beginContact(other, contact);
+  }
+
+  @override
   Body createBody() {
     final fixtureDef = FixtureDef(
       PolygonShape()
@@ -49,10 +55,10 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition {
           (_spriteSize.y / 2) * 0.88,
         ),
       userData: this,
+      isSensor: true,
     );
     final bodyDef = BodyDef(position: initialPosition);
 
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }
-
 }

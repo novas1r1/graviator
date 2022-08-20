@@ -18,7 +18,7 @@ class GameOverPage extends StatelessWidget {
               children: const [
                 Expanded(
                   child: Text(
-                    'GAMEOVER',
+                    'WIN!!! 🎉🎉🎉🎉',
                     style: TextStyle(fontSize: 40),
                   ),
                 ),

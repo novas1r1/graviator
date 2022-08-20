@@ -103,6 +103,6 @@ class GameEntity extends Entity {
       ],
     );
     await addAll(children..add(astronaut));
-    // game.camera.followBodyComponent(astronaut.bodyComponent);
+    game.camera.followBodyComponent(astronaut.bodyComponent);
   }
 }

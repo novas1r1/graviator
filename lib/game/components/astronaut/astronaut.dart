@@ -33,7 +33,7 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
           ],
         );
 
-  static final _spriteSize = Vector2.all(32);
+  static final _spriteSize = Vector2.all(16);
 
   @override
   Body createBody() {
@@ -48,7 +48,7 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
       position: initialPosition,
       allowSleep: false,
       fixedRotation: true,
-      userData: this,
+      userData: parent,
     );
 
     return world.createBody(bodyDef)..createFixture(fixture);
