@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const MaterialApp(home: App()),
+    MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        fontFamily: 'BitPotion',
+      ),
+      home: const App(),
+    ),
   );
 }
