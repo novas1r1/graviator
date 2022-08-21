@@ -12,22 +12,22 @@ class AstronautState {
   const AstronautState({
     this.oxygen = 100,
     this.health = 100,
-    this.playerStatus = AstronautStatus.alive,
+    this.astronautStatus = AstronautStatus.alive,
   });
 
   final int oxygen;
   final int health;
-  final AstronautStatus playerStatus;
+  final AstronautStatus astronautStatus;
 
   AstronautState copyWith({
     int? oxygen,
     int? health,
-    AstronautStatus? playerStatus,
+    AstronautStatus? astronautStatus,
   }) {
     return AstronautState(
       oxygen: oxygen ?? this.oxygen,
       health: health ?? this.health,
-      playerStatus: playerStatus ?? this.playerStatus,
+      astronautStatus: astronautStatus ?? this.astronautStatus,
     );
   }
 }

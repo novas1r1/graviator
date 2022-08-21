@@ -15,12 +15,12 @@ class AstronautCubit extends Cubit<AstronautState> {
   void pickUpOxygen() {
     final currentOxygen = state.oxygen + oxygenPerTank;
 
-    print('PICKED UP OXYGEN, OXYGEN: $currentOxygen');
-
     if (currentOxygen >= maxOxygen) {
       emit(state.copyWith(oxygen: maxOxygen));
+      print('PICKED UP OXYGEN, OXYGEN: $maxOxygen');
     } else {
       emit(state.copyWith(oxygen: currentOxygen));
+      print('PICKED UP OXYGEN, OXYGEN: $currentOxygen');
     }
   }
 
@@ -40,7 +40,11 @@ class AstronautCubit extends Cubit<AstronautState> {
     print('PLAYER DIED');
 
     emit(
-      state.copyWith(playerStatus: AstronautStatus.dead, health: 0, oxygen: 0),
+      state.copyWith(
+        astronautStatus: AstronautStatus.dead,
+        health: 0,
+        oxygen: 0,
+      ),
     );
   }
 
@@ -49,7 +53,7 @@ class AstronautCubit extends Cubit<AstronautState> {
 
     emit(
       state.copyWith(
-        playerStatus: AstronautStatus.alive,
+        astronautStatus: AstronautStatus.alive,
         health: 100,
         oxygen: 100,
       ),
