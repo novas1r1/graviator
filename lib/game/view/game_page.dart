@@ -3,7 +3,8 @@
 import 'package:flame/game.dart';
 import 'package:flamejam/game/components/ingame_ui/ingame_ui.dart';
 import 'package:flamejam/game/game.dart';
-import 'package:flamejam/game/view/message_box.dart';
+import 'package:flamejam/message_box/cubit/message_box_cubit.dart';
+import 'package:flamejam/message_box/message_box.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,19 +13,58 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GameWidget.controlled(
-      initialActiveOverlays: const [
-        MessageBox.flameOverlayId,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MessageBoxCubit>(
+          create: (_) => MessageBoxCubit(),
+        ),
       ],
-      overlayBuilderMap: {
-        MessageBox.flameOverlayId: (_, __) => const MessageBox(
-              text: 'Hello world',
-            ),
-        IngameOverlay.flameOverlayId: (_, __) => const IngameOverlay(),
-      },
-      gameFactory: () => FlameJam(
-        gameCubit: context.read<GameCubit>(),
-        astronautCubit: context.read<AstronautCubit>(),
+      child: const _GameView(),
+    );
+  }
+}
+
+class _GameView extends StatefulWidget {
+  const _GameView();
+
+  @override
+  State<_GameView> createState() => _GameViewState();
+}
+
+class _GameViewState extends State<_GameView> {
+  late final FlameJam _game;
+
+  @override
+  void initState() {
+    super.initState();
+    _game = FlameJam(
+      gameCubit: context.read<GameCubit>(),
+      astronautCubit: context.read<AstronautCubit>(),
+      messageBoxCubit: context.read<MessageBoxCubit>(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final messageBloc = context.read<MessageBoxCubit>();
+
+    return BlocListener<MessageBoxCubit, MessageBoxState>(
+      listener: (_, __) => _game.overlays.add(MessageBox.flameOverlayId),
+      child: GameWidget(
+        initialActiveOverlays: const [
+          MessageBox.flameOverlayId,
+          IngameOverlay.flameOverlayId,
+        ],
+        overlayBuilderMap: {
+          IngameOverlay.flameOverlayId: (_, __) => const IngameOverlay(),
+          MessageBox.flameOverlayId: (_, Game game) => MessageBox(
+                text: messageBloc.state.text,
+                duration: messageBloc.state.duration,
+                onComplete: () =>
+                    game.overlays.remove(MessageBox.flameOverlayId),
+              ),
+        },
+        game: _game,
       ),
     );
   }

@@ -11,7 +11,7 @@ void main() {
           create: (context) => GameCubit(),
         ),
         BlocProvider(
-          create: (context) => AstronautCubit(),
+          create: (_) => AstronautCubit(),
         ),
       ],
       child: MaterialApp(

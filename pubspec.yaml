@@ -10,6 +10,7 @@ environment:
 dependencies:
   bloc: ^8.1.0
   build_runner: ^2.2.0
+  equatable: ^2.0.5
   flame: ^1.3.0
   flame_behaviors: ^0.1.1
   flame_bloc: ^1.7.0
