@@ -45,8 +45,6 @@ class _BarrelBodyComponent extends BodyComponent with InitialPosition {
         type: BodyType.dynamic,
         position: initialPosition,
       ),
-    )..createFixtureFromShape(
-        PolygonShape()..setAsBoxXY(_spriteSize.x / 2, _spriteSize.y / 2),
-      );
+    )..createFixtureFromShape(PolygonShape()..setAsBoxXY(_spriteSize.x / 2, _spriteSize.y / 2), 5);
   }
 }

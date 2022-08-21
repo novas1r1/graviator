@@ -2,6 +2,7 @@
 
 import 'package:flamejam/consts.dart';
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,8 @@ class StartPage extends StatelessWidget {
               'Gravitator'.toUpperCase(),
               style: const TextStyle(fontSize: 120),
             ),
+            SizedBox(height: Spacers.l * 3),
+            Image.asset(Assets.tutorial.tutorial.path),
             SizedBox(height: Spacers.l * 3),
             Row(
               children: [

@@ -50,6 +50,10 @@ class $AssetsTutorialGen {
   /// File path: assets/tutorial/spike_ball.png
   AssetGenImage get spikeBall =>
       const AssetGenImage('assets/tutorial/spike_ball.png');
+
+  /// File path: assets/tutorial/tutorial.png
+  AssetGenImage get tutorial =>
+      const AssetGenImage('assets/tutorial/tutorial.png');
 }
 
 class Assets {
