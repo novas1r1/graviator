@@ -20,10 +20,7 @@ class GamePage extends StatelessWidget {
         MessageBox.flameOverlayId: (_, __) => const MessageBox(
               text: 'Hello world',
             ),
-        IngameOverlay.flameOverlayId: (_, __) => IngameOverlay(
-              health: context.watch<AstronautCubit>().state.health,
-              oxygen: context.watch<AstronautCubit>().state.oxygen,
-            ),
+        IngameOverlay.flameOverlayId: (_, __) => const IngameOverlay(),
       },
       gameFactory: () => FlameJam(
         gameCubit: context.read<GameCubit>(),
