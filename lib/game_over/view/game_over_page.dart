@@ -19,7 +19,7 @@ class GameOverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    audioPlayer.play(FlameJamAudios.loose);
+    audioPlayer.play(hasPlayerWon ? FlameJamAudios.win : FlameJamAudios.loose);
 
     return Scaffold(
       backgroundColor: Colors.black,
