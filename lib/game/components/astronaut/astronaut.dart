@@ -13,8 +13,7 @@ class Astronaut extends BodyEntity<AstronautBodyComponent> {
     super.behaviors,
     super.children,
   }) : super(
-          bodyComponent: AstronautBodyComponent()
-            ..initialPosition = initialPosition,
+          bodyComponent: AstronautBodyComponent()..initialPosition = initialPosition,
         );
 }
 
@@ -22,16 +21,7 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
   AstronautBodyComponent()
       : super(
           renderBody: false,
-          children: [
-            SpriteComponent(
-              sprite: MiniSpriteLibrary.sprites['player'],
-              size: spriteSize,
-              position: Vector2(
-                spriteSize.x / -2,
-                (spriteSize.y / -2) - (spriteSize.y * 0.03),
-              ),
-            ),
-          ],
+          children: [AstronautSprite(spriteSize: spriteSize)],
         );
 
   static final spriteSize = Vector2.all(16);
@@ -53,5 +43,34 @@ class AstronautBodyComponent extends BodyComponent with InitialPosition {
     );
 
     return world.createBody(bodyDef)..createFixture(fixture);
+  }
+}
+
+enum Direction { left, right }
+
+class AstronautSprite extends SpriteComponent with ParentIsA<AstronautBodyComponent> {
+  Direction viewDirection = Direction.left;
+
+  AstronautSprite({required Vector2 spriteSize})
+      : super(
+          sprite: MiniSpriteLibrary.sprites['player'],
+          size: spriteSize,
+          position: Vector2(
+            spriteSize.x / -2,
+            (spriteSize.y / -2) - (spriteSize.y * 0.03),
+          ),
+        );
+
+  @override
+  void update(double dt) {
+    if (parent.body.linearVelocity.x.ceil() > 0 && viewDirection == Direction.left) {
+      flipHorizontallyAroundCenter();
+      viewDirection = Direction.right;
+    }
+    if (parent.body.linearVelocity.x.ceil() < 0 && viewDirection == Direction.right) {
+      flipHorizontallyAroundCenter();
+      viewDirection = Direction.left;
+    }
+    super.update(dt);
   }
 }
