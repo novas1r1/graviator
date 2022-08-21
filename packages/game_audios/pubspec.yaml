@@ -7,9 +7,9 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
+  audioplayers: ^0.20.1
   flutter:
     sdk: flutter
-  audioplayers: ^0.20.1
   clock: ^1.1.0
   flame_audio: ^1.0.1
 

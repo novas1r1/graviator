@@ -4,6 +4,8 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flamejam/game/game.dart';
 
+final _random = Random();
+
 /// The [SpikeBall]s moving behavior is reflected here
 class SpikeBallMovingBehavior extends Behavior<SpikeBall>
     with ParentIsA<SpikeBall>, HasGameRef<FlameJam> {
@@ -22,11 +24,10 @@ class SpikeBallMovingBehavior extends Behavior<SpikeBall>
 
   void _moveSpikeBall() {
     final body = parent.bodyComponent.body;
-    final rng = Random();
     body.applyLinearImpulse(
       Vector2(
-        rng.nextDouble() * (rng.nextBool() ? 100 : -100),
-        rng.nextDouble() * (rng.nextBool() ? 100 : -100),
+        _random.nextDouble() * (_random.nextBool() ? 100 : -100),
+        _random.nextDouble() * (_random.nextBool() ? 100 : -100),
       ).scaled(body.mass),
     );
   }

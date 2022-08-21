@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
@@ -60,7 +58,6 @@ class _BubbleComponent extends BodyComponent
 
   @override
   Body createBody() {
-    paint.color = const Color(0xffff00000);
     final fixtureDef = FixtureDef(
       CircleShape()..radius = _spriteSize.x / 2,
       restitution: 0.4,
