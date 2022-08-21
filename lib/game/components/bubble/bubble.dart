@@ -51,9 +51,8 @@ class _BubbleComponent extends BodyComponent
     super.beginContact(other, contact);
     if (other is Astronaut) {
       readBloc<AstronautCubit, AstronautState>().pickUpOxygen();
+      parent!.removeFromParent();
     }
-
-    parent!.removeFromParent();
   }
 
   @override

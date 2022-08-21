@@ -48,7 +48,7 @@ class _PortalBodyComponent extends BodyComponent
         );
   final bool isGoingBack;
 
-  static final _spriteSize = Vector2.all(24);
+  static final _spriteSize = Vector2.all(16);
 
   @override
   void preSolve(Object other, Contact contact, Manifold oldManifold) {
