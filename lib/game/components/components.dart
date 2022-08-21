@@ -1,5 +1,5 @@
 export 'astronaut/astronaut.dart';
-export 'box/box.dart';
+export 'barrel/barrel.dart';
 export 'bubble/bubble.dart';
 export 'door/door.dart';
 export 'jetpack/jetpack.dart';

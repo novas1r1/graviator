@@ -1,10 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flamejam/game/components/box/box.dart';
+import 'package:flamejam/game/components/barrel/barrel.dart';
 
-/// Makes the [Box] bounce when not moving.
-class BoxBouncingBehavior extends Behavior<Box> {
+/// Makes the [Barrel] bounce when not moving.
+class BarrelBouncingBehavior extends Behavior<Barrel> {
   @override
   Future<void> update(double dt) async {
     super.update(dt);
