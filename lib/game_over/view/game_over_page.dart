@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameOverPage extends StatelessWidget {
-  GameOverPage({
+  const GameOverPage({
     super.key,
     required this.hasPlayerWon,
     required this.score,

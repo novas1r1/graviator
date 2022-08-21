@@ -31,7 +31,7 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCa
           renderBody: false,
           children: [
             SpriteComponent(
-              sprite: MiniSpriteLibrary.sprites['portal'],
+              sprite: MiniSpriteLibrary.sprites['door'],
               size: _spriteSize,
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.05, 0),
@@ -39,7 +39,7 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCa
           ],
         );
 
-  static final _spriteSize = Vector2.all(16);
+  static final _spriteSize = Vector2.all(24);
 
   @override
   void beginContact(Object other, Contact contact) {
@@ -56,7 +56,7 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCa
       PolygonShape()
         ..setAsBoxXY(
           (_spriteSize.x / 2) * 0.6,
-          (_spriteSize.y / 2) * 0.88,
+          (_spriteSize.y / 2),
         ),
       userData: this,
       isSensor: true,
