@@ -32,6 +32,8 @@ class GameCubit extends Cubit<GameState> {
   void nextLevel() {
     if (state.currentGameLevel >= minGameLevel &&
         state.currentGameLevel < maxGameLevel) {
+      audioPlayer.play(FlameJamAudios.level_complete);
+
       final updatedLevel = state.currentGameLevel + 1;
 
       if (state.currentGameLevel == updatedLevel) return;
