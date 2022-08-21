@@ -1,29 +1,25 @@
-import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
-import 'package:flutter/services.dart';
 
-/// Rotates the [World.gravity] clockwise when [_keys] are pressed.
+/// Rotates the [World.gravity].
 ///
 /// Whenever, the gravity is rotated, all the [World.bodies] lose their
 /// velocity.
-class GravityRotatorBehavior extends Behavior<GameEntity> with KeyboardHandler {
-  late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
-
+class GravityRotatorBehavior extends Behavior<GameEntity> {
   @override
-  // ignore: avoid_renaming_method_parameters
-  bool onKeyEvent(RawKeyEvent event, _) {
-    if (event is! RawKeyUpEvent) return true;
-    if (!_keys.contains(event.logicalKey)) return true;
-
+  Future<void> onLoad() async {
+    await super.onLoad();
+    final astronaut = parent.descendants().whereType<Astronaut>();
     for (final body in parent.game.world.bodies) {
+      if (astronaut.isNotEmpty && body == astronaut.first.bodyComponent.body) {
+        continue;
+      }
       body.linearVelocity.setZero();
       body.setAwake(true);
     }
     parent.game.world.gravity.rotateAntiClockwise();
-
-    return true;
+    removeFromParent();
   }
 }
 

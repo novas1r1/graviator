@@ -6,30 +6,16 @@ import 'package:flame/effects.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
-import 'package:flutter/services.dart';
+
+double _rotation = 0;
 
 /// {@template game.behaviors.CameraRotatorBehavior}
-/// Rotates the camera clockwise when [_keys] are pressed.
+/// Rotates the camera clockwise.
 /// {@endtemplate}
 class CameraRotatorBehavior extends Behavior<GameEntity>
-    with KeyboardHandler, HasGameRef<Forge2DGame> {
+    with HasGameRef<Forge2DGame> {
   /// {@macro game.behaviors.CameraRotatorBehavior}
   CameraRotatorBehavior();
-
-  late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
-
-  double _rotation = 0;
-
-  @override
-  Future<void> onLoad() async {
-    await super.onLoad();
-    parent.game.renderTreeCallback = _onGameRenderTree;
-  }
-
-  @override
-  void update(double dt) {
-    super.update(dt);
-  }
 
   void _onGameRenderTree(ui.Canvas canvas) {
     final camera = parent.game.camera;
@@ -42,22 +28,16 @@ class CameraRotatorBehavior extends Behavior<GameEntity>
   }
 
   @override
-  // ignore: avoid_renaming_method_parameters
-  bool onKeyEvent(RawKeyEvent event, _) {
-    if (event is! RawKeyUpEvent) return true;
-    if (!_keys.contains(event.logicalKey)) return true;
-
-    if (children.whereType<_AnimationEffect>().isEmpty) {
-      add(
-        _AnimationEffect(
-          a: _rotation,
-          b: _rotation + math.pi / -2,
-          onStep: (value) => _rotation = value,
-        ),
-      );
-    }
-
-    return true;
+  Future<void> onLoad() async {
+    await super.onLoad();
+    parent.game.renderTreeCallback = _onGameRenderTree;
+    await add(
+      _AnimationEffect(
+        a: _rotation,
+        b: _rotation + math.pi / -2,
+        onStep: (value) => _rotation = value,
+      ),
+    );
   }
 }
 

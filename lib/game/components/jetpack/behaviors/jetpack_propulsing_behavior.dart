@@ -13,7 +13,7 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
     with KeyboardHandler, HasGameRef<Forge2DGame> {
   JetpackPropulsingBehavior();
 
-  late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.keyW];
+  late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.space];
 
   bool _facingRight = false;
 
