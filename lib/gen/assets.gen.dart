@@ -9,33 +9,17 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-
-  /// File path: assets/images/astronaut.png
-  AssetGenImage get astronaut =>
-      const AssetGenImage('assets/images/astronaut.png');
-
-  /// File path: assets/images/oxygen_tank.png
-  AssetGenImage get oxygenTank =>
-      const AssetGenImage('assets/images/oxygen_tank.png');
-
-  /// File path: assets/images/oxygen_tank_label.png
-  AssetGenImage get oxygenTankLabel =>
-      const AssetGenImage('assets/images/oxygen_tank_label.png');
-
-  /// File path: assets/images/portal.png
-  AssetGenImage get portal => const AssetGenImage('assets/images/portal.png');
-
-  /// File path: assets/images/spike_ball.png
-  AssetGenImage get spikeBall =>
-      const AssetGenImage('assets/images/spike_ball.png');
-}
-
 class Assets {
   Assets._();
 
-  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const AssetGenImage astronaut = AssetGenImage('assets/astronaut.png');
+  static const AssetGenImage buttonBg = AssetGenImage('assets/button_bg.png');
+  static const AssetGenImage oxygenTank =
+      AssetGenImage('assets/oxygen_tank.png');
+  static const AssetGenImage oxygenTankLabel =
+      AssetGenImage('assets/oxygen_tank_label.png');
+  static const AssetGenImage portal = AssetGenImage('assets/portal.png');
+  static const AssetGenImage spikeBall = AssetGenImage('assets/spike_ball.png');
 }
 
 class AssetGenImage {

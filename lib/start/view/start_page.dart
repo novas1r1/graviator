@@ -29,7 +29,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  Assets.images.astronaut.path,
+                  Assets.astronaut.path,
                   width: 32,
                   height: 32,
                 ),
@@ -40,7 +40,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  Assets.images.portal.path,
+                  Assets.portal.path,
                   width: 32,
                   height: 32,
                 ),
@@ -59,12 +59,12 @@ class StartPage extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      Assets.images.oxygenTank.path,
+                      Assets.oxygenTank.path,
                       width: 32,
                       height: 32,
                     ),
                     Image.asset(
-                      Assets.images.oxygenTankLabel.path,
+                      Assets.oxygenTankLabel.path,
                       width: 8,
                       height: 8,
                     )
@@ -81,7 +81,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  Assets.images.spikeBall.path,
+                  Assets.spikeBall.path,
                   width: 32,
                   height: 32,
                 ),
