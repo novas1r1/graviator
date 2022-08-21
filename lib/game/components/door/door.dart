@@ -63,7 +63,13 @@ class _PortalBodyComponent extends BodyComponent
       if (isGoingBack) {
         readBloc<GameCubit, GameState>().previousLevel();
       } else {
-        readBloc<GameCubit, GameState>().nextLevel();
+        final astronautState = readBloc<AstronautCubit, AstronautState>().state;
+
+        readBloc<GameCubit, GameState>().nextLevel(
+          healthLeft: astronautState.health,
+          oxygenLeft: astronautState.oxygen,
+          inventoryItems: astronautState.inventoryItems,
+        );
         readBloc<MessageBoxCubit, MessageBoxState>().show('', Duration.zero);
       }
     }

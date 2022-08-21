@@ -3,9 +3,11 @@
 import 'package:flamejam/consts.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/gen/assets.gen.dart';
+import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_audios/game_audios.dart';
 
 const _defaultFontStyle = TextStyle(fontSize: 42);
 
@@ -33,13 +35,18 @@ class StartPage extends StatelessWidget {
                 Expanded(
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): () =>
-                          context.read<GameCubit>().startGame(),
+                      const SingleActivator(LogicalKeyboardKey.enter): () {
+                        audioPlayer.play(FlameJamAudios.background_loop);
+                        context.read<GameCubit>().startGame();
+                      },
                     },
                     child: Focus(
                       autofocus: true,
                       child: GestureDetector(
-                        onTap: () => context.read<GameCubit>().startGame(),
+                        onTap: () {
+                          audioPlayer.play(FlameJamAudios.background_loop);
+                          context.read<GameCubit>().startGame();
+                        },
                         child: Container(
                           height: 100,
                           decoration: const BoxDecoration(
