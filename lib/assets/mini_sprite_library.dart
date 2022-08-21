@@ -25,13 +25,13 @@ spike_ball|16,16;34,0;1,1;4,0;2,1;4,0;1,1;5,0;1,1;2,0;4,1;2,0;1,1;7,0;8,1;8,0;2,
   static Map<String, Sprite> sprites = {};
 
   /// load all sprites
-  static Future<void> loadSprites({
+  static Future<Map<String, Sprite>> loadSprites({
     required double pixelSize,
     required Color color,
     Color? blankColor,
     Color? backgroundColor,
   }) async {
-    sprites = await _library.toSprites(
+    return _library.toSprites(
       color: color,
       pixelSize: pixelSize,
       blankColor: blankColor,
