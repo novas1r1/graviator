@@ -261,6 +261,12 @@ class FlameJamAudioPlayer {
         path: Assets.sfx.painOne,
         volume: .5,
       ),
+      FlameJamAudios.gravity_change: _SimplePlayAudio(
+        preCacheSingleAudio: _preCacheSingleAudio,
+        playSingleAudio: _playSingleAudio,
+        path: Assets.sfx.gravityChange,
+        volume: .5,
+      ),
     };
   }
 
