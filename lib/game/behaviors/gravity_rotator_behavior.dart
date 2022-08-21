@@ -29,7 +29,7 @@ class GravityRotatorBehavior extends Behavior<GameEntity> {
     await super.onLoad();
     await add(
       TimerComponent(
-        period: 8,
+        period: 32,
         repeat: true,
         onTick: _rotateGravity,
       ),

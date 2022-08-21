@@ -8,7 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:game_audios/gen/assets.gen.dart';
 
 /// Sounds available to play.
-enum FlameJamAudios { gravity_change, pain, plop, background_loop, loose, win }
+enum FlameJamAudios {
+  gravity_change,
+  pain,
+  plop,
+  background_loop,
+  loose,
+  win,
+  level_complete,
+}
 
 /// Defines the contract of the creation of an [AudioPool].
 typedef CreateAudioPool = Future<AudioPool> Function(
@@ -234,11 +242,16 @@ class FlameJamAudioPlayer {
         playSingleAudio: _playSingleAudio,
         path: Assets.music.win,
       ),
+      FlameJamAudios.level_complete: _SimplePlayAudio(
+        preCacheSingleAudio: _preCacheSingleAudio,
+        playSingleAudio: _playSingleAudio,
+        path: Assets.sfx.levelComplete,
+      ),
       FlameJamAudios.background_loop: _SingleLoopAudio(
         preCacheSingleAudio: _preCacheSingleAudio,
         loopSingleAudio: _loopSingleAudio,
         path: Assets.music.backgroundLoop,
-        volume: .2,
+        volume: .04,
       ),
       FlameJamAudios.pain: _SimplePlayAudio(
         preCacheSingleAudio: _preCacheSingleAudio,

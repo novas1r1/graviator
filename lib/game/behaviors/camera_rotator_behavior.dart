@@ -34,7 +34,7 @@ class CameraRotatorBehavior extends Behavior<GameEntity>
 
     await add(
       TimerComponent(
-        period: 8,
+        period: 32,
         repeat: true,
         onTick: () => add(
           _AnimationEffect(
