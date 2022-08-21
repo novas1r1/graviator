@@ -19,6 +19,8 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
   bool _facingRight = false;
 
   Vector2 getFlightDirectionDependingOnGravity() {
+    const strength = 10.0;
+
     final gravityDirectionY = gameRef.world.gravity.y;
     final gravityDirectionX = gameRef.world.gravity.x;
 
@@ -26,10 +28,10 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
     final isGravityUp = gravityDirectionY == -10;
     final isGravityRight = gravityDirectionX == 10;
 
-    if (isGravityLeft) return Vector2(4, 0);
-    if (isGravityUp) return Vector2(0, 4);
-    if (isGravityRight) return Vector2(-4, 0);
-    return Vector2(0, -4);
+    if (isGravityLeft) return Vector2(strength, 0);
+    if (isGravityUp) return Vector2(0, strength);
+    if (isGravityRight) return Vector2(-strength, 0);
+    return Vector2(0, -strength);
   }
 
   @override

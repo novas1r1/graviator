@@ -2,6 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/main.dart';
+import 'package:game_audios/game_audios.dart';
 
 /// Rotates the [World.gravity].
 ///
@@ -9,6 +11,8 @@ import 'package:flamejam/game/game.dart';
 /// velocity.
 class GravityRotatorBehavior extends Behavior<GameEntity> {
   void _rotateGravity() {
+    audioPlayer.play(FlameJamAudios.gravity_change);
+
     final astronaut = parent.descendants().whereType<Astronaut>();
     for (final body in parent.game.world.bodies) {
       if (astronaut.isNotEmpty && body == astronaut.first.bodyComponent.body) {
