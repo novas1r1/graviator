@@ -6,6 +6,7 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/forge2d_game.dart';
 import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flamejam/game/components/jetpack/jetpack.dart';
+import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -46,6 +47,8 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
 
     final astronaut = parent.parent;
     if (event is RawKeyDownEvent) {
+      readBloc<AstronautCubit, AstronautState>().reduceOxygen();
+
       astronaut.body.applyLinearImpulse(
         getFlightDirectionDependingOnGravity()..scale(astronaut.body.mass),
       );
