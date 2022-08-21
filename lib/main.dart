@@ -2,8 +2,21 @@ import 'package:flamejam/app/app.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_audios/game_audios.dart';
 
-void main() {
+Future<void> main() async {
+  final audioPlayer = FlameJamAudioPlayer();
+
+  final futures = <Future>[];
+
+  audioPlayer.load().map((loaderFunction) => futures.add(loaderFunction()));
+
+  await Future.wait(futures);
+
+  Future.delayed(Duration(seconds: 5)).then((_) {
+    audioPlayer.play(FlameJamAudios.background_loop);
+  });
+
   runApp(
     MultiBlocProvider(
       providers: [
