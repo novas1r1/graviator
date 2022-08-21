@@ -10,8 +10,7 @@ import 'package:game_audios/gen/assets.gen.dart';
 /// Sounds available to play.
 enum FlameJamAudios {
   gravity_change,
-  pain_one,
-  pain_two,
+  pain,
   plop_four,
   plop_one,
   plop_three,
@@ -255,6 +254,12 @@ class FlameJamAudioPlayer {
         loopSingleAudio: _loopSingleAudio,
         path: Assets.music.backgroundLoop,
         volume: .2,
+      ),
+      FlameJamAudios.pain: _SimplePlayAudio(
+        preCacheSingleAudio: _preCacheSingleAudio,
+        playSingleAudio: _playSingleAudio,
+        path: Assets.sfx.painOne,
+        volume: .5,
       ),
     };
   }
