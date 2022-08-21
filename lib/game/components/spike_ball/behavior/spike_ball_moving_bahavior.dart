@@ -9,15 +9,11 @@ import 'package:flamejam/game/game.dart';
 class SpikeBallMovingBehavior extends Behavior<SpikeBall> with ParentIsA<SpikeBall>, HasGameRef<FlameJam> {
   @override
   Future<void>? onLoad() async {
+    parent.bodyComponent.body.gravityScale = Vector2.zero();
+
     await add(
       TimerComponent(period: Random().nextDouble(), repeat: true, onTick: _moveSpikeBall),
     );
-  }
-
-  @override
-  void update(double dt) {
-    super.update(dt);
-    parent.bodyComponent.body.gravityScale = Vector2.zero();
   }
 
   void _moveSpikeBall() {
