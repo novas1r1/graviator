@@ -44,6 +44,12 @@ class _PortalBodyComponent extends BodyComponent
   static final _spriteSize = Vector2.all(24);
 
   @override
+  void preSolve(Object other, Contact contact, Manifold oldManifold) {
+    super.preSolve(other, contact, oldManifold);
+    if (other is Astronaut) contact.setEnabled(false);
+  }
+
+  @override
   void beginContact(Object other, Contact contact) {
     if (other is Astronaut) {
       readBloc<GameCubit, GameState>().nextLevel();
@@ -61,7 +67,6 @@ class _PortalBodyComponent extends BodyComponent
           (_spriteSize.y / 2),
         ),
       userData: this,
-      isSensor: true,
     );
     final bodyDef = BodyDef(position: initialPosition);
 
