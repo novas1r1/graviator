@@ -14,8 +14,7 @@ class SpaceshipItem extends BodyEntity {
     required InventoryItemType itemType,
     required Vector2 initialPosition,
   }) : super(
-          bodyComponent: _SpaceshipItemComponent(itemType: itemType)
-            ..initialPosition = initialPosition,
+          bodyComponent: _SpaceshipItemComponent(itemType: itemType)..initialPosition = initialPosition,
           behaviors: [],
         );
 
@@ -32,8 +31,7 @@ class SpaceshipItem extends BodyEntity {
         );
 }
 
-class _SpaceshipItemComponent extends BodyComponent
-    with InitialPosition, ContactCallbacks {
+class _SpaceshipItemComponent extends BodyComponent with InitialPosition, ContactCallbacks {
   _SpaceshipItemComponent({
     required this.itemType,
   }) : super(
@@ -64,10 +62,7 @@ class _SpaceshipItemComponent extends BodyComponent
   @override
   Body createBody() {
     paint.color = const Color(0xffff00000);
-    final fixtureDef = FixtureDef(
-      CircleShape()..radius = _spriteSize.x / 2,
-      restitution: 0.4,
-    );
+    final fixtureDef = FixtureDef(CircleShape()..radius = _spriteSize.x / 2, restitution: 0.4, isSensor: true);
     return world.createBody(
       BodyDef(
         position: initialPosition,
