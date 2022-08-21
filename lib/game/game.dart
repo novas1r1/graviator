@@ -5,7 +5,6 @@ import 'package:flame/events.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
@@ -13,7 +12,6 @@ import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/components/jetpack/behaviors/behaviors.dart';
 import 'package:flamejam/game/components/jetpack/jetpack.dart';
 import 'package:flamejam/game/game.dart';
-
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
@@ -24,13 +22,16 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   /// default constructor
   FlameJam({
     required GameCubit gameCubit,
+    required AstronautCubit astronautCubit,
   })  : _gameCubit = gameCubit,
+        _astronautCubit = astronautCubit,
         super(
           gravity: Vector2(0, 10),
           zoom: 4,
         );
 
   final GameCubit _gameCubit;
+  final AstronautCubit _astronautCubit;
 
   void Function(Canvas canvas) renderTreeCallback = (_) {};
 
@@ -53,6 +54,9 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
         providers: [
           FlameBlocProvider<GameCubit, GameState>.value(
             value: _gameCubit,
+          ),
+          FlameBlocProvider<AstronautCubit, AstronautState>.value(
+            value: _astronautCubit,
           ),
         ],
         children: [
