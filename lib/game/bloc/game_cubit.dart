@@ -12,15 +12,11 @@ const maxGameLevel = 2;
 /// Can be before the game starts, during the game, or after the game is over.
 class GameCubit extends Cubit<GameState> {
   /// Constructs a GameCubit
-  GameCubit() : super(const GameState());
+  GameCubit() : super(const GameState.initial());
 
   /// Starts the game
   void startGame() {
-    emit(
-      const GameState(
-        status: GameStatus.gameScreenDisplayed,
-      ),
-    );
+    emit(state.copyWith(status: GameStatus.gameScreenDisplayed));
   }
 
   void nextLevel() {
@@ -36,17 +32,10 @@ class GameCubit extends Cubit<GameState> {
       );
     } else {
       emit(
-        const GameState(
-          status: GameStatus.gameScreenDisplayed,
-          currentGameLevel: 2,
-        ),
-      );
-/* 
-      emit(
-        const GameState(
+        state.copyWith(
           status: GameStatus.gameOverScreenDisplayed,
         ),
-      ); */
+      );
     }
   }
 
@@ -66,7 +55,7 @@ class GameCubit extends Cubit<GameState> {
   /// Ends the game
   void endGame({required bool victory}) {
     emit(
-      GameState(
+      state.copyWith(
         status: GameStatus.gameOverScreenDisplayed,
         hasWon: victory,
       ),

@@ -11,12 +11,19 @@ enum GameStatus {
 @immutable
 class GameState extends Equatable {
   const GameState({
-    this.status = GameStatus.startScreenDisplayed,
-    this.currentGameLevel = minGameLevel,
-    this.hasWon = true,
-    this.score = 0,
-    this.oxygenLeft = 0,
+    required this.status,
+    required this.currentGameLevel,
+    required this.hasWon,
+    required this.score,
+    required this.oxygenLeft,
   });
+
+  const GameState.initial()
+      : status = GameStatus.startScreenDisplayed,
+        hasWon = false,
+        score = 0,
+        oxygenLeft = 100,
+        currentGameLevel = 1;
 
   final GameStatus status;
 
