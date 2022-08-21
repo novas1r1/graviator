@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/components/components.dart';
+import 'package:flamejam/game/components/spaceship_items/spaceship_items.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 /// Holds all the maps
@@ -105,6 +106,24 @@ extension MiniMapCreate on MiniMap {
             spriteName: 'wall_bottom',
             entry: entry,
             wallDirection: WallDirection.bottom,
+          );
+          break;
+        case 'spaceship_wrench':
+          component = SpaceshipItem.fromMapEntry(
+            entry: entry,
+            itemType: InventoryItemType.spaceshipWrench,
+          );
+          break;
+        case 'spaceship_computer':
+          component = SpaceshipItem.fromMapEntry(
+            entry: entry,
+            itemType: InventoryItemType.spaceshipComputer,
+          );
+          break;
+        case 'spaceship_tank':
+          component = SpaceshipItem.fromMapEntry(
+            entry: entry,
+            itemType: InventoryItemType.spaceshipFuelTank,
           );
           break;
         default:

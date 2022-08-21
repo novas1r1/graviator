@@ -64,9 +64,12 @@ class GameState extends Equatable {
 extension GameLevelMap on int {
   String getSpriteMap() {
     if (this == 1) {
-      return MiniSpriteMap.firstLevel;
+      // TODO CHANGE!!!!!!!!!!!!!
+      return MiniSpriteMap.secondLevel;
     } else if (this == 2) {
       return MiniSpriteMap.secondLevel;
+    } else if (this == 3) {
+      return MiniSpriteMap.thirdLevel;
     } else {
       throw Exception('Invalid game level');
     }

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:bloc/bloc.dart';
+import 'package:flamejam/game/components/components.dart';
 import 'package:meta/meta.dart';
 
 part 'astronaut_state.dart';
@@ -39,6 +40,7 @@ class AstronautCubit extends Cubit<AstronautState> {
         astronautStatus: AstronautStatus.dead,
         health: 0,
         oxygen: 0,
+        inventoryItems: {},
       ),
     );
   }
@@ -49,6 +51,7 @@ class AstronautCubit extends Cubit<AstronautState> {
         astronautStatus: AstronautStatus.alive,
         health: maxHealth,
         oxygen: maxOxygen,
+        inventoryItems: {},
       ),
     );
   }
@@ -57,12 +60,20 @@ class AstronautCubit extends Cubit<AstronautState> {
   void takeDamage(int damage) {
     final currentHealth = state.health - damage;
 
-    print('PLAYER TOOK DAMAGE, HEALTH: $currentHealth');
-
     if (currentHealth <= 0) {
       die();
     } else {
       emit(state.copyWith(health: currentHealth));
     }
+  }
+
+  void pickupItem(InventoryItemType item) {
+    final updatedInventory = state.inventoryItems.toSet()..add(item);
+
+    emit(
+      state.copyWith(
+        inventoryItems: updatedInventory,
+      ),
+    );
   }
 }
