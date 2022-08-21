@@ -17,6 +17,8 @@ class AstronautCubit extends Cubit<AstronautState> {
   AstronautCubit() : super(const AstronautState());
 
   void pickUpOxygen() {
+    audioPlayer.play(FlameJamAudios.plop);
+
     final currentOxygen = state.oxygen + oxygenPerTank;
 
     if (currentOxygen >= maxOxygen) {
