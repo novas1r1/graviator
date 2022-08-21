@@ -22,7 +22,7 @@ class StartPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Game Name'.toUpperCase(),
+              'Gravitator'.toUpperCase(),
               style: const TextStyle(fontSize: 60),
             ),
             SizedBox(height: Spacers.l * 3),
@@ -31,8 +31,7 @@ class StartPage extends StatelessWidget {
                 Expanded(
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): () =>
-                          context.read<GameCubit>().startGame(),
+                      const SingleActivator(LogicalKeyboardKey.enter): () => context.read<GameCubit>().startGame(),
                     },
                     child: Focus(
                       autofocus: true,
