@@ -41,7 +41,9 @@ class _SpikeBall extends BodyComponent with InitialPosition, ContactCallbacks {
 
   @override
   void beginContact(Object other, Contact contact) {
-    if (other is Astronaut) readBloc<GameCubit, GameState>().loseGame();
+    if (other is Astronaut) {
+      readBloc<GameCubit, GameState>().endGame(victory: false);
+    }
     super.beginContact(other, contact);
   }
 

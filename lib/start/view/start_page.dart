@@ -38,7 +38,7 @@ class StartPage extends StatelessWidget {
                           ),
                           child: const Center(
                             child: Text(
-                              'START GAME (Hotkey: Enter)',
+                              'START GAME',
                               style: TextStyle(fontSize: 42),
                             ),
                           ),
