@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flutter/material.dart';
 
 part 'game_state.dart';
 
 const minGameLevel = 1;
-const maxGameLevel = 2;
+const maxGameLevel = 3;
 
 /// The GameCubit handles the state of the game.
 /// Can be before the game starts, during the game, or after the game is over.
@@ -16,7 +17,12 @@ class GameCubit extends Cubit<GameState> {
 
   /// Starts the game
   void startGame() {
-    emit(state.copyWith(status: GameStatus.gameScreenDisplayed));
+    emit(
+      state.copyWith(
+        status: GameStatus.gameScreenDisplayed,
+        currentGameLevel: 1,
+      ),
+    );
   }
 
   void nextLevel() {
@@ -36,6 +42,7 @@ class GameCubit extends Cubit<GameState> {
       emit(
         state.copyWith(
           status: GameStatus.gameOverScreenDisplayed,
+          hasWon: true,
         ),
       );
     }

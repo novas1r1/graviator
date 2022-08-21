@@ -9,16 +9,20 @@ import 'package:mini_sprite/mini_sprite.dart';
 /// This portal will finish the game and show the "Win Screen" screen
 class Portal extends BodyEntity {
   /// Create a Portal Entity
-  Portal({required Vector2 initialPosition})
-      : super(
-          bodyComponent: _PortalBodyComponent()
+  Portal({
+    required Vector2 initialPosition,
+    required bool isGoingBack,
+  }) : super(
+          bodyComponent: _PortalBodyComponent(isGoingBack: isGoingBack)
             ..initialPosition = initialPosition,
         );
 
   /// Create a [Portal] Entity from the [MiniMap] Entry
   Portal.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
+    required bool isGoingBack,
   }) : this(
+          isGoingBack: isGoingBack,
           initialPosition: Vector2(
             entry.key.x.toDouble() * 16,
             entry.key.y.toDouble() * 16,
@@ -28,18 +32,21 @@ class Portal extends BodyEntity {
 
 class _PortalBodyComponent extends BodyComponent
     with InitialPosition, ContactCallbacks {
-  _PortalBodyComponent()
+  _PortalBodyComponent({required this.isGoingBack})
       : super(
           renderBody: false,
           children: [
             SpriteComponent(
-              sprite: MiniSpriteLibrary.sprites['door'],
+              sprite: isGoingBack
+                  ? MiniSpriteLibrary.sprites['door_back']
+                  : MiniSpriteLibrary.sprites['door'],
               size: _spriteSize,
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.05, 0),
             )
           ],
         );
+  final bool isGoingBack;
 
   static final _spriteSize = Vector2.all(24);
 
@@ -52,7 +59,11 @@ class _PortalBodyComponent extends BodyComponent
   @override
   void beginContact(Object other, Contact contact) {
     if (other is Astronaut) {
-      readBloc<GameCubit, GameState>().nextLevel();
+      if (isGoingBack) {
+        readBloc<GameCubit, GameState>().previousLevel();
+      } else {
+        readBloc<GameCubit, GameState>().nextLevel();
+      }
     }
 
     super.beginContact(other, contact);
