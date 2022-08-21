@@ -5,7 +5,8 @@ part of 'game_cubit.dart';
 enum GameStatus {
   startScreenDisplayed,
   gameScreenDisplayed,
-  gameOverScreenDisplayed,
+  winGameOverScreenDisplayed,
+  gameOverScreenDisplayed
 }
 
 @immutable

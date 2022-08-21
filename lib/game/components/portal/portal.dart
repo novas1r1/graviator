@@ -45,7 +45,7 @@ class _PortalBodyComponent extends BodyComponent
 
   @override
   void beginContact(Object other, Contact contact) {
-    if (other is Astronaut) readBloc<GameCubit, GameState>().endGame();
+    if (other is Astronaut) readBloc<GameCubit, GameState>().winGame();
     super.beginContact(other, contact);
   }
 

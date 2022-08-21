@@ -7,8 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameOverPage extends StatelessWidget {
-  const GameOverPage({
-    super.key,
+  bool victory;
+
+  GameOverPage({required this.victory, super.key,
     required this.hasPlayerWon,
     required this.score,
   });
@@ -32,7 +33,7 @@ class GameOverPage extends StatelessWidget {
             const SizedBox(height: 72),
             CallbackShortcuts(
               bindings: {
-                const SingleActivator(LogicalKeyboardKey.space): () =>
+                const SingleActivator(LogicalKeyboardKey.enter): () =>
                     context.read<GameCubit>().startGame(),
               },
               child: Focus(
