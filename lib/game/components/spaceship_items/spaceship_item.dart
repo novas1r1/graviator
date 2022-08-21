@@ -4,7 +4,6 @@ import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/mini_sprite_library.dart';
 import 'package:flamejam/game/components/components.dart';
-import 'package:flamejam/game/components/ingame_ui/inventory.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
@@ -71,7 +70,6 @@ class _SpaceshipItemComponent extends BodyComponent
     );
     return world.createBody(
       BodyDef(
-        type: BodyType.dynamic,
         position: initialPosition,
         userData: this,
       ),

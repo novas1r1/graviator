@@ -2,7 +2,6 @@
 
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/components/ingame_ui/ingame_ui.dart';
-import 'package:flamejam/game/components/ingame_ui/view/inventory_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
