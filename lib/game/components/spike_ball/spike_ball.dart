@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/mini_sprite_library.dart';
-import 'package:flamejam/game/bloc/game_cubit.dart';
 import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
@@ -42,7 +41,7 @@ class _SpikeBall extends BodyComponent with InitialPosition, ContactCallbacks {
   @override
   void beginContact(Object other, Contact contact) {
     if (other is Astronaut) {
-      readBloc<GameCubit, GameState>().endGame(victory: false);
+      readBloc<AstronautCubit, AstronautState>().takeDamage(1);
     }
     super.beginContact(other, contact);
   }
