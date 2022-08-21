@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 part 'game_state.dart';
 
 const minGameLevel = 1;
-const maxGameLevel = 2;
+const maxGameLevel = 3;
 
 /// The GameCubit handles the state of the game.
 /// Can be before the game starts, during the game, or after the game is over.
@@ -20,11 +20,6 @@ class GameCubit extends Cubit<GameState> {
   }
 
   void nextLevel() {
-    print(state);
-    print(state.currentGameLevel);
-    print(state.currentGameLevel >= minGameLevel);
-    print(state.currentGameLevel < maxGameLevel);
-
     if (state.currentGameLevel >= minGameLevel &&
         state.currentGameLevel < maxGameLevel) {
       final updatedLevel = state.currentGameLevel + 1;
@@ -41,6 +36,7 @@ class GameCubit extends Cubit<GameState> {
       emit(
         state.copyWith(
           status: GameStatus.gameOverScreenDisplayed,
+          hasWon: true,
         ),
       );
     }

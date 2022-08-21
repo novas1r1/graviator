@@ -1,6 +1,7 @@
 // /*
 // /// Sounds available to play.
-// enum GameAudio { pain_one, pain_two, plop_one, plop_two, plop_three, plop_four }
+// enum GameAudio { pain_one, pain_two, plop_one, plop_two, plop_three, 
+// plop_four }
 //
 // /// Defines the contract of the creation of an [AudioPool].
 // typedef CreateAudioPool = Future<AudioPool> Function(
