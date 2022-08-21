@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:flamejam/game/bloc/game_cubit.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameOverPage extends StatelessWidget {
@@ -39,23 +41,32 @@ class GameOverPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 72),
-            GestureDetector(
-              onTap: () => context.read<GameCubit>().startGame(),
-              child: Container(
-                height: 100,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('button_bg.png'),
-                  ),
-                ),
-                child: const Center(
-                  child: Text(
-                    'RESTART GAME',
-                    style: TextStyle(fontSize: 42),
+            CallbackShortcuts(
+              bindings: {
+                const SingleActivator(LogicalKeyboardKey.space): () =>
+                    context.read<GameCubit>().startGame(),
+              },
+              child: Focus(
+                autofocus: true,
+                child: GestureDetector(
+                  onTap: () => context.read<GameCubit>().startGame(),
+                  child: Container(
+                    height: 100,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('button_bg.png'),
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'PLAY AGAIN',
+                        style: TextStyle(fontSize: 42),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

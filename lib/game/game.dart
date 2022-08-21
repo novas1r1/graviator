@@ -87,9 +87,7 @@ class GameEntity extends Entity {
     await super.onLoad();
     final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
-    children
-      ..addAll(map.create())
-      ..addAll(OxygenTank.createAllFromMap(map));
+    children.addAll(map.create());
 
     final astronaut = Astronaut(
       initialPosition: Vector2(16, 16),
