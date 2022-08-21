@@ -49,6 +49,10 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
       color: Colors.white,
     );
 
+    const ingameOverlayIdentifier = 'IngameOverlay';
+
+    overlays.add(ingameOverlayIdentifier);
+
     await add(
       FlameMultiBlocProvider(
         providers: [

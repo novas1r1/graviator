@@ -25,7 +25,7 @@ class OxygenLevel extends StatelessWidget {
         Text(
           '$oxygen',
           style: const TextStyle(
-            fontSize: 42,
+            fontSize: 62,
             color: Colors.white,
             fontFamily: 'BitPotion',
           ),
