@@ -23,8 +23,10 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   FlameJam({
     required GameCubit gameCubit,
     required AstronautCubit astronautCubit,
+    required String mapToLoad,
   })  : _gameCubit = gameCubit,
         _astronautCubit = astronautCubit,
+        _mapToLoad = mapToLoad,
         super(
           gravity: Vector2(0, 10),
           zoom: 4,
@@ -32,6 +34,8 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
 
   final GameCubit _gameCubit;
   final AstronautCubit _astronautCubit;
+
+  final String _mapToLoad;
 
   void Function(Canvas canvas) renderTreeCallback = (_) {};
 
@@ -64,7 +68,7 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
         children: [
           GameEntity(
             game: this,
-            mapData: MiniSpriteMap.demoLevel,
+            mapData: _mapToLoad,
             behaviors: [
               GravityRotatorBehavior(),
               CameraRotatorBehavior(),

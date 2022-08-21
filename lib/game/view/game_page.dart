@@ -8,7 +8,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamePage extends StatelessWidget {
-  const GamePage({super.key});
+  const GamePage({
+    super.key,
+    required this.currentGameLevel,
+  });
+
+  final int currentGameLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,7 @@ class GamePage extends StatelessWidget {
       },
       gameFactory: () => FlameJam(
         gameCubit: context.read<GameCubit>(),
+        mapToLoad: currentGameLevel.getSpriteMap(),
         astronautCubit: context.read<AstronautCubit>(),
       ),
     );

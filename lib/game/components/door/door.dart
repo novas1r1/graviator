@@ -11,7 +11,8 @@ class Portal extends BodyEntity {
   /// Create a Portal Entity
   Portal({required Vector2 initialPosition})
       : super(
-          bodyComponent: _PortalBodyComponent()..initialPosition = initialPosition,
+          bodyComponent: _PortalBodyComponent()
+            ..initialPosition = initialPosition,
         );
 
   /// Create a [Portal] Entity from the [MiniMap] Entry
@@ -25,7 +26,8 @@ class Portal extends BodyEntity {
         );
 }
 
-class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCallbacks {
+class _PortalBodyComponent extends BodyComponent
+    with InitialPosition, ContactCallbacks {
   _PortalBodyComponent()
       : super(
           renderBody: false,
@@ -44,7 +46,7 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCa
   @override
   void beginContact(Object other, Contact contact) {
     if (other is Astronaut) {
-      readBloc<GameCubit, GameState>().endGame(victory: true);
+      readBloc<GameCubit, GameState>().nextLevel();
     }
 
     super.beginContact(other, contact);
