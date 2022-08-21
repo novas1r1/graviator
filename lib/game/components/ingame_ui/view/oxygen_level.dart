@@ -13,24 +13,27 @@ class OxygenLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          width: 32,
-          height: 32,
-          child: Image.asset(Assets.ingame.oxygenLevel.path),
-        ),
-        const SizedBox(width: 16),
-        Text(
-          '$oxygen',
-          style: const TextStyle(
-            fontSize: 62,
-            color: Colors.white,
-            fontFamily: 'BitPotion',
+    return Material(
+      color: Colors.transparent,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 32,
+            height: 32,
+            child: Image.asset(Assets.ingame.oxygenLevel.path),
           ),
-        ),
-      ],
+          const SizedBox(width: 16),
+          Text(
+            '$oxygen',
+            style: const TextStyle(
+              fontSize: 62,
+              color: Colors.white,
+              fontFamily: 'BitPotion',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
