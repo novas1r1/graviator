@@ -49,9 +49,9 @@ class StartPage extends StatelessWidget {
                         },
                         child: Container(
                           height: 100,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('button_bg.png'),
+                              image: AssetImage(Assets.ingame.buttonBg.path),
                             ),
                           ),
                           child: const Center(

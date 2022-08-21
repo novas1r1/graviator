@@ -12,6 +12,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsIngameGen {
   const $AssetsIngameGen();
 
+  /// File path: assets/ingame/button_bg.png
+  AssetGenImage get buttonBg =>
+      const AssetGenImage('assets/ingame/button_bg.png');
+
   /// File path: assets/ingame/heart_empty.png
   AssetGenImage get heartEmpty =>
       const AssetGenImage('assets/ingame/heart_empty.png');
