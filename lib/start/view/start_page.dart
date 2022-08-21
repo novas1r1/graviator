@@ -33,7 +33,8 @@ class StartPage extends StatelessWidget {
                 Expanded(
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): () => context.read<GameCubit>().startGame(),
+                      const SingleActivator(LogicalKeyboardKey.enter): () =>
+                          context.read<GameCubit>().startGame(),
                     },
                     child: Focus(
                       autofocus: true,

@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
+import 'package:game_audios/game_audios.dart';
 
 part 'game_state.dart';
 
@@ -16,6 +18,8 @@ class GameCubit extends Cubit<GameState> {
 
   /// Starts the game
   void startGame() {
+    audioPlayer.play(FlameJamAudios.background_loop);
+
     emit(state.copyWith(status: GameStatus.gameScreenDisplayed));
   }
 
