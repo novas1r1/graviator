@@ -33,15 +33,8 @@ class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCa
           renderBody: false,
           children: [
             SpriteComponent(
-              sprite: MiniSpriteLibrary.sprites['oxygen_tank_label'],
-              size: Vector2.all(4),
-              anchor: Anchor.center,
-              position: Vector2(0, _spriteSize.y * 0.1),
-              priority: 1,
-            ),
-            SpriteComponent(
               size: _spriteSize,
-              sprite: MiniSpriteLibrary.sprites['oxygen_tank'],
+              sprite: MiniSpriteLibrary.sprites['oxygen_bubbles'],
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.005, 0),
               priority: 0,
