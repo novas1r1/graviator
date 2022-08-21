@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flutter/material.dart';
 
 part 'game_state.dart';
@@ -16,7 +17,12 @@ class GameCubit extends Cubit<GameState> {
 
   /// Starts the game
   void startGame() {
-    emit(state.copyWith(status: GameStatus.gameScreenDisplayed));
+    emit(
+      state.copyWith(
+        status: GameStatus.gameScreenDisplayed,
+        currentGameLevel: 1,
+      ),
+    );
   }
 
   void nextLevel() {
