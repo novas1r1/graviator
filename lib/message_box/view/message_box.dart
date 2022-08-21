@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs
 import 'dart:math' as math;
 
+import 'package:flamejam/consts.dart';
+import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class MessageBox extends StatefulWidget {
@@ -35,33 +37,45 @@ class _MessageBoxState extends State<MessageBox> {
           horizontal: 128,
           vertical: 32,
         ),
-        child: SizedBox(
-          width: double.infinity,
-          height: mediaQueryData.size.height * 0.15,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.white),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 15,
-              ),
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _scrollController,
-                child: _TypewriterText(
-                  text: widget.text,
-                  duration: widget.duration,
-                  onComplete: widget.onComplete,
-                  onNewCharacter: () => _scrollController.jumpTo(
-                    _scrollController.position.maxScrollExtent,
+        child: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: mediaQueryData.size.height * 0.15,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(Assets.tutorial.commanderFox.path),
+                      SizedBox(width: Spacers.l),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: _scrollController,
+                          child: _TypewriterText(
+                            text: widget.text,
+                            duration: widget.duration,
+                            onComplete: widget.onComplete,
+                            onNewCharacter: () => _scrollController.jumpTo(
+                              _scrollController.position.maxScrollExtent,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -85,8 +99,7 @@ class _TypewriterText extends StatefulWidget {
   State<_TypewriterText> createState() => _TypewriterTextState();
 }
 
-class _TypewriterTextState extends State<_TypewriterText>
-    with SingleTickerProviderStateMixin {
+class _TypewriterTextState extends State<_TypewriterText> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
@@ -121,12 +134,21 @@ class _TypewriterTextState extends State<_TypewriterText>
       builder: (_, __) {
         return Material(
           color: Colors.black,
-          child: Text(
-            style: const TextStyle(fontSize: 32),
-            widget.text.substring(
-              0,
-              math.min(_controller.value.ceil(), widget.text.length),
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Commander:',
+                style: TextStyle(fontSize: 32),
+              ),
+              Text(
+                style: const TextStyle(fontSize: 32),
+                widget.text.substring(
+                  0,
+                  math.min(_controller.value.ceil(), widget.text.length),
+                ),
+              ),
+            ],
           ),
         );
       },

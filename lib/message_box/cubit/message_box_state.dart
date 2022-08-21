@@ -12,7 +12,7 @@ class MessageBoxState extends Equatable {
   const MessageBoxState.welcome()
       : this(
           duration: const Duration(seconds: 20),
-          text: 'Commander: Hello Pilot! Hello PILOT! Do you hear me?\n'
+          text: 'Hello Pilot! Hello PILOT! Do you hear me?\n'
               "I'm glad you're still alive. Apparently, we've suffered an attack and our spaceship is seriously damaged.\n\n"
               'The oxygen pump system is malfunctioning. We need to repair it immediately!',
         );
