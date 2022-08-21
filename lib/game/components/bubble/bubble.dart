@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
+import 'package:flamejam/game/components/bubble/behavior/bubble_wiggle_behavior.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
@@ -13,9 +14,9 @@ class Bubble extends BodyEntity {
   /// Creates a [Bubble] instance
   Bubble({
     required Vector2 initialPosition,
-    super.behaviors,
   }) : super(
           bodyComponent: _BubbleComponent()..initialPosition = initialPosition,
+          behaviors: [BubbleWiggleBehavior()],
         );
 
   /// Create a [Bubble] Entity from the [MiniMap] Entry
@@ -29,8 +30,7 @@ class Bubble extends BodyEntity {
         );
 }
 
-class _BubbleComponent extends BodyComponent
-    with InitialPosition, ContactCallbacks {
+class _BubbleComponent extends BodyComponent with InitialPosition, ContactCallbacks {
   _BubbleComponent()
       : super(
           renderBody: false,
@@ -52,24 +52,21 @@ class _BubbleComponent extends BodyComponent
     super.beginContact(other, contact);
     if (other is Astronaut) {
       readBloc<AstronautCubit, AstronautState>().pickUpOxygen();
-      parent!.removeFromParent();
     }
-  }
 
-  @override
-  void preSolve(Object other, Contact contact, Manifold oldManifold) {
-    super.preSolve(other, contact, oldManifold);
-    if (other is Astronaut) contact.setEnabled(false);
+    parent!.removeFromParent();
   }
 
   @override
   Body createBody() {
-    paint.color = const Color(0xffff00000);
+    paint.color = Color(0xFFFF00000);
     final fixtureDef = FixtureDef(
       CircleShape()..radius = _spriteSize.x / 2,
+      restitution: 0.4,
     );
     return world.createBody(
       BodyDef(
+        type: BodyType.dynamic,
         position: initialPosition,
         userData: this,
       ),
