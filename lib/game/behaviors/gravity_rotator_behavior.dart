@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
@@ -7,9 +8,7 @@ import 'package:flamejam/game/game.dart';
 /// Whenever, the gravity is rotated, all the [World.bodies] lose their
 /// velocity.
 class GravityRotatorBehavior extends Behavior<GameEntity> {
-  @override
-  Future<void> onLoad() async {
-    await super.onLoad();
+  void _rotateGravity() {
     final astronaut = parent.descendants().whereType<Astronaut>();
     for (final body in parent.game.world.bodies) {
       if (astronaut.isNotEmpty && body == astronaut.first.bodyComponent.body) {
@@ -19,7 +18,18 @@ class GravityRotatorBehavior extends Behavior<GameEntity> {
       body.setAwake(true);
     }
     parent.game.world.gravity.rotateAntiClockwise();
-    removeFromParent();
+  }
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    await add(
+      TimerComponent(
+        period: 8,
+        repeat: true,
+        onTick: _rotateGravity,
+      ),
+    );
   }
 }
 

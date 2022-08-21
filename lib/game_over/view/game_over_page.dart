@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_audios/game_audios.dart';
 
 class GameOverPage extends StatelessWidget {
   const GameOverPage({
@@ -17,6 +19,8 @@ class GameOverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    audioPlayer.play(FlameJamAudios.loose);
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(

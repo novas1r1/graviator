@@ -4,7 +4,6 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/components/components.dart';
-import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flutter/services.dart';
 
 /// Can be attached to a [Astronaut] to make it move on keyboard inputs.
@@ -66,12 +65,9 @@ class ControlledMovementBehavior extends Behavior<Astronaut>
       if (isGravityUp) velocity.x = isKeyDown ? -1 : 0;
       if (isGravityRight) velocity.y = isKeyDown ? -1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyW) {
-      readBloc<AstronautCubit, AstronautState>().reduceOxygen();
       final linearVelocity = parent.bodyComponent.body.linearVelocity;
-      final isJumpAllowedHorizontal =
-          (isGravityUp || isGravityDown) && linearVelocity.y == 0;
-      final isJumpAllowedVertical =
-          (isGravityLeft || isGravityRight) && linearVelocity.x == 0;
+      final isJumpAllowedHorizontal = (isGravityUp || isGravityDown) && linearVelocity.y == 0;
+      final isJumpAllowedVertical = (isGravityLeft || isGravityRight) && linearVelocity.x == 0;
       if (isJumpAllowedHorizontal && isGravityDown) {
         jump(Vector2(0, -_jumpForce));
       }
