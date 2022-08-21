@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flamejam/assets/assets.dart';
-import 'package:flamejam/main.dart';
 import 'package:flamejam/game/components/astronaut/astronaut.dart';
+import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:game_audios/game_audios.dart';
 
@@ -43,12 +43,7 @@ class GameCubit extends Cubit<GameState> {
         ),
       );
     } else {
-      emit(
-        state.copyWith(
-          status: GameStatus.gameOverScreenDisplayed,
-          hasWon: true,
-        ),
-      );
+      endGame(victory: true);
     }
   }
 
