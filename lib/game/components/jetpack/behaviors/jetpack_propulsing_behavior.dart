@@ -15,6 +15,8 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
 
   late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.keyW];
 
+  bool _facingRight = false;
+
   Vector2 getFlightDirectionDependingOnGravity() {
     final gravityDirectionY = gameRef.world.gravity.y;
     final gravityDirectionX = gameRef.world.gravity.x;
@@ -27,6 +29,14 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
     if (isGravityUp) return Vector2(0, 4);
     if (isGravityRight) return Vector2(-4, 0);
     return Vector2(0, -4);
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    final astronautBody = parent.parent.body;
+    _facingRight = astronautBody.linearVelocity.x.ceil() > 0;
   }
 
   @override
@@ -43,6 +53,7 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack>
       add(
         _SmokeParticleSystem(
           size: AstronautBodyComponent.spriteSize,
+          mirror: _facingRight,
           count: astronaut.body.linearVelocity.length.ceil(),
           acceleration: Vector2(
             -astronaut.body.linearVelocity.x,
@@ -60,10 +71,12 @@ class _SmokeParticleSystem extends ParticleSystemComponent {
   _SmokeParticleSystem({
     required int count,
     required Vector2 acceleration,
+    required bool mirror,
     required Vector2 size,
   }) : super(
-          // TODO(alestiago): Remove this absolute positioning.
-          position: Vector2(size.x - 12, size.y - 11),
+          position: mirror
+              ? Vector2(size.x - 21, size.y - 11)
+              : Vector2(size.x - 12, size.y - 11),
           particle: Particle.generate(
             count: count,
             generator: (i) => AcceleratedParticle(
