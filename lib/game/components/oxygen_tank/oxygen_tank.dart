@@ -56,6 +56,7 @@ class _OxygenTankComponent extends BodyComponent
   @override
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
+    readBloc<AstronautCubit, AstronautState>().pickUpOxygen();
     parent!.removeFromParent();
   }
 

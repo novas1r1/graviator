@@ -1,30 +1,30 @@
 // ignore_for_file: public_member_api_docs
 
-part of 'playert_cubit.dart';
+part of 'astronaut_cubit.dart';
 
-enum PlayerStatus {
+enum AstronautStatus {
   alive,
   dead,
 }
 
 @immutable
-class PlayertState {
-  const PlayertState({
+class AstronautState {
+  const AstronautState({
     this.oxygen = 100,
     this.health = 100,
-    this.playerStatus = PlayerStatus.alive,
+    this.playerStatus = AstronautStatus.alive,
   });
 
   final int oxygen;
   final int health;
-  final PlayerStatus playerStatus;
+  final AstronautStatus playerStatus;
 
-  PlayertState copyWith({
+  AstronautState copyWith({
     int? oxygen,
     int? health,
-    PlayerStatus? playerStatus,
+    AstronautStatus? playerStatus,
   }) {
-    return PlayertState(
+    return AstronautState(
       oxygen: oxygen ?? this.oxygen,
       health: health ?? this.health,
       playerStatus: playerStatus ?? this.playerStatus,

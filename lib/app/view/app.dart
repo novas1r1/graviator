@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flame/game.dart';
+import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game_over/game_over.dart';
 import 'package:flamejam/start/start.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
             return GameWidget.controlled(
               gameFactory: () => FlameJam(
                 gameCubit: context.read<GameCubit>(),
+                astronautCubit: context.read<AstronautCubit>(),
               ),
             );
           case GameStatus.gameOverScreenDisplayed:
