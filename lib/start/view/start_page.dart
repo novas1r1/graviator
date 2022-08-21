@@ -2,7 +2,6 @@
 
 import 'package:flamejam/consts.dart';
 import 'package:flamejam/game/game.dart';
-import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +28,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  Assets.astronaut.path,
+                  'astronaut.png',
                   width: 32,
                   height: 32,
                 ),
@@ -40,7 +39,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  Assets.portal.path,
+                  'portal.png',
                   width: 32,
                   height: 32,
                 ),
@@ -59,12 +58,12 @@ class StartPage extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      Assets.oxygenTank.path,
+                      'oxygen_tank.png',
                       width: 32,
                       height: 32,
                     ),
                     Image.asset(
-                      Assets.oxygenTankLabel.path,
+                      "oxygen_tank_label.png",
                       width: 8,
                       height: 8,
                     )
@@ -81,7 +80,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  Assets.spikeBall.path,
+                  'spike_ball.png',
                   width: 32,
                   height: 32,
                 ),
