@@ -20,9 +20,25 @@ class $AssetsIngameGen {
   AssetGenImage get heartFull =>
       const AssetGenImage('assets/ingame/heart_full.png');
 
+  /// File path: assets/ingame/inventory.png
+  AssetGenImage get inventory =>
+      const AssetGenImage('assets/ingame/inventory.png');
+
   /// File path: assets/ingame/oxygen_level.png
   AssetGenImage get oxygenLevel =>
       const AssetGenImage('assets/ingame/oxygen_level.png');
+
+  /// File path: assets/ingame/spaceship_computer.png
+  AssetGenImage get spaceshipComputer =>
+      const AssetGenImage('assets/ingame/spaceship_computer.png');
+
+  /// File path: assets/ingame/spaceship_fuel.png
+  AssetGenImage get spaceshipFuel =>
+      const AssetGenImage('assets/ingame/spaceship_fuel.png');
+
+  /// File path: assets/ingame/spaceship_wrench.png
+  AssetGenImage get spaceshipWrench =>
+      const AssetGenImage('assets/ingame/spaceship_wrench.png');
 }
 
 class $AssetsTutorialGen {

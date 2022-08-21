@@ -67,6 +67,8 @@ extension GameLevelMap on int {
       return MiniSpriteMap.firstLevel;
     } else if (this == 2) {
       return MiniSpriteMap.secondLevel;
+    } else if (this == 3) {
+      return MiniSpriteMap.thirdLevel;
     } else {
       throw Exception('Invalid game level');
     }
