@@ -25,5 +25,5 @@ flutter_gen:
 
 flutter:
   assets:
-    - ./assets/sfx/
-    - ./assets/music/
+    - assets/sfx
+    - assets/music

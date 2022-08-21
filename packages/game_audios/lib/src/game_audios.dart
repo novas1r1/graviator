@@ -48,7 +48,7 @@ abstract class _Audio {
   Future<void> load();
 
   String prefixFile(String file) {
-    return 'packages/flame_jam_audio/$file';
+    return 'packages/game_audios/$file';
   }
 }
 
@@ -208,7 +208,8 @@ class _ThrottledAudio extends _Audio {
   @override
   void play() {
     final now = clock.now();
-    if (_lastPlayed == null || (_lastPlayed != null && now.difference(_lastPlayed!) > duration)) {
+    if (_lastPlayed == null ||
+        (_lastPlayed != null && now.difference(_lastPlayed!) > duration)) {
       _lastPlayed = now;
       playSingleAudio(prefixFile(path));
     }
@@ -230,7 +231,8 @@ class FlameJamAudioPlayer {
   })  : _createAudioPool = createAudioPool ?? AudioPool.create,
         _playSingleAudio = playSingleAudio ?? FlameAudio.audioCache.play,
         _loopSingleAudio = loopSingleAudio ?? FlameAudio.audioCache.loop,
-        _preCacheSingleAudio = preCacheSingleAudio ?? FlameAudio.audioCache.load,
+        _preCacheSingleAudio =
+            preCacheSingleAudio ?? FlameAudio.audioCache.load,
         _configureAudioCache = configureAudioCache ??
             ((AudioCache a) {
               a.prefix = '';
