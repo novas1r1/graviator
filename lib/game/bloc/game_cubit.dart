@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flamejam/assets/assets.dart';
-import 'package:flamejam/game/components/astronaut/astronaut.dart';
+import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:game_audios/game_audios.dart';
@@ -27,7 +27,49 @@ class GameCubit extends Cubit<GameState> {
     );
   }
 
-  void nextLevel() {
+  /// Ends the game
+  void endGame({
+    required bool victory,
+    required Set<InventoryItemType> inventoryItems,
+    required int oxygenLeft,
+    required int healthLeft,
+  }) {
+    var score = 0;
+
+    if (inventoryItems.contains(InventoryItemType.spaceshipWrench)) {
+      score += 100;
+    }
+
+    if (inventoryItems.contains(InventoryItemType.spaceshipComputer)) {
+      score *= 250;
+    }
+
+    if (inventoryItems.contains(InventoryItemType.spaceshipFuelTank)) {
+      score *= 500;
+    }
+
+    if (oxygenLeft > 0) {
+      score *= oxygenLeft;
+    }
+
+    if (healthLeft > 0) {
+      score *= healthLeft;
+    }
+
+    emit(
+      state.copyWith(
+        status: GameStatus.gameOverScreenDisplayed,
+        hasWon: victory,
+        score: score,
+      ),
+    );
+  }
+
+  void nextLevel({
+    required Set<InventoryItemType> inventoryItems,
+    required int oxygenLeft,
+    required int healthLeft,
+  }) {
     if (state.currentGameLevel >= minGameLevel &&
         state.currentGameLevel < maxGameLevel) {
       audioPlayer.play(FlameJamAudios.level_complete);
@@ -43,7 +85,12 @@ class GameCubit extends Cubit<GameState> {
         ),
       );
     } else {
-      endGame(victory: true);
+      endGame(
+        victory: true,
+        healthLeft: healthLeft,
+        oxygenLeft: oxygenLeft,
+        inventoryItems: inventoryItems,
+      );
     }
   }
 
@@ -58,15 +105,5 @@ class GameCubit extends Cubit<GameState> {
         ),
       );
     }
-  }
-
-  /// Ends the game
-  void endGame({required bool victory}) {
-    emit(
-      state.copyWith(
-        status: GameStatus.gameOverScreenDisplayed,
-        hasWon: victory,
-      ),
-    );
   }
 }
