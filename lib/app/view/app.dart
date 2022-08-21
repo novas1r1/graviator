@@ -23,7 +23,9 @@ class App extends StatelessWidget {
             case GameStatus.startScreenDisplayed:
               return const StartPage();
             case GameStatus.gameScreenDisplayed:
-              return const GamePage();
+              return GamePage(
+                gameLevelMapToLoad: state.currentGameLevel.getSpriteMap(),
+              );
             case GameStatus.gameOverScreenDisplayed:
               return GameOverPage(
                 hasPlayerWon: state.hasWon,

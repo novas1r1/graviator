@@ -9,7 +9,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GamePage extends StatelessWidget {
-  const GamePage({super.key});
+  const GamePage({
+    super.key,
+    required this.gameLevelMapToLoad,
+  });
+
+  final String gameLevelMapToLoad;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +24,17 @@ class GamePage extends StatelessWidget {
           create: (_) => MessageBoxCubit(),
         ),
       ],
-      child: const _GameView(),
+      child: _GameView(gameLevelMapToLoad: gameLevelMapToLoad),
     );
   }
 }
 
 class _GameView extends StatefulWidget {
-  const _GameView();
+  const _GameView({
+    required this.gameLevelMapToLoad,
+  });
+
+  final String gameLevelMapToLoad;
 
   @override
   State<_GameView> createState() => _GameViewState();
@@ -41,6 +50,7 @@ class _GameViewState extends State<_GameView> {
       gameCubit: context.read<GameCubit>(),
       astronautCubit: context.read<AstronautCubit>(),
       messageBoxCubit: context.read<MessageBoxCubit>(),
+      mapToLoad: widget.gameLevelMapToLoad,
     );
   }
 
@@ -64,7 +74,12 @@ class _GameViewState extends State<_GameView> {
                     game.overlays.remove(MessageBox.flameOverlayId),
               ),
         },
-        game: _game,
+        game: FlameJam(
+          gameCubit: context.read<GameCubit>(),
+          astronautCubit: context.read<AstronautCubit>(),
+          messageBoxCubit: context.read<MessageBoxCubit>(),
+          mapToLoad: widget.gameLevelMapToLoad,
+        ),
       ),
     );
   }

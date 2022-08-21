@@ -2,8 +2,6 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flame/game.dart';
-import 'package:flamejam/message_box/message_box.dart';
 import 'package:meta/meta.dart';
 
 part 'message_box_state.dart';
