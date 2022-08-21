@@ -10,8 +10,10 @@ import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/ingame_ui/ingame_ui.dart';
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/main.dart';
 import 'package:flamejam/message_box/cubit/message_box_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:game_audios/game_audios.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 export 'bloc/bloc.dart';
@@ -52,6 +54,10 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+    if (_messageBoxCubit.state == const MessageBoxState.welcome()) {
+      audioPlayer.play(FlameJamAudios.hello_pilot);
+    }
+
     await MiniSpriteLibrary.loadSprites(
       pixelSize: 1,
       color: Colors.white,

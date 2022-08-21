@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names, public_member_api_docs
+
 import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -16,6 +18,7 @@ enum FlameJamAudios {
   loose,
   win,
   level_complete,
+  hello_pilot,
 }
 
 /// Defines the contract of the creation of an [AudioPool].
@@ -269,6 +272,12 @@ class FlameJamAudioPlayer {
         preCacheSingleAudio: _preCacheSingleAudio,
         playSingleAudio: _playSingleAudio,
         path: Assets.sfx.plopOne,
+        volume: .5,
+      ),
+      FlameJamAudios.hello_pilot: _SimplePlayAudio(
+        preCacheSingleAudio: _preCacheSingleAudio,
+        playSingleAudio: _playSingleAudio,
+        path: Assets.sfx.helloPilot,
         volume: .5,
       ),
     };

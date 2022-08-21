@@ -28,6 +28,9 @@ class $AssetsSfxGen {
   /// File path: assets/sfx/gravity_change.mp3
   String get gravityChange => 'assets/sfx/gravity_change.mp3';
 
+  /// File path: assets/sfx/hello_pilot.mp3
+  String get helloPilot => 'assets/sfx/hello_pilot.mp3';
+
   /// File path: assets/sfx/jetpack.mp3
   String get jetpack => 'assets/sfx/jetpack.mp3';
 
