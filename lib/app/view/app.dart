@@ -17,7 +17,7 @@ class App extends StatelessWidget {
     return BlocListener<AstronautCubit, AstronautState>(
       listener: (context, state) {
         if (state.astronautStatus == AstronautStatus.dead) {
-          context.read<GameCubit>().endGame();
+          context.read<GameCubit>().endGame(victory: false);
         }
       },
       child: BlocBuilder<GameCubit, GameState>(
