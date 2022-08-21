@@ -10,7 +10,7 @@ part 'astronaut_state.dart';
 
 const oxygenPerTank = 10;
 const oxygenPerUsage = 1;
-const maxOxygen = 100;
+const maxOxygen = 1000;
 const maxHealth = 3;
 
 class AstronautCubit extends Cubit<AstronautState> {

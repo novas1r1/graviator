@@ -87,16 +87,11 @@ class _LoopAudio extends _Audio {
 
 class _SingleLoopAudio extends _LoopAudio {
   _SingleLoopAudio({
-    required PreCacheSingleAudio preCacheSingleAudio,
-    required LoopSingleAudio loopSingleAudio,
-    required String path,
-    double? volume,
-  }) : super(
-          preCacheSingleAudio: preCacheSingleAudio,
-          loopSingleAudio: loopSingleAudio,
-          path: path,
-          volume: volume,
-        );
+    required super.preCacheSingleAudio,
+    required super.loopSingleAudio,
+    required super.path,
+    super.volume,
+  });
 
   bool _playing = false;
 

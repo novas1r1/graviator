@@ -10,7 +10,7 @@ enum AstronautStatus {
 @immutable
 class AstronautState {
   const AstronautState({
-    this.oxygen = 100,
+    this.oxygen = maxOxygen,
     this.health = 3,
     this.astronautStatus = AstronautStatus.alive,
     this.inventoryItems = const {},
