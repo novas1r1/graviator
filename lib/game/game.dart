@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_bloc/flame_bloc.dart';
