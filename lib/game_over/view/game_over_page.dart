@@ -7,7 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameOverPage extends StatelessWidget {
-  const GameOverPage({super.key});
+  const GameOverPage({
+    super.key,
+    required this.hasPlayerWon,
+    required this.score,
+  });
+
+  final bool hasPlayerWon;
+  final int score;
 
   @override
   Widget build(BuildContext context) {
@@ -18,28 +25,10 @@ class GameOverPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      'GAMEOVER',
-                      style: TextStyle(fontSize: 72),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 32),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      'SCORE: 0',
-                      style: TextStyle(fontSize: 42),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            if (hasPlayerWon)
+              _GameOverWon(score: score)
+            else
+              const _GameOverLost(),
             const SizedBox(height: 72),
             CallbackShortcuts(
               bindings: {
@@ -70,6 +59,68 @@ class GameOverPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _GameOverWon extends StatelessWidget {
+  const _GameOverWon({required this.score});
+
+  final int score;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Expanded(
+          child: Center(
+            child: Text(
+              'YOU MADE IT :)))! PARTYYY!',
+              style: TextStyle(fontSize: 72),
+            ),
+          ),
+        ),
+        const SizedBox(height: 32),
+        Expanded(
+          child: Center(
+            child: Text(
+              'SCORE: $score',
+              style: const TextStyle(fontSize: 42),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _GameOverLost extends StatelessWidget {
+  const _GameOverLost();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Expanded(
+          child: Center(
+            child: Text(
+              'GAMEOVER',
+              style: TextStyle(fontSize: 72),
+            ),
+          ),
+        ),
+        SizedBox(height: 32),
+        Expanded(
+          child: Center(
+            child: Text(
+              "YOU COULDN'T MAKE IT :'(",
+              style: TextStyle(fontSize: 42),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

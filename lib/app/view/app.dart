@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flame/game.dart';
-
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game_over/game_over.dart';
 import 'package:flamejam/start/start.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +24,10 @@ class App extends StatelessWidget {
               ),
             );
           case GameStatus.gameOverScreenDisplayed:
-            return const GameOverPage();
+            return GameOverPage(
+              hasPlayerWon: state.hasWon,
+              score: state.score,
+            );
         }
       },
     );
