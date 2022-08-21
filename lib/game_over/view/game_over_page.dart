@@ -27,7 +27,9 @@ class GameOverPage extends StatelessWidget {
             if (hasPlayerWon)
               _GameOverWon(score: score)
             else
-              const _GameOverLost(),
+              const Expanded(
+                child: _GameOverLost(),
+              ),
             const SizedBox(height: 72),
             CallbackShortcuts(
               bindings: {
@@ -104,8 +106,7 @@ class _GameOverLost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: const [
         Expanded(
           child: Center(
