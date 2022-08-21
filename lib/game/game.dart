@@ -8,14 +8,13 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
-import 'package:flamejam/game/components/components.dart';
-import 'package:flamejam/game/components/jetpack/behaviors/behaviors.dart';
-import 'package:flamejam/game/components/jetpack/jetpack.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
-export 'package:flamejam/game/bloc/bloc.dart';
+export 'bloc/bloc.dart';
+export 'components/components.dart';
+export 'view/view.dart';
 
 /// the main game class
 class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
