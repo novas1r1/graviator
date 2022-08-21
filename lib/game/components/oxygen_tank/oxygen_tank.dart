@@ -13,8 +13,7 @@ class OxygenTank extends BodyEntity {
     required Vector2 initialPosition,
     super.behaviors,
   }) : super(
-          bodyComponent: _OxygenTankComponent()
-            ..initialPosition = initialPosition,
+          bodyComponent: _OxygenTankComponent()..initialPosition = initialPosition,
         );
 
   /// Create a [OxygenTank] Entity from the [MiniMap] Entry
@@ -28,8 +27,7 @@ class OxygenTank extends BodyEntity {
         );
 }
 
-class _OxygenTankComponent extends BodyComponent
-    with InitialPosition, ContactCallbacks {
+class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCallbacks {
   _OxygenTankComponent()
       : super(
           renderBody: false,
@@ -56,8 +54,10 @@ class _OxygenTankComponent extends BodyComponent
   @override
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
-    readBloc<AstronautCubit, AstronautState>().pickUpOxygen();
-    parent!.removeFromParent();
+    if (other is Astronaut) {
+      readBloc<AstronautCubit, AstronautState>().pickUpOxygen();
+      parent!.removeFromParent();
+    }
   }
 
   @override

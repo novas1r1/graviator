@@ -11,7 +11,7 @@ enum AstronautStatus {
 class AstronautState {
   const AstronautState({
     this.oxygen = 100,
-    this.health = 100,
+    this.health = 3,
     this.astronautStatus = AstronautStatus.alive,
   });
 
