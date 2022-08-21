@@ -11,48 +11,24 @@ class HealthBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (health) {
-      case 0:
-        return Row(
-          children: const [
-            _Heart(isFull: false),
-            SizedBox(width: 8),
-            _Heart(isFull: false),
-            SizedBox(width: 8),
-            _Heart(isFull: false),
-          ],
-        );
-      case 1:
-        return Row(
-          children: const [
-            _Heart(isFull: true),
-            SizedBox(width: 8),
-            _Heart(isFull: false),
-            SizedBox(width: 8),
-            _Heart(isFull: false),
-          ],
-        );
-      case 2:
-        return Row(
-          children: const [
-            _Heart(isFull: true),
-            SizedBox(width: 8),
-            _Heart(isFull: true),
-            SizedBox(width: 8),
-            _Heart(isFull: false),
-          ],
-        );
-      default:
-        return Row(
-          children: const [
-            _Heart(isFull: true),
-            SizedBox(width: 8),
-            _Heart(isFull: true),
-            SizedBox(width: 8),
-            _Heart(isFull: true),
-          ],
-        );
-    }
+    return Row(
+      children: [
+        if (health >= 1)
+          const _Heart(isFull: true)
+        else
+          const _Heart(isFull: false),
+        const SizedBox(width: 8),
+        if (health >= 2)
+          const _Heart(isFull: true)
+        else
+          const _Heart(isFull: false),
+        const SizedBox(width: 8),
+        if (health >= 3)
+          const _Heart(isFull: true)
+        else
+          const _Heart(isFull: false),
+      ],
+    );
   }
 }
 
