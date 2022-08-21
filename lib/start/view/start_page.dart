@@ -2,7 +2,6 @@
 
 import 'package:flamejam/consts.dart';
 import 'package:flamejam/game/game.dart';
-import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
