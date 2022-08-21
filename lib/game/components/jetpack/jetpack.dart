@@ -2,6 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flamejam/game/components/components.dart';
 
+export 'behaviors/behaviors.dart';
+
 /// {@template game.components.jetpack.Jetpack}
 /// Backpack that allows a player to propulse through space.
 /// {@endtemplate}
