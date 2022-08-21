@@ -59,7 +59,7 @@ class _BubbleComponent extends BodyComponent with InitialPosition, ContactCallba
 
   @override
   Body createBody() {
-    paint.color = Color(0xFFFF00000);
+    paint.color = const Color(0xFFFF00000);
     final fixtureDef = FixtureDef(
       CircleShape()..radius = _spriteSize.x / 2,
       restitution: 0.4,

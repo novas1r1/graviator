@@ -45,28 +45,44 @@ extension MiniMapCreate on MiniMap {
           component = SpikeBall.fromMapEntry(entry: entry);
           break;
         case 'wall_corner_top_left':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(
+            spriteName: 'wall_corner_top_left',
+            entry: entry,
+            wallDirection: WallDirection.top_left,
+          );
           break;
         case 'wall_corner_top_right':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(
+            spriteName: 'wall_corner_top_right',
+            entry: entry,
+            wallDirection: WallDirection.top_right,
+          );
           break;
         case 'wall_corner_bottom_right':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(
+            spriteName: 'wall_corner_bottom_right',
+            entry: entry,
+            wallDirection: WallDirection.bottom_right,
+          );
           break;
         case 'wall_corner_bottom_left':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(
+            spriteName: 'wall_corner_bottom_left',
+            entry: entry,
+            wallDirection: WallDirection.bottom_left,
+          );
           break;
         case 'wall_left':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(spriteName: 'wall_left', entry: entry, wallDirection: WallDirection.left);
           break;
         case 'wall_right':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(spriteName: 'wall_right', entry: entry, wallDirection: WallDirection.right);
           break;
         case 'wall_top':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(spriteName: 'wall_top', entry: entry, wallDirection: WallDirection.top);
           break;
         case 'wall_bottom':
-          component = Wall.fromMapEntry(entry: entry);
+          component = Wall.fromMapEntry(spriteName: 'wall_bottom', entry: entry, wallDirection: WallDirection.bottom);
           break;
         default:
           continue;
