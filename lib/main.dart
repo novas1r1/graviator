@@ -2,8 +2,10 @@ import 'package:flamejam/app/app.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_audios/game_audios.dart';
 
 void main() {
+  FlameJamAudioPlayer().play(FlameJamAudios.background_loop);
   runApp(
     MultiBlocProvider(
       providers: [
