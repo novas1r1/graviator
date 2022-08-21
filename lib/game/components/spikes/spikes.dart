@@ -9,12 +9,14 @@ class Spike extends BodyEntity {
   /// Create a Spike Body Entity
   Spike({required Vector2 initialPosition})
       : super(
-          bodyComponent: _SpikeBodyComponent()..initialPosition = initialPosition,
+          bodyComponent: _SpikeBodyComponent()
+            ..initialPosition = initialPosition,
         );
 
   /// Create a [Spike] Entity from the [MiniMap] Entry
-  Spike.fromMapEntry({required MapEntry<MapPosition, Map<String, dynamic>> entry})
-      : this(
+  Spike.fromMapEntry({
+    required MapEntry<MapPosition, Map<String, dynamic>> entry,
+  }) : this(
           initialPosition: Vector2(
             entry.key.x.toDouble() * 16,
             entry.key.y.toDouble() * 16,
@@ -32,7 +34,7 @@ class _SpikeBodyComponent extends BodyComponent with InitialPosition {
 
   @override
   Body createBody() {
-    paint.color = Color(0xFFFF0000);
+    paint.color = const Color(0xFFFF0000);
     final bodyDef = BodyDef(position: initialPosition);
 
     final fixtureDef = FixtureDef(

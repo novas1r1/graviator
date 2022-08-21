@@ -16,9 +16,9 @@ class Portal extends BodyEntity {
         );
 
   /// Create a [Portal] Entity from the [MiniMap] Entry
-  Portal.fromMapEntry(
-      {required MapEntry<MapPosition, Map<String, dynamic>> entry})
-      : this(
+  Portal.fromMapEntry({
+    required MapEntry<MapPosition, Map<String, dynamic>> entry,
+  }) : this(
           initialPosition: Vector2(
             entry.key.x.toDouble() * 16,
             entry.key.y.toDouble() * 16,
