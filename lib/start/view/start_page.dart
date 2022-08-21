@@ -34,7 +34,9 @@ class StartPage extends StatelessWidget {
                   height: 32,
                 ),
                 SizedBox(width: Spacers.m),
-                const Expanded(child: Text('This is still you, stay alive!', style: defaultFontStyle))
+                const Expanded(
+                    child: Text('This is still you, stay alive!',
+                        style: defaultFontStyle))
               ],
             ),
             Row(
@@ -72,10 +74,11 @@ class StartPage extends StatelessWidget {
                 ),
                 SizedBox(width: Spacers.m),
                 const Expanded(
-                    child: Text(
-                  'Air is quite important these days and if you run out you cannot fly anymore. Ah and breathing is also harder without it.',
-                  style: defaultFontStyle,
-                ))
+                  child: Text(
+                    'Air is quite important these days and if you run out you cannot fly anymore. Ah and breathing is also harder without it.',
+                    style: defaultFontStyle,
+                  ),
+                )
               ],
             ),
             Row(
@@ -100,7 +103,8 @@ class StartPage extends StatelessWidget {
                 Expanded(
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): () => context.read<GameCubit>().startGame(),
+                      const SingleActivator(LogicalKeyboardKey.enter): () =>
+                          context.read<GameCubit>().startGame(),
                     },
                     child: Focus(
                       autofocus: true,
