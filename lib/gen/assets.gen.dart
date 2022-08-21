@@ -32,6 +32,10 @@ class $AssetsTutorialGen {
   AssetGenImage get astronaut =>
       const AssetGenImage('assets/tutorial/astronaut.png');
 
+  /// File path: assets/tutorial/commander-fox.png
+  AssetGenImage get commanderFox =>
+      const AssetGenImage('assets/tutorial/commander-fox.png');
+
   /// File path: assets/tutorial/oxygen_tank.png
   AssetGenImage get oxygenTank =>
       const AssetGenImage('assets/tutorial/oxygen_tank.png');

@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs
 import 'dart:math' as math;
 
+import 'package:flamejam/consts.dart';
+import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
-class MessageBox extends StatelessWidget {
+class MessageBox extends StatefulWidget {
   const MessageBox({
     super.key,
     required this.text,
@@ -18,6 +20,13 @@ class MessageBox extends StatelessWidget {
   final VoidCallback? onComplete;
 
   @override
+  State<MessageBox> createState() => _MessageBoxState();
+}
+
+class _MessageBoxState extends State<MessageBox> {
+  final _scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
 
@@ -28,26 +37,45 @@ class MessageBox extends StatelessWidget {
           horizontal: 128,
           vertical: 32,
         ),
-        child: SizedBox(
-          width: double.infinity,
-          height: mediaQueryData.size.height * 0.15,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.white),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: ColoredBox(
-                color: Colors.black.withOpacity(0.5),
-                child: _TypewriterText(
-                  text: text,
-                  duration: duration,
-                  onComplete: onComplete,
+        child: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: mediaQueryData.size.height * 0.15,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(Assets.tutorial.commanderFox.path),
+                      SizedBox(width: Spacers.l),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: _scrollController,
+                          child: _TypewriterText(
+                            text: widget.text,
+                            duration: widget.duration,
+                            onComplete: widget.onComplete,
+                            onNewCharacter: () => _scrollController.jumpTo(
+                              _scrollController.position.maxScrollExtent,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -59,34 +87,38 @@ class _TypewriterText extends StatefulWidget {
     required this.text,
     required this.duration,
     this.onComplete,
+    this.onNewCharacter,
   });
 
   final String text;
   final Duration duration;
   final VoidCallback? onComplete;
+  final VoidCallback? onNewCharacter;
 
   @override
   State<_TypewriterText> createState() => _TypewriterTextState();
 }
 
-class _TypewriterTextState extends State<_TypewriterText>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    duration: widget.duration,
-    upperBound: widget.text.length.toDouble() + 20,
-    vsync: this,
-  )..repeat();
+class _TypewriterTextState extends State<_TypewriterText> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      final isCompleted = _controller.value.ceil() == _controller.upperBound;
-      if (isCompleted) {
-        widget.onComplete?.call();
-        _controller.stop();
-      }
-    });
+    _controller = AnimationController(
+      duration: widget.duration,
+      upperBound: widget.text.length.toDouble() + 20,
+      vsync: this,
+    )
+      ..forward()
+      ..addListener(() {
+        widget.onNewCharacter?.call();
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          widget.onComplete?.call();
+        }
+      });
   }
 
   @override
@@ -101,15 +133,22 @@ class _TypewriterTextState extends State<_TypewriterText>
       animation: _controller,
       builder: (_, __) {
         return Material(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              style: const TextStyle(fontSize: 32),
-              widget.text.substring(
-                0,
-                math.min(_controller.value.ceil(), widget.text.length),
+          color: Colors.black,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Commander:',
+                style: TextStyle(fontSize: 32),
               ),
-            ),
+              Text(
+                style: const TextStyle(fontSize: 32),
+                widget.text.substring(
+                  0,
+                  math.min(_controller.value.ceil(), widget.text.length),
+                ),
+              ),
+            ],
           ),
         );
       },

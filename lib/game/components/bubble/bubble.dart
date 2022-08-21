@@ -30,8 +30,7 @@ class Bubble extends BodyEntity {
         );
 }
 
-class _BubbleComponent extends BodyComponent
-    with InitialPosition, ContactCallbacks {
+class _BubbleComponent extends BodyComponent with InitialPosition, ContactCallbacks {
   _BubbleComponent()
       : super(
           renderBody: false,
@@ -60,7 +59,7 @@ class _BubbleComponent extends BodyComponent
 
   @override
   Body createBody() {
-    paint.color = const Color(0xffff00000);
+    paint.color = const Color(0xFFFF00000);
     final fixtureDef = FixtureDef(
       CircleShape()..radius = _spriteSize.x / 2,
       restitution: 0.4,
