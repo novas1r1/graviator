@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:flamejam/game/bloc/game_cubit.dart';
-import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +24,10 @@ class GameOverPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (hasPlayerWon) _GameOverWon(score: score) else const _GameOverLost(),
+            if (hasPlayerWon)
+              _GameOverWon(score: score)
+            else
+              const _GameOverLost(),
             const SizedBox(height: 72),
             CallbackShortcuts(
               bindings: {

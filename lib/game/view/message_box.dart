@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class MessageBox extends StatelessWidget {
   const MessageBox({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   static const flameOverlayId = 'flame-overlay__message_box';
 

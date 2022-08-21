@@ -1,6 +1,5 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flamejam/game/components/bubble/bubble.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 

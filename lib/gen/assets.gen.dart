@@ -9,6 +9,22 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIngameGen {
+  const $AssetsIngameGen();
+
+  /// File path: assets/ingame/heart_empty.png
+  AssetGenImage get heartEmpty =>
+      const AssetGenImage('assets/ingame/heart_empty.png');
+
+  /// File path: assets/ingame/heart_full.png
+  AssetGenImage get heartFull =>
+      const AssetGenImage('assets/ingame/heart_full.png');
+
+  /// File path: assets/ingame/oxygen_level.png
+  AssetGenImage get oxygenLevel =>
+      const AssetGenImage('assets/ingame/oxygen_level.png');
+}
+
 class $AssetsTutorialGen {
   const $AssetsTutorialGen();
 
@@ -35,6 +51,7 @@ class $AssetsTutorialGen {
 class Assets {
   Assets._();
 
+  static const $AssetsIngameGen ingame = $AssetsIngameGen();
   static const $AssetsTutorialGen tutorial = $AssetsTutorialGen();
 }
 

@@ -2,17 +2,21 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
-import 'package:flamejam/game/components/spike_ball/spike_ball.dart';
 import 'package:flamejam/game/game.dart';
 
 /// The [SpikeBall]s moving behavior is reflected here
-class SpikeBallMovingBehavior extends Behavior<SpikeBall> with ParentIsA<SpikeBall>, HasGameRef<FlameJam> {
+class SpikeBallMovingBehavior extends Behavior<SpikeBall>
+    with ParentIsA<SpikeBall>, HasGameRef<FlameJam> {
   @override
   Future<void>? onLoad() async {
     parent.bodyComponent.body.gravityScale = Vector2.zero();
 
     await add(
-      TimerComponent(period: Random().nextDouble(), repeat: true, onTick: _moveSpikeBall),
+      TimerComponent(
+        period: Random().nextDouble(),
+        repeat: true,
+        onTick: _moveSpikeBall,
+      ),
     );
   }
 

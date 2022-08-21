@@ -2,8 +2,7 @@
 
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game_over/game_over.dart';
-import 'package:flamejam/start/start.dart';
-
+import 'package:flamejam/start/view/start_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
