@@ -3,7 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-class MessageBox extends StatelessWidget {
+class MessageBox extends StatefulWidget {
   const MessageBox({
     super.key,
     required this.text,
@@ -16,6 +16,13 @@ class MessageBox extends StatelessWidget {
   final String text;
   final Duration duration;
   final VoidCallback? onComplete;
+
+  @override
+  State<MessageBox> createState() => _MessageBoxState();
+}
+
+class _MessageBoxState extends State<MessageBox> {
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +44,20 @@ class MessageBox extends StatelessWidget {
               border: Border.all(color: Colors.white),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: ColoredBox(
-                color: Colors.black.withOpacity(0.5),
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 15,
+              ),
+              child: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _scrollController,
                 child: _TypewriterText(
-                  text: text,
-                  duration: duration,
-                  onComplete: onComplete,
+                  text: widget.text,
+                  duration: widget.duration,
+                  onComplete: widget.onComplete,
+                  onNewCharacter: () => _scrollController.jumpTo(
+                    _scrollController.position.maxScrollExtent,
+                  ),
                 ),
               ),
             ),
@@ -59,11 +73,13 @@ class _TypewriterText extends StatefulWidget {
     required this.text,
     required this.duration,
     this.onComplete,
+    this.onNewCharacter,
   });
 
   final String text;
   final Duration duration;
   final VoidCallback? onComplete;
+  final VoidCallback? onNewCharacter;
 
   @override
   State<_TypewriterText> createState() => _TypewriterTextState();
@@ -71,22 +87,25 @@ class _TypewriterText extends StatefulWidget {
 
 class _TypewriterTextState extends State<_TypewriterText>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    duration: widget.duration,
-    upperBound: widget.text.length.toDouble() + 20,
-    vsync: this,
-  )..repeat();
+  late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      final isCompleted = _controller.value.ceil() == _controller.upperBound;
-      if (isCompleted) {
-        widget.onComplete?.call();
-        _controller.stop();
-      }
-    });
+    _controller = AnimationController(
+      duration: widget.duration,
+      upperBound: widget.text.length.toDouble() + 20,
+      vsync: this,
+    )
+      ..forward()
+      ..addListener(() {
+        widget.onNewCharacter?.call();
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          widget.onComplete?.call();
+        }
+      });
   }
 
   @override
@@ -101,14 +120,12 @@ class _TypewriterTextState extends State<_TypewriterText>
       animation: _controller,
       builder: (_, __) {
         return Material(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              style: const TextStyle(fontSize: 32),
-              widget.text.substring(
-                0,
-                math.min(_controller.value.ceil(), widget.text.length),
-              ),
+          color: Colors.black,
+          child: Text(
+            style: const TextStyle(fontSize: 32),
+            widget.text.substring(
+              0,
+              math.min(_controller.value.ceil(), widget.text.length),
             ),
           ),
         );
