@@ -8,9 +8,9 @@ import 'package:meta/meta.dart';
 
 part 'astronaut_state.dart';
 
-const oxygenPerTank = 10;
+const oxygenPerTank = 50;
 const oxygenPerUsage = 1;
-const maxOxygen = 1000;
+const maxOxygen = 500;
 const maxHealth = 3;
 
 class AstronautCubit extends Cubit<AstronautState> {
