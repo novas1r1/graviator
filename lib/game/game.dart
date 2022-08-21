@@ -102,22 +102,7 @@ class GameEntity extends Entity {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    final children = <Component>[];
     final map = MiniMap.fromDataString(mapData);
-    children.addAll(map.create());
-
-    final astronaut = Astronaut(
-      initialPosition: Vector2(16 * 3, 16 * 15),
-      children: [
-        Jetpack(
-          behaviors: [JetpackPropulsingBehavior()],
-        ),
-      ],
-      behaviors: [
-        ControlledMovementBehavior(),
-      ],
-    );
-    await addAll(children..add(astronaut));
-    game.camera.followBodyComponent(astronaut.bodyComponent);
+    await addAll(map.create());
   }
 }

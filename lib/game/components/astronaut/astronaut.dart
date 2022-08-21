@@ -3,7 +3,9 @@
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/mini_sprite_library.dart';
+import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
+import 'package:mini_sprite/mini_sprite.dart';
 
 export 'behaviors/behaviors.dart';
 export 'bloc/bloc.dart';
@@ -11,11 +13,28 @@ export 'bloc/bloc.dart';
 class Astronaut extends BodyEntity<AstronautBodyComponent> {
   Astronaut({
     required Vector2 initialPosition,
-    super.behaviors,
-    super.children,
   }) : super(
           bodyComponent: AstronautBodyComponent()
             ..initialPosition = initialPosition,
+          children: [
+            Jetpack(
+              behaviors: [JetpackPropulsingBehavior()],
+            ),
+          ],
+          behaviors: [
+            AstronautFollowerBehavior(),
+            ControlledMovementBehavior(),
+          ],
+        );
+
+  /// Create an [Astronaut] entity from the [MiniMap] Entry
+  Astronaut.fromMapEntry({
+    required MapEntry<MapPosition, Map<String, dynamic>> entry,
+  }) : this(
+          initialPosition: Vector2(
+            entry.key.x.toDouble() * 16,
+            entry.key.y.toDouble() * 16,
+          ),
         );
 }
 
