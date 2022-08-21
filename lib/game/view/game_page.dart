@@ -74,7 +74,12 @@ class _GameViewState extends State<_GameView> {
                     game.overlays.remove(MessageBox.flameOverlayId),
               ),
         },
-        game: _game,
+        game: FlameJam(
+          gameCubit: context.read<GameCubit>(),
+          astronautCubit: context.read<AstronautCubit>(),
+          messageBoxCubit: context.read<MessageBoxCubit>(),
+          mapToLoad: widget.gameLevelMapToLoad,
+        ),
       ),
     );
   }

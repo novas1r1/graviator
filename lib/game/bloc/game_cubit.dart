@@ -20,9 +20,16 @@ class GameCubit extends Cubit<GameState> {
   }
 
   void nextLevel() {
+    print(state);
+    print(state.currentGameLevel);
+    print(state.currentGameLevel >= minGameLevel);
+    print(state.currentGameLevel < maxGameLevel);
+
     if (state.currentGameLevel >= minGameLevel &&
-        state.currentGameLevel > maxGameLevel) {
+        state.currentGameLevel < maxGameLevel) {
       final updatedLevel = state.currentGameLevel + 1;
+
+      if (state.currentGameLevel == updatedLevel) return;
 
       emit(
         state.copyWith(
