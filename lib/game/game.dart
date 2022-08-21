@@ -6,7 +6,8 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
-import 'package:flamejam/game/behaviors/behaviors.dart';
+import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
+import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
 import 'package:flamejam/game/components/ingame_ui/ingame_ui.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/message_box/cubit/message_box_cubit.dart';
@@ -76,7 +77,8 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
             game: this,
             mapData: _mapToLoad,
             behaviors: [
-              RotatorBehavior(),
+              CameraRotatorBehavior(),
+              GravityRotatorBehavior(),
             ],
           ),
         ],

@@ -7,8 +7,6 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
 
-double _rotation = 0;
-
 /// {@template game.behaviors.CameraRotatorBehavior}
 /// Rotates the camera clockwise.
 /// {@endtemplate}
@@ -16,6 +14,8 @@ class CameraRotatorBehavior extends Behavior<GameEntity>
     with HasGameRef<Forge2DGame> {
   /// {@macro game.behaviors.CameraRotatorBehavior}
   CameraRotatorBehavior();
+
+  double _rotation = 0;
 
   void _onGameRenderTree(ui.Canvas canvas) {
     final camera = parent.game.camera;
@@ -31,11 +31,18 @@ class CameraRotatorBehavior extends Behavior<GameEntity>
   Future<void> onLoad() async {
     await super.onLoad();
     parent.game.renderTreeCallback = _onGameRenderTree;
+
     await add(
-      _AnimationEffect(
-        a: _rotation,
-        b: _rotation + math.pi / -2,
-        onStep: (value) => _rotation = value,
+      TimerComponent(
+        period: 8,
+        repeat: true,
+        onTick: () => add(
+          _AnimationEffect(
+            a: _rotation,
+            b: _rotation + math.pi / -2,
+            onStep: (value) => _rotation = value,
+          ),
+        ),
       ),
     );
   }
