@@ -107,7 +107,7 @@ class GameEntity extends Entity {
     children.addAll(map.create());
 
     final astronaut = Astronaut(
-      initialPosition: Vector2(16, 16),
+      initialPosition: Vector2(16 * 3, 16 * 15),
       children: [
         Jetpack(
           behaviors: [JetpackPropulsingBehavior()],
