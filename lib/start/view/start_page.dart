@@ -22,22 +22,33 @@ class StartPage extends StatelessWidget {
                 Expanded(
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.space): () => context.read<GameCubit>().startGame(),
+                      const SingleActivator(LogicalKeyboardKey.space): () =>
+                          context.read<GameCubit>().startGame(),
                     },
                     child: Focus(
                       autofocus: true,
-                      child: ElevatedButton(
-                        onPressed: () => context.read<GameCubit>().startGame(),
-                        child: const Text(
-                          'START GAME',
-                          style: TextStyle(fontSize: 40),
+                      child: GestureDetector(
+                        onTap: () => context.read<GameCubit>().startGame(),
+                        child: Container(
+                          height: 100,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('button_bg.png'),
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'START GAME',
+                              style: TextStyle(fontSize: 42),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),

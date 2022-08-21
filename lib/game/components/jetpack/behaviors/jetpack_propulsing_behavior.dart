@@ -9,7 +9,8 @@ import 'package:flamejam/game/components/jetpack/jetpack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class JetpackPropulsingBehavior extends Behavior<Jetpack> with KeyboardHandler, HasGameRef<Forge2DGame> {
+class JetpackPropulsingBehavior extends Behavior<Jetpack>
+    with KeyboardHandler, HasGameRef<Forge2DGame> {
   JetpackPropulsingBehavior();
 
   late final List<LogicalKeyboardKey> _keys = [LogicalKeyboardKey.keyW];
@@ -56,8 +57,11 @@ class JetpackPropulsingBehavior extends Behavior<Jetpack> with KeyboardHandler, 
 }
 
 class _SmokeParticleSystem extends ParticleSystemComponent {
-  _SmokeParticleSystem({required int count, required Vector2 acceleration, required Vector2 size})
-      : super(
+  _SmokeParticleSystem({
+    required int count,
+    required Vector2 acceleration,
+    required Vector2 size,
+  }) : super(
           // TODO(alestiago): Remove this absolute positioning.
           position: Vector2(size.x - 12, size.y - 11),
           particle: Particle.generate(
@@ -72,7 +76,7 @@ class _SmokeParticleSystem extends ParticleSystemComponent {
               ),
             ),
           ),
-        ) {}
+        );
 }
 
 class _SquareParticle extends Particle {
