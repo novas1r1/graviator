@@ -238,7 +238,7 @@ class FlameJamAudioPlayer {
         preCacheSingleAudio: _preCacheSingleAudio,
         loopSingleAudio: _loopSingleAudio,
         path: Assets.music.backgroundLoop,
-        volume: .2,
+        volume: .04,
       ),
       FlameJamAudios.pain: _SimplePlayAudio(
         preCacheSingleAudio: _preCacheSingleAudio,
