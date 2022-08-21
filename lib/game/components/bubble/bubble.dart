@@ -5,19 +5,19 @@ import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
-/// The [OxygenTank] allows the player to stay longer in the universe, if you collect them you receive O2 to survive
+/// The [Bubble] allows the player to stay longer in the universe, if you collect them you receive O2 to survive
 /// in space.
-class OxygenTank extends BodyEntity {
-  /// Creates a [OxygenTank] instance
-  OxygenTank({
+class Bubble extends BodyEntity {
+  /// Creates a [Bubble] instance
+  Bubble({
     required Vector2 initialPosition,
     super.behaviors,
   }) : super(
-          bodyComponent: _OxygenTankComponent()..initialPosition = initialPosition,
+          bodyComponent: _BubbleComponent()..initialPosition = initialPosition,
         );
 
-  /// Create a [OxygenTank] Entity from the [MiniMap] Entry
-  OxygenTank.fromMapEntry({
+  /// Create a [Bubble] Entity from the [MiniMap] Entry
+  Bubble.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
   }) : this(
           initialPosition: Vector2(
@@ -27,14 +27,14 @@ class OxygenTank extends BodyEntity {
         );
 }
 
-class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCallbacks {
-  _OxygenTankComponent()
+class _BubbleComponent extends BodyComponent with InitialPosition, ContactCallbacks {
+  _BubbleComponent()
       : super(
           renderBody: false,
           children: [
             SpriteComponent(
               size: _spriteSize,
-              sprite: MiniSpriteLibrary.sprites['oxygen_bubbles'],
+              sprite: MiniSpriteLibrary.sprites['oxygen_bubble'],
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.005, 0),
               priority: 0,
