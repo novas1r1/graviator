@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
@@ -42,7 +44,7 @@ class _BubbleComponent extends BodyComponent with InitialPosition, ContactCallba
           ],
         );
 
-  static final _spriteSize = Vector2.all(16);
+  static final _spriteSize = Vector2.all(6);
 
   @override
   void beginContact(Object other, Contact contact) {
@@ -61,12 +63,9 @@ class _BubbleComponent extends BodyComponent with InitialPosition, ContactCallba
 
   @override
   Body createBody() {
+    paint.color = Color(0xFFFF00000);
     final fixtureDef = FixtureDef(
-      PolygonShape()
-        ..setAsBoxXY(
-          (_spriteSize.x / 2) * 0.5,
-          (_spriteSize.y / 2) * 0.88,
-        ),
+      CircleShape()..radius = _spriteSize.x / 2,
     );
     return world.createBody(
       BodyDef(
