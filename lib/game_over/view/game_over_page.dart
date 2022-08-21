@@ -1,14 +1,12 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:flamejam/game/bloc/game_cubit.dart';
-import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameOverPage extends StatelessWidget {
-  GameOverPage({
+  const GameOverPage({
     super.key,
     required this.hasPlayerWon,
     required this.score,
@@ -26,7 +24,10 @@ class GameOverPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (hasPlayerWon) _GameOverWon(score: score) else const _GameOverLost(),
+            if (hasPlayerWon)
+              _GameOverWon(score: score)
+            else
+              const _GameOverLost(),
             const SizedBox(height: 72),
             CallbackShortcuts(
               bindings: {

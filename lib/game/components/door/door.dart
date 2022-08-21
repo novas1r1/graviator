@@ -11,7 +11,8 @@ class Portal extends BodyEntity {
   /// Create a Portal Entity
   Portal({required Vector2 initialPosition})
       : super(
-          bodyComponent: _PortalBodyComponent()..initialPosition = initialPosition,
+          bodyComponent: _PortalBodyComponent()
+            ..initialPosition = initialPosition,
         );
 
   /// Create a [Portal] Entity from the [MiniMap] Entry
@@ -25,13 +26,14 @@ class Portal extends BodyEntity {
         );
 }
 
-class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCallbacks {
+class _PortalBodyComponent extends BodyComponent
+    with InitialPosition, ContactCallbacks {
   _PortalBodyComponent()
       : super(
           renderBody: false,
           children: [
             SpriteComponent(
-              sprite: MiniSpriteLibrary.sprites['portal'],
+              sprite: MiniSpriteLibrary.sprites['door'],
               size: _spriteSize,
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.05, 0),
@@ -39,12 +41,18 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCa
           ],
         );
 
-  static final _spriteSize = Vector2.all(16);
+  static final _spriteSize = Vector2.all(24);
+
+  @override
+  void preSolve(Object other, Contact contact, Manifold oldManifold) {
+    super.preSolve(other, contact, oldManifold);
+    if (other is Astronaut) contact.setEnabled(false);
+  }
 
   @override
   void beginContact(Object other, Contact contact) {
     if (other is Astronaut) {
-      readBloc<GameCubit, GameState>().endGame(victory: true);
+      readBloc<GameCubit, GameState>().nextLevel();
     }
 
     super.beginContact(other, contact);
@@ -56,10 +64,9 @@ class _PortalBodyComponent extends BodyComponent with InitialPosition, ContactCa
       PolygonShape()
         ..setAsBoxXY(
           (_spriteSize.x / 2) * 0.6,
-          (_spriteSize.y / 2) * 0.88,
+          (_spriteSize.y / 2),
         ),
       userData: this,
-      isSensor: true,
     );
     final bodyDef = BodyDef(position: initialPosition);
 

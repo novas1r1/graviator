@@ -1,11 +1,8 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:flame/game.dart';
-import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game_over/game_over.dart';
-import 'package:flamejam/start/start.dart';
-
+import 'package:flamejam/start/view/start_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,11 +23,8 @@ class App extends StatelessWidget {
             case GameStatus.startScreenDisplayed:
               return const StartPage();
             case GameStatus.gameScreenDisplayed:
-              return GameWidget.controlled(
-                gameFactory: () => FlameJam(
-                  gameCubit: context.read<GameCubit>(),
-                  astronautCubit: context.read<AstronautCubit>(),
-                ),
+              return GamePage(
+                gameLevelMapToLoad: state.currentGameLevel.getSpriteMap(),
               );
             case GameStatus.gameOverScreenDisplayed:
               return GameOverPage(

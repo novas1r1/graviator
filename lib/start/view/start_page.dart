@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:flamejam/consts.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+const _defaultFontStyle = TextStyle(fontSize: 42);
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -17,13 +20,17 @@ class StartPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              'Gravitator'.toUpperCase(),
+              style: const TextStyle(fontSize: 120),
+            ),
+            SizedBox(height: Spacers.l * 3),
             Row(
               children: [
                 Expanded(
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): () =>
-                          context.read<GameCubit>().startGame(),
+                      const SingleActivator(LogicalKeyboardKey.enter): () => context.read<GameCubit>().startGame(),
                     },
                     child: Focus(
                       autofocus: true,
@@ -39,7 +46,7 @@ class StartPage extends StatelessWidget {
                           child: const Center(
                             child: Text(
                               'START GAME',
-                              style: TextStyle(fontSize: 42),
+                              style: _defaultFontStyle,
                             ),
                           ),
                         ),

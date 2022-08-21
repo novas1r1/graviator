@@ -8,14 +8,15 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/behaviors/camera_rotator_behavior.dart';
 import 'package:flamejam/game/behaviors/gravity_rotator_behavior.dart';
-import 'package:flamejam/game/components/components.dart';
-import 'package:flamejam/game/components/jetpack/behaviors/behaviors.dart';
-import 'package:flamejam/game/components/jetpack/jetpack.dart';
+import 'package:flamejam/game/components/ingame_ui/ingame_ui.dart';
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/message_box/cubit/message_box_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
-export 'package:flamejam/game/bloc/bloc.dart';
+export 'bloc/bloc.dart';
+export 'components/components.dart';
+export 'view/view.dart';
 
 /// the main game class
 class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
@@ -23,8 +24,12 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
   FlameJam({
     required GameCubit gameCubit,
     required AstronautCubit astronautCubit,
+    required String mapToLoad,
+    required MessageBoxCubit messageBoxCubit,
   })  : _gameCubit = gameCubit,
         _astronautCubit = astronautCubit,
+        _messageBoxCubit = messageBoxCubit,
+        _mapToLoad = mapToLoad,
         super(
           gravity: Vector2(0, 10),
           zoom: 4,
@@ -32,6 +37,9 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
 
   final GameCubit _gameCubit;
   final AstronautCubit _astronautCubit;
+  final MessageBoxCubit _messageBoxCubit;
+
+  final String _mapToLoad;
 
   void Function(Canvas canvas) renderTreeCallback = (_) {};
 
@@ -49,6 +57,8 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
       color: Colors.white,
     );
 
+    overlays.add(IngameOverlay.flameOverlayId);
+
     await add(
       FlameMultiBlocProvider(
         providers: [
@@ -58,11 +68,14 @@ class FlameJam extends Forge2DGame with HasKeyboardHandlerComponents {
           FlameBlocProvider<AstronautCubit, AstronautState>.value(
             value: _astronautCubit,
           ),
+          FlameBlocProvider<MessageBoxCubit, MessageBoxState>.value(
+            value: _messageBoxCubit,
+          ),
         ],
         children: [
           GameEntity(
             game: this,
-            mapData: MiniSpriteMap.demoLevel,
+            mapData: _mapToLoad,
             behaviors: [
               GravityRotatorBehavior(),
               CameraRotatorBehavior(),
