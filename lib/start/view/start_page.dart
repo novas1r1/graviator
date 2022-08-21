@@ -2,6 +2,7 @@
 
 import 'package:flamejam/consts.dart';
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  'astronaut.png',
+                  Assets.tutorial.astronaut.path,
                   width: 32,
                   height: 32,
                 ),
@@ -39,7 +40,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  'portal.png',
+                  Assets.tutorial.portal.path,
                   width: 32,
                   height: 32,
                 ),
@@ -58,12 +59,12 @@ class StartPage extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      'oxygen_tank.png',
+                      Assets.tutorial.oxygenTank.path,
                       width: 32,
                       height: 32,
                     ),
                     Image.asset(
-                      "oxygen_tank_label.png",
+                      Assets.tutorial.oxygenTankLabel.path,
                       width: 8,
                       height: 8,
                     )
@@ -80,7 +81,7 @@ class StartPage extends StatelessWidget {
             Row(
               children: [
                 Image.asset(
-                  'spike_ball.png',
+                  Assets.tutorial.spikeBall.path,
                   width: 32,
                   height: 32,
                 ),
@@ -93,7 +94,7 @@ class StartPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: Spacers.l),
+            SizedBox(height: Spacers.l * 3),
             Row(
               children: [
                 Expanded(
