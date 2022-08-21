@@ -19,8 +19,6 @@ class GameCubit extends Cubit<GameState> {
 
   /// Starts the game
   void startGame() {
-    audioPlayer.play(FlameJamAudios.background_loop);
-
     emit(
       state.copyWith(
         status: GameStatus.gameScreenDisplayed,
