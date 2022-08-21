@@ -36,7 +36,6 @@ class _BouncingComponent extends TimerComponent {
   void onTick() {
     super.onTick();
     final notMoving = body.linearVelocity.isZero();
-    // TODO(paul): Make the box bounce depending on the mass.
-    if (notMoving) body.applyLinearImpulse(Vector2(0, -20));
+    if (notMoving) body.applyLinearImpulse(Vector2(0, -20).scaled(body.mass));
   }
 }

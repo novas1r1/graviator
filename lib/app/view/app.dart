@@ -5,6 +5,7 @@ import 'package:flamejam/game/components/astronaut/astronaut.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game_over/game_over.dart';
 import 'package:flamejam/start/start.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class App extends StatelessWidget {
     return BlocListener<AstronautCubit, AstronautState>(
       listener: (context, state) {
         if (state.astronautStatus == AstronautStatus.dead) {
-          context.read<GameCubit>().endGame();
+          context.read<GameCubit>().endGame(victory: false);
         }
       },
       child: BlocBuilder<GameCubit, GameState>(

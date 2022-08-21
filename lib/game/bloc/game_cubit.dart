@@ -15,7 +15,7 @@ class GameCubit extends Cubit<GameState> {
   }
 
   /// Ends the game
-  void endGame() {
-    emit(const GameState(status: GameStatus.gameOverScreenDisplayed));
+  void endGame({required bool victory}) {
+    emit(GameState(status: GameStatus.gameOverScreenDisplayed, hasWon: victory));
   }
 }

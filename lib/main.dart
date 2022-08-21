@@ -16,6 +16,7 @@ void main() {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: const ColorScheme(
             brightness: Brightness.dark,

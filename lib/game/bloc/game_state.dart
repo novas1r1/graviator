@@ -2,11 +2,7 @@
 
 part of 'game_cubit.dart';
 
-enum GameStatus {
-  startScreenDisplayed,
-  gameScreenDisplayed,
-  gameOverScreenDisplayed,
-}
+enum GameStatus { startScreenDisplayed, gameScreenDisplayed, gameOverScreenDisplayed }
 
 @immutable
 class GameState {
