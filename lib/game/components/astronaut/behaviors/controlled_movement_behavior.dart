@@ -66,16 +66,12 @@ class ControlledMovementBehavior extends Behavior<Astronaut>
       if (isGravityRight) velocity.y = isKeyDown ? -1 : 0;
     } else if (event.logicalKey == LogicalKeyboardKey.keyW) {
       final linearVelocity = parent.bodyComponent.body.linearVelocity;
-      final isJumpAllowedHorizontal =
-          (isGravityUp || isGravityDown) && linearVelocity.y == 0;
-      final isJumpAllowedVertical =
-          (isGravityLeft || isGravityRight) && linearVelocity.x == 0;
-      if (isJumpAllowedHorizontal && isGravityDown)
-        jump(Vector2(0, -_jumpForce));
+      final isJumpAllowedHorizontal = (isGravityUp || isGravityDown) && linearVelocity.y == 0;
+      final isJumpAllowedVertical = (isGravityLeft || isGravityRight) && linearVelocity.x == 0;
+      if (isJumpAllowedHorizontal && isGravityDown) jump(Vector2(0, -_jumpForce));
       if (isJumpAllowedVertical && isGravityLeft) jump(Vector2(_jumpForce, 0));
       if (isJumpAllowedHorizontal && isGravityUp) jump(Vector2(0, _jumpForce));
-      if (isJumpAllowedVertical && isGravityRight)
-        jump(Vector2(-_jumpForce, 0));
+      if (isJumpAllowedVertical && isGravityRight) jump(Vector2(-_jumpForce, 0));
     } else if (event.logicalKey == LogicalKeyboardKey.keyS) {
       if (isGravityDown) velocity.y = isKeyDown ? 1 : 0;
       if (isGravityLeft) velocity.x = isKeyDown ? -1 : 0;
