@@ -67,12 +67,14 @@ class _GameViewState extends State<_GameView> {
         ],
         overlayBuilderMap: {
           IngameOverlay.flameOverlayId: (_, __) => const IngameOverlay(),
-          MessageBox.flameOverlayId: (_, Game game) => MessageBox(
-                text: messageBloc.state.text,
-                duration: messageBloc.state.duration,
-                onComplete: () =>
-                    game.overlays.remove(MessageBox.flameOverlayId),
-              ),
+          MessageBox.flameOverlayId: (_, Game game) {
+            if (messageBloc.state.text.isEmpty) return const SizedBox.shrink();
+            return MessageBox(
+              text: messageBloc.state.text,
+              duration: messageBloc.state.duration,
+              onComplete: () => game.overlays.remove(MessageBox.flameOverlayId),
+            );
+          }
         },
         game: FlameJam(
           gameCubit: context.read<GameCubit>(),

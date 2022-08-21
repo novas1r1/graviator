@@ -4,6 +4,7 @@ import 'package:flamejam/assets/mini_sprite_library.dart';
 import 'package:flamejam/game/bloc/game_cubit.dart';
 import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
+import 'package:flamejam/message_box/cubit/message_box_cubit.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 /// This portal will finish the game and show the "Win Screen" screen
@@ -63,6 +64,7 @@ class _PortalBodyComponent extends BodyComponent
         readBloc<GameCubit, GameState>().previousLevel();
       } else {
         readBloc<GameCubit, GameState>().nextLevel();
+        readBloc<MessageBoxCubit, MessageBoxState>().show('', Duration.zero);
       }
     }
 
