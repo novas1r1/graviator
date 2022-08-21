@@ -2,6 +2,8 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flamejam/game/components/components.dart';
+import 'package:flamejam/main.dart';
+import 'package:game_audios/game_audios.dart';
 import 'package:meta/meta.dart';
 
 part 'astronaut_state.dart';
@@ -58,6 +60,8 @@ class AstronautCubit extends Cubit<AstronautState> {
 
   /// Player dies if health drops below 0 after  taking [damage]
   void takeDamage(int damage) {
+    audioPlayer.play(FlameJamAudios.pain);
+
     final currentHealth = state.health - damage;
 
     if (currentHealth <= 0) {
