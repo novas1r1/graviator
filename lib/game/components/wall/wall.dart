@@ -7,7 +7,16 @@ import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 /// The [WallDirection] contains all possible wall directions
-enum WallDirection { left, right, top, bottom, top_left, top_right, bottom_left, bottom_right }
+enum WallDirection {
+  left,
+  right,
+  top,
+  bottom,
+  top_left,
+  top_right,
+  bottom_left,
+  bottom_right
+}
 
 /// [Wall] to get exposed to the universe
 class Wall extends BodyEntity {
@@ -17,8 +26,10 @@ class Wall extends BodyEntity {
     required WallDirection wallDirection,
     required String spriteName,
   }) : super(
-          bodyComponent: _WallBodyComponent(wallDirection: wallDirection, spriteName: spriteName)
-            ..initialPosition = initialPosition,
+          bodyComponent: _WallBodyComponent(
+            wallDirection: wallDirection,
+            spriteName: spriteName,
+          )..initialPosition = initialPosition,
         );
 
   /// Create a [Wall] Entity from the [MiniMap] Entry
