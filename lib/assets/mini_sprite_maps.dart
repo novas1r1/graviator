@@ -33,6 +33,9 @@ extension MiniMapCreate on MiniMap {
 
       late final Component component;
       switch (spriteName) {
+        case 'player':
+          component = Astronaut.fromMapEntry(entry: entry);
+          break;
         case 'platform':
           component = Platform.fromMapEntry(entry: entry);
           break;
@@ -127,6 +130,7 @@ extension MiniMapCreate on MiniMap {
             itemType: InventoryItemType.spaceshipFuelTank,
           );
           break;
+
         default:
           continue;
       }
