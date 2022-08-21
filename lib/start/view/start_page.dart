@@ -23,7 +23,7 @@ class StartPage extends StatelessWidget {
           children: [
             Text(
               'Gravitator'.toUpperCase(),
-              style: const TextStyle(fontSize: 60),
+              style: const TextStyle(fontSize: 120),
             ),
             SizedBox(height: Spacers.l * 3),
             Row(
