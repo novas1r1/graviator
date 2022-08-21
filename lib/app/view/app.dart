@@ -1,8 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:flame/game.dart';
-import 'package:flamejam/game/components/astronaut/astronaut.dart';
-import 'package:flamejam/game/components/ingame_ui/ingame_ui.dart';
 import 'package:flamejam/game/game.dart';
 import 'package:flamejam/game_over/game_over.dart';
 import 'package:flamejam/start/view/start_page.dart';
@@ -26,20 +23,7 @@ class App extends StatelessWidget {
             case GameStatus.startScreenDisplayed:
               return const StartPage();
             case GameStatus.gameScreenDisplayed:
-              return GameWidget.controlled(
-                gameFactory: () => FlameJam(
-                  gameCubit: context.read<GameCubit>(),
-                  astronautCubit: context.read<AstronautCubit>(),
-                ),
-                overlayBuilderMap: {
-                  'IngameOverlay': (context, game) {
-                    return IngameOverlay(
-                      health: context.watch<AstronautCubit>().state.health,
-                      oxygen: context.watch<AstronautCubit>().state.oxygen,
-                    );
-                  },
-                },
-              );
+              return const GamePage();
             case GameStatus.gameOverScreenDisplayed:
               return GameOverPage(
                 hasPlayerWon: state.hasWon,

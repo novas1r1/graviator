@@ -35,8 +35,11 @@ class StartPage extends StatelessWidget {
                 ),
                 SizedBox(width: Spacers.m),
                 const Expanded(
-                    child: Text('This is still you, stay alive!',
-                        style: defaultFontStyle))
+                  child: Text(
+                    'This is still you, stay alive!',
+                    style: defaultFontStyle,
+                  ),
+                )
               ],
             ),
             Row(

@@ -10,6 +10,8 @@ class IngameOverlay extends StatelessWidget {
     required this.oxygen,
   });
 
+  static const flameOverlayId = 'flame-overlay__status_bar';
+
   final int health;
   final int oxygen;
 

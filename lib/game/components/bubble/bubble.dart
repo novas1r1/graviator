@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/assets/assets.dart';
@@ -5,19 +7,19 @@ import 'package:flamejam/game/components/components.dart';
 import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
-/// The [OxygenTank] allows the player to stay longer in the universe, if you collect them you receive O2 to survive
+/// The [Bubble] allows the player to stay longer in the universe, if you collect them you receive O2 to survive
 /// in space.
-class OxygenTank extends BodyEntity {
-  /// Creates a [OxygenTank] instance
-  OxygenTank({
+class Bubble extends BodyEntity {
+  /// Creates a [Bubble] instance
+  Bubble({
     required Vector2 initialPosition,
     super.behaviors,
   }) : super(
-          bodyComponent: _OxygenTankComponent()..initialPosition = initialPosition,
+          bodyComponent: _BubbleComponent()..initialPosition = initialPosition,
         );
 
-  /// Create a [OxygenTank] Entity from the [MiniMap] Entry
-  OxygenTank.fromMapEntry({
+  /// Create a [Bubble] Entity from the [MiniMap] Entry
+  Bubble.fromMapEntry({
     required MapEntry<MapPosition, Map<String, dynamic>> entry,
   }) : this(
           initialPosition: Vector2(
@@ -27,21 +29,15 @@ class OxygenTank extends BodyEntity {
         );
 }
 
-class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCallbacks {
-  _OxygenTankComponent()
+class _BubbleComponent extends BodyComponent
+    with InitialPosition, ContactCallbacks {
+  _BubbleComponent()
       : super(
           renderBody: false,
           children: [
             SpriteComponent(
-              sprite: MiniSpriteLibrary.sprites['oxygen_tank_label'],
-              size: Vector2.all(4),
-              anchor: Anchor.center,
-              position: Vector2(0, _spriteSize.y * 0.1),
-              priority: 1,
-            ),
-            SpriteComponent(
               size: _spriteSize,
-              sprite: MiniSpriteLibrary.sprites['oxygen_tank'],
+              sprite: MiniSpriteLibrary.sprites['oxygen_bubble'],
               anchor: Anchor.center,
               position: Vector2(_spriteSize.x * 0.005, 0),
               priority: 0,
@@ -49,7 +45,7 @@ class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCa
           ],
         );
 
-  static final _spriteSize = Vector2.all(16);
+  static final _spriteSize = Vector2.all(6);
 
   @override
   void beginContact(Object other, Contact contact) {
@@ -68,12 +64,9 @@ class _OxygenTankComponent extends BodyComponent with InitialPosition, ContactCa
 
   @override
   Body createBody() {
+    paint.color = const Color(0xffff00000);
     final fixtureDef = FixtureDef(
-      PolygonShape()
-        ..setAsBoxXY(
-          (_spriteSize.x / 2) * 0.5,
-          (_spriteSize.y / 2) * 0.88,
-        ),
+      CircleShape()..radius = _spriteSize.x / 2,
     );
     return world.createBody(
       BodyDef(
