@@ -2,16 +2,12 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flamejam/game/components/components.dart';
+import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:flamejam/main.dart';
 import 'package:game_audios/game_audios.dart';
 import 'package:meta/meta.dart';
 
 part 'astronaut_state.dart';
-
-const oxygenPerTank = 50;
-const oxygenPerUsage = 1;
-const maxOxygen = 500;
-const maxHealth = 3;
 
 class AstronautCubit extends Cubit<AstronautState> {
   AstronautCubit() : super(const AstronautState());
@@ -19,17 +15,17 @@ class AstronautCubit extends Cubit<AstronautState> {
   void pickUpOxygen() {
     audioPlayer.play(FlameJamAudios.plop);
 
-    final currentOxygen = state.oxygen + oxygenPerTank;
+    final currentOxygen = state.oxygen + GameConfig.oxygenPerTank;
 
-    if (currentOxygen >= maxOxygen) {
-      emit(state.copyWith(oxygen: maxOxygen));
+    if (currentOxygen >= GameConfig.maxOxygen) {
+      emit(state.copyWith(oxygen: GameConfig.maxOxygen));
     } else {
       emit(state.copyWith(oxygen: currentOxygen));
     }
   }
 
   void reduceOxygen() {
-    final currentOxygen = state.oxygen - oxygenPerUsage;
+    final currentOxygen = state.oxygen - GameConfig.oxygenPerUsage;
 
     if (currentOxygen <= 0) {
       die();
@@ -53,8 +49,8 @@ class AstronautCubit extends Cubit<AstronautState> {
     emit(
       state.copyWith(
         astronautStatus: AstronautStatus.alive,
-        health: maxHealth,
-        oxygen: maxOxygen,
+        health: GameConfig.maxHealth,
+        oxygen: GameConfig.maxOxygen,
         inventoryItems: {},
       ),
     );

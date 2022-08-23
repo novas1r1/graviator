@@ -2,14 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flamejam/assets/assets.dart';
 import 'package:flamejam/game/components/components.dart';
+import 'package:flamejam/game/helpers/game_config.dart';
 import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:game_audios/game_audios.dart';
 
 part 'game_state.dart';
-
-const minGameLevel = 1;
-const maxGameLevel = 3;
 
 /// The GameCubit handles the state of the game.
 /// Can be before the game starts, during the game, or after the game is over.
@@ -41,11 +39,11 @@ class GameCubit extends Cubit<GameState> {
     }
 
     if (inventoryItems.contains(InventoryItemType.spaceshipComputer)) {
-      score *= 250;
+      score += 250;
     }
 
     if (inventoryItems.contains(InventoryItemType.spaceshipFuelTank)) {
-      score *= 500;
+      score += 500;
     }
 
     if (oxygenLeft > 0) {
@@ -70,8 +68,8 @@ class GameCubit extends Cubit<GameState> {
     required int oxygenLeft,
     required int healthLeft,
   }) {
-    if (state.currentGameLevel >= minGameLevel &&
-        state.currentGameLevel < maxGameLevel) {
+    if (state.currentGameLevel >= GameConfig.minGameLevel &&
+        state.currentGameLevel < GameConfig.maxGameLevel) {
       audioPlayer.play(FlameJamAudios.level_complete);
 
       final updatedLevel = state.currentGameLevel + 1;
@@ -95,7 +93,7 @@ class GameCubit extends Cubit<GameState> {
   }
 
   void previousLevel() {
-    if (state.currentGameLevel > minGameLevel) {
+    if (state.currentGameLevel > GameConfig.minGameLevel) {
       final updatedLevel = state.currentGameLevel - 1;
 
       emit(

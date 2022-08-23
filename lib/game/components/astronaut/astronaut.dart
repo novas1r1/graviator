@@ -8,7 +8,7 @@ import 'package:flamejam/game/helpers/helpers.dart';
 import 'package:mini_sprite/mini_sprite.dart';
 
 export 'behaviors/behaviors.dart';
-export 'bloc/bloc.dart';
+export 'cubit/astronaut_cubit.dart';
 
 class Astronaut extends BodyEntity<AstronautBodyComponent> {
   Astronaut({

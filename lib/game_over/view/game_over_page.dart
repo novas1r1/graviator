@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/gen/assets.gen.dart';
 import 'package:flamejam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,9 +52,9 @@ class GameOverPage extends StatelessWidget {
                   },
                   child: Container(
                     height: 100,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('button_bg.png'),
+                        image: AssetImage(Assets.ingame.buttonBg.path),
                       ),
                     ),
                     child: const Center(

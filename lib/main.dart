@@ -16,12 +16,8 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => GameCubit(),
-        ),
-        BlocProvider(
-          create: (_) => AstronautCubit(),
-        ),
+        BlocProvider(create: (_) => GameCubit()),
+        BlocProvider(create: (_) => AstronautCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

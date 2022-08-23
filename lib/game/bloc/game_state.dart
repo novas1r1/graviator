@@ -22,8 +22,8 @@ class GameState extends Equatable {
       : status = GameStatus.startScreenDisplayed,
         hasWon = false,
         score = 0,
-        oxygenLeft = maxOxygen,
-        currentGameLevel = minGameLevel;
+        oxygenLeft = GameConfig.maxOxygen,
+        currentGameLevel = GameConfig.minGameLevel;
 
   final GameStatus status;
 
