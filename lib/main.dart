@@ -7,7 +7,7 @@ import 'package:game_audios/game_audios.dart';
 final audioPlayer = FlameJamAudioPlayer();
 
 Future<void> main() async {
-  final futures = <Future>[];
+  final futures = <Future<dynamic>>[];
 
   audioPlayer.load().map((loaderFunction) => futures.add(loaderFunction()));
 

@@ -60,28 +60,28 @@ extension MiniMapCreate on MiniMap {
           component = Wall.fromMapEntry(
             spriteName: 'wall_corner_top_left',
             entry: entry,
-            wallDirection: WallDirection.top_left,
+            wallDirection: WallDirection.topLeft,
           );
           break;
         case 'wall_corner_top_right':
           component = Wall.fromMapEntry(
             spriteName: 'wall_corner_top_right',
             entry: entry,
-            wallDirection: WallDirection.top_right,
+            wallDirection: WallDirection.topRight,
           );
           break;
         case 'wall_corner_bottom_right':
           component = Wall.fromMapEntry(
             spriteName: 'wall_corner_bottom_right',
             entry: entry,
-            wallDirection: WallDirection.bottom_right,
+            wallDirection: WallDirection.bottomRight,
           );
           break;
         case 'wall_corner_bottom_left':
           component = Wall.fromMapEntry(
             spriteName: 'wall_corner_bottom_left',
             entry: entry,
-            wallDirection: WallDirection.bottom_left,
+            wallDirection: WallDirection.bottomLeft,
           );
           break;
         case 'wall_left':

@@ -12,10 +12,10 @@ enum WallDirection {
   right,
   top,
   bottom,
-  top_left,
-  top_right,
-  bottom_left,
-  bottom_right
+  topLeft,
+  topRight,
+  bottomLeft,
+  bottomRight
 }
 
 /// [Wall] to get exposed to the universe
@@ -63,23 +63,23 @@ class _WallBodyComponent extends BodyComponent with InitialPosition {
 
   bool get checkWallDirectionTop =>
       wallDirection == WallDirection.top ||
-      wallDirection == WallDirection.top_left ||
-      wallDirection == WallDirection.top_right;
+      wallDirection == WallDirection.topLeft ||
+      wallDirection == WallDirection.topRight;
 
   bool get checkWallDirectionLeft =>
       wallDirection == WallDirection.left ||
-      wallDirection == WallDirection.top_left ||
-      wallDirection == WallDirection.bottom_left;
+      wallDirection == WallDirection.topLeft ||
+      wallDirection == WallDirection.bottomLeft;
 
   bool get checkWallDirectionRight =>
       wallDirection == WallDirection.right ||
-      wallDirection == WallDirection.top_right ||
-      wallDirection == WallDirection.bottom_right;
+      wallDirection == WallDirection.topRight ||
+      wallDirection == WallDirection.bottomRight;
 
   bool get checkWallDirectionBottom =>
       wallDirection == WallDirection.bottom ||
-      wallDirection == WallDirection.bottom_right ||
-      wallDirection == WallDirection.bottom_left;
+      wallDirection == WallDirection.bottomRight ||
+      wallDirection == WallDirection.bottomLeft;
 
   @override
   Body createBody() {
