@@ -7,7 +7,7 @@ import 'package:game_audios/game_audios.dart';
 final audioPlayer = FlameJamAudioPlayer();
 
 Future<void> main() async {
-  final futures = <Future>[];
+  final futures = <Future<dynamic>>[];
 
   audioPlayer.load().map((loaderFunction) => futures.add(loaderFunction()));
 
@@ -16,12 +16,8 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => GameCubit(),
-        ),
-        BlocProvider(
-          create: (_) => AstronautCubit(),
-        ),
+        BlocProvider(create: (_) => GameCubit()),
+        BlocProvider(create: (_) => AstronautCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

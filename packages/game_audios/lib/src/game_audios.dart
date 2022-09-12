@@ -238,7 +238,7 @@ class FlameJamAudioPlayer {
         preCacheSingleAudio: _preCacheSingleAudio,
         playSingleAudio: _playSingleAudio,
         path: Assets.music.loose,
-        volume: .3,
+        volume: .03,
       ),
       FlameJamAudios.win: _SimplePlayAudio(
         preCacheSingleAudio: _preCacheSingleAudio,
@@ -260,25 +260,25 @@ class FlameJamAudioPlayer {
         preCacheSingleAudio: _preCacheSingleAudio,
         playSingleAudio: _playSingleAudio,
         path: Assets.sfx.painOne,
-        volume: .5,
+        volume: .05,
       ),
       FlameJamAudios.gravity_change: _SimplePlayAudio(
         preCacheSingleAudio: _preCacheSingleAudio,
         playSingleAudio: _playSingleAudio,
         path: Assets.sfx.gravityChange,
-        volume: .5,
+        volume: .05,
       ),
       FlameJamAudios.plop: _SimplePlayAudio(
         preCacheSingleAudio: _preCacheSingleAudio,
         playSingleAudio: _playSingleAudio,
         path: Assets.sfx.plopOne,
-        volume: .5,
+        volume: .05,
       ),
       FlameJamAudios.hello_pilot: _SimplePlayAudio(
         preCacheSingleAudio: _preCacheSingleAudio,
         playSingleAudio: _playSingleAudio,
         path: Assets.sfx.helloPilot,
-        volume: .5,
+        volume: .05,
       ),
     };
   }

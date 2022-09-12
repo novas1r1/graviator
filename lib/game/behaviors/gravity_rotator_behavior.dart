@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flamejam/game/game.dart';
+import 'package:flamejam/game/helpers/game_config.dart';
 import 'package:flamejam/main.dart';
 import 'package:game_audios/game_audios.dart';
 
@@ -29,7 +30,7 @@ class GravityRotatorBehavior extends Behavior<GameEntity> {
     await super.onLoad();
     await add(
       TimerComponent(
-        period: 32,
+        period: GameConfig.gravityChangeInterval,
         repeat: true,
         onTick: _rotateGravity,
       ),
