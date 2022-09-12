@@ -24,10 +24,9 @@ enum FlameJamAudios {
 /// Defines the contract of the creation of an [AudioPool].
 typedef CreateAudioPool = Future<AudioPool> Function(
   String sound, {
-  bool? repeating,
-  int? maxPlayers,
-  int? minPlayers,
-  String? prefix,
+  AudioCache? audioCache,
+  int minPlayers,
+  required int maxPlayers,
 });
 
 /// Defines the contract for playing a single audio.
@@ -132,7 +131,6 @@ class _SingleAudioPool extends _Audio {
     pool = await createAudioPool(
       prefixFile(path),
       maxPlayers: maxPlayers,
-      prefix: '',
     );
   }
 
@@ -165,12 +163,10 @@ class _RandomABAudio extends _Audio {
         createAudioPool(
           prefixFile(audioAssetA),
           maxPlayers: 4,
-          prefix: '',
         ).then((pool) => audioA = pool),
         createAudioPool(
           prefixFile(audioAssetB),
           maxPlayers: 4,
-          prefix: '',
         ).then((pool) => audioB = pool),
       ],
     );
@@ -224,8 +220,8 @@ class FlameJamAudioPlayer {
     ConfigureAudioCache? configureAudioCache,
     Random? seed,
   })  : _createAudioPool = createAudioPool ?? AudioPool.create,
-        _playSingleAudio = playSingleAudio ?? FlameAudio.audioCache.play,
-        _loopSingleAudio = loopSingleAudio ?? FlameAudio.audioCache.loop,
+        _playSingleAudio = playSingleAudio ?? FlameAudio.play,
+        _loopSingleAudio = loopSingleAudio ?? FlameAudio.loop,
         _preCacheSingleAudio =
             preCacheSingleAudio ?? FlameAudio.audioCache.load,
         _configureAudioCache = configureAudioCache ??
