@@ -8,6 +8,7 @@ environment:
   flutter: ^3.0.5
 
 dependencies:
+  audioplayers: ^1.0.1
   bloc: ^8.1.0
   build_runner: ^2.2.0
   equatable: ^2.0.5
